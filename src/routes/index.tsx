@@ -8,24 +8,6 @@ import Infobox from "../components/starter/infobox/infobox";
 import Starter from "../components/starter/next-steps/next-steps";
 
 export default component$(() => {
-
-  // console.log([
-  //   `1. ${book[1][1].en}`,
-  //   `2. ${book[2][2].en}`,
-  //   `3. ${book[3][3].en}`,
-  //   `4. ${book[4][4].en}`,
-  //   `5. ${book[5][5].en}`,
-  //   `6. ${book[6][6].en}`,
-  //   `7. ${book[7][7].en}`,
-  //   `8. ${book[8][8].en}`,
-  //   `9. ${book[9][9].en}`,
-  //   `10. ${book[10][10].en}`,
-  //   `11. ${book[1][11].en}`,
-  //   `12. ${book[2][12].en}`,
-  //   `13. ${book[3][13].en}`,
-  //   `14. ${book[4][14].en}`,
-  // ])
-
   return (
     <>
       <Hero />
