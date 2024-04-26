@@ -12,4 +12,7 @@ export const config = {
   apis: {
     randomImage: "https://source.unsplash.com/1280x720?random",
   },
+  urls: {
+    slides: "/slides",
+  },
 };

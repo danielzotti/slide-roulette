@@ -953,7 +953,7 @@ export const three = [
   "nella mente di un essere celeste",
 ];
 
-export function getRandomTitle(level = 1) {
+export function getRandomTopic(level = 1) {
   let title = one[Math.floor(Math.random() * one.length)];
 
   if (level === 2) {

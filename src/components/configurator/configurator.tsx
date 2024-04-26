@@ -1,34 +1,97 @@
+import type { QRL } from "@builder.io/qwik";
 import { $, component$ } from "@builder.io/qwik";
+import type { SubmitHandler } from "@modular-forms/qwik";
+import { useForm, zodForm$ } from "@modular-forms/qwik";
 import { Button } from "~/components/ui/button/button";
+import type { ConfigurationForm } from "~/models/configuration.models";
+import { configurationSchema } from "~/models/configuration.models";
+import { useFormLoader } from "~/routes";
 import styles from "./configurator.module.scss";
 
-export default component$(() => {
+interface ConfiguratorProps {
+  onSubmit: QRL<(values: ConfigurationForm) => void>;
+}
+
+export default component$(({ onSubmit }: ConfiguratorProps) => {
+  const [, { Form, Field }] = useForm<ConfigurationForm>({
+    loader: useFormLoader(),
+    validate: zodForm$(configurationSchema),
+  });
+
+  const handleSubmit = $<SubmitHandler<ConfigurationForm>>(async (values) => {
+    onSubmit(values);
+  });
+
   return (
-    <form>
-      <div class={styles.configurator}>
-        <div class={styles.field}>
-          <label for="level">Level</label>
-          <select id="level" name="level">
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-          </select>
+    <>
+      <Form onSubmit$={handleSubmit}>
+        <div class={styles.configurator}>
+          <Field name="level" type="number">
+            {(field, props) => (
+              <div class={styles.field}>
+                <label for="level">Level</label>
+                <select
+                  id={field.name}
+                  {...props}
+                  onInput$={(e) => {
+                    field.value = +(e.target as HTMLInputElement).value;
+                  }}
+                >
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                </select>
+              </div>
+            )}
+          </Field>
+
+          <Field name="language" type="string">
+            {(field, props) => (
+              <div class={styles.field}>
+                <label for="language">Language</label>
+                <select
+                  id={field.name}
+                  {...props}
+                  onInput$={(e) => {
+                    field.value = (e.target as HTMLInputElement).value;
+                  }}
+                >
+                  <option value="it">Italian</option>
+                  <option value="en" disabled>
+                    English
+                  </option>
+                </select>
+              </div>
+            )}
+          </Field>
+
+          <Field name="slides" type="number">
+            {(field, props) => (
+              <div class={styles.field}>
+                <label for="slides">Slides</label>
+                <select
+                  id={field.name}
+                  {...props}
+                  onInput$={(e) => {
+                    field.value = +(e.target as HTMLInputElement).value;
+                  }}
+                >
+                  <option>3</option>
+                  <option selected>5</option>
+                  <option>7</option>
+                  <option>10</option>
+                  <option>15</option>
+                  <option>20</option>
+                </select>
+              </div>
+            )}
+          </Field>
+
+          <Button type="submit" variant="primary">
+            Start!
+          </Button>
         </div>
-        <div class={styles.field}>
-          <label for="language">Language</label>
-          <select name="language">
-            <option value="it">Italiano</option>
-            <option value="en" disabled>
-              English
-            </option>
-          </select>
-        </div>
-        <div class={styles.field}>
-          <label for="slides">Number of slides</label>
-          <input type="number" min="1" max="10" name="slides" value="5" />
-        </div>
-        <Button variant="primary">Start!</Button>
-      </div>
-    </form>
+      </Form>
+    </>
   );
 });
