@@ -1,0 +1,28 @@
+.button {
+  border: none;
+  border-radius: var(--btn-border-radius);
+  padding: var(--margin-small) var(--margin-medium);
+  cursor: var(--cursor-pointer);
+
+  &.primary {
+    background-color: var(--btn-primary-bg-color);
+    color: var(--btn-primary-text-color);
+  }
+
+  &.secondary {
+    background-color: var(--btn-secondary-bg-color);
+    color: var(--btn-secondary-text-color);
+    border: 1px solid var(--btn-secondary-text-color);
+  }
+
+  &.outline {
+    background-color: transparent;
+    color: var(--btn-outline-text-color);
+    border: 1px solid var(--btn-outline-border-color);
+  }
+
+  &.clean {
+    background-color: transparent;
+    color: var(--btn-clean-text-color);
+  }
+}

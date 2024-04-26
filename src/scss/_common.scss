@@ -1,0 +1,19 @@
+.teaser-list {
+  display: grid;
+  gap: clamp(20px, 4vw, 45px);
+  grid-template-columns: 1fr;
+}
+
+.link {
+  color: var(--link-color);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-color);
+  transition: transform var(--transition-duration) ease-in-out;
+
+  &:hover, &:focus, &:active {
+    color: var(--accent-color);
+    cursor: var(--cursor-pointer);
+    text-decoration: none;
+    transform: rotate(-3deg);
+  }
+}

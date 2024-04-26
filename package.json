@@ -1,11 +1,11 @@
 {
-  "name": "my-qwik-basic-starter",
-  "description": "Demo App with Routing built-in (recommended)",
+  "name": "slide-roulette",
+  "description": "A slide roulette app to test your improvising skills!",
   "engines": {
     "node": "^18.17.0 || ^20.3.0 || >=21.0.0"
   },
   "engines-annotation": "Mostly required by sharp which needs a Node-API v9 compatible runtime",
-  "private": true,
+  "private": false,
   "trustedDependencies": [
     "sharp"
   ],
@@ -36,6 +36,8 @@
     "eslint": "^8.57.0",
     "eslint-plugin-qwik": "^1.5.1",
     "prettier": "^3.2.5",
+    "sass": "^1.75.0",
+    "sass-loader": "^14.2.1",
     "typescript": "5.3.3",
     "undici": "*",
     "vite": "^5.1.4",
