@@ -5,7 +5,6 @@ import { useNavigate } from "@builder.io/qwik-city";
 import type { InitialValues } from "@modular-forms/qwik";
 import Configurator from "~/components/configurator/configurator";
 import { config } from "~/config";
-import { getRandomTopic } from "~/db/topics";
 import type { ConfigurationForm } from "~/models/configuration.models";
 import { configurationDefaultValue } from "~/models/configuration.models";
 import styles from "./index.module.scss";
