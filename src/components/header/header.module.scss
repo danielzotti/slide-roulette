@@ -1,12 +1,31 @@
 .header {
   z-index: 100;
   position: sticky;
-  top:0;
+  top: 0;
   margin: 0;
-  padding: var(--margin-default);
   display: flex;
   gap: 30px;
   flex-direction: row;
+  align-items: center;
+  justify-content: center;
   background-color: var(--navbar-bg-color);
   color: var(--navbar-color);
+  height: var(--navbar-height);
+
+  a {
+    border: none;
+    display: block;
+    transition: scale 0.2s ease-in-out;
+
+    &:hover {
+      scale: 1.05;
+    }
+  }
+}
+
+.title {
+  margin:0;
+  font-size: 25px;
+  font-family: var(--font-family-title);
+  text-transform: uppercase;
 }

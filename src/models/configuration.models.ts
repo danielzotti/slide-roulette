@@ -4,6 +4,7 @@ export const configurationDefaultValue: ConfigurationForm = {
   language: "it",
   level: 1,
   slides: 5,
+  orientation: "landscape",
 };
 
 export const configurationSchema = z.object({
@@ -16,6 +17,7 @@ export const configurationSchema = z.object({
     .number()
     .min(1, "Please enter a number between 1 and 100.")
     .max(100, "Please enter a number between 1 and 100."),
+  orientation: z.union([z.literal("landscape"), z.literal("portrait")]),
 });
 
 export type ConfigurationForm = z.infer<typeof configurationSchema>;

@@ -87,6 +87,26 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
             )}
           </Field>
 
+          <Field name="orientation" type="string">
+            {(field, props) => (
+              <div class={styles.field}>
+                <label for="slides">Orientation</label>
+                <select
+                  id={field.name}
+                  {...props}
+                  onInput$={(e) => {
+                    field.value = (e.target as HTMLInputElement).value as
+                      | "landscape"
+                      | "portrait";
+                  }}
+                >
+                  <option value="landscape">Landscape (Desktop)</option>
+                  <option value="portrait">Portrait (Smartphone)</option>
+                </select>
+              </div>
+            )}
+          </Field>
+
           <Button type="submit" variant="primary">
             Start!
           </Button>

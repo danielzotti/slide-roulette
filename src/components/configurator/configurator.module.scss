@@ -1,8 +1,32 @@
 .configurator {
   padding: var(--margin-default);
   text-align: center;
+  border-radius: var(--border-radius);
+  border: 2px solid var(--border-color);
+  margin: var(--margin-medium);
+
+  button {
+    margin-top: var(--margin-medium);
+  }
+
 }
 
 .field {
-  margin: var(--margin-default);
+  margin-bottom: var(--margin-default);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--margin-small);
+  text-transform: uppercase;
+  label {
+    font-weight: bold;
+  }
+
+  label, input, select {
+    font-size: clamp(1em, 1.6vw, 2em);
+    line-height: 1.5;
+  }
+
 }
+

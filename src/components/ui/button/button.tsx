@@ -16,12 +16,14 @@ export const Button = ({
   children,
   onClick$,
   type = "button",
+  disabled = false,
 }: ButtonProps) => {
   return (
     <button
       class={`${styles.button} ${styles[variant]} ${classOverride}`}
       type={type}
       onClick$={[onClick$]}
+      disabled={disabled}
     >
       {children}
     </button>

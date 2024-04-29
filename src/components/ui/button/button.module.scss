@@ -25,4 +25,8 @@
     background-color: transparent;
     color: var(--btn-clean-text-color);
   }
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
 }
