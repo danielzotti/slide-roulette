@@ -13,8 +13,10 @@ export default component$(() => {
     language: location.url.searchParams.get("language") ?? "it",
     slides: parseInt(location.url.searchParams.get("slides") ?? "5"),
     orientation:
-      (location.url.searchParams.get("orientation") as State["orientation"]) ??
-      "landscape",
+      (location.url.searchParams.get("orientation") as unknown as
+        | "landscape"
+        | "portrait"
+        | undefined) ?? "landscape",
     currentSlide: 0,
     title: getRandomTopic(
       parseInt(location.url.searchParams.get("level") ?? "1"),
