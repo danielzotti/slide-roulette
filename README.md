@@ -14,6 +14,7 @@ A slide roulette app: one random topic and 3 (or more) random slides (with just 
   - TLDR: move `dependencies` to `devDependencies`
 
 ## TODO
-- [ ] Check italian topics (especially for level 2 and 3)
+- [ ] Automatically check device orientation
+- [ ] Check Italian topics (especially for level 2 and 3)
 - [ ] Add English topics
 - [ ] Contribution guidelines
