@@ -1,7 +1,6 @@
 import { $, component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
-import { useNavigate } from "@builder.io/qwik-city";
 import type { InitialValues } from "@modular-forms/qwik";
 import Configurator from "~/components/configurator/configurator";
 import Footer from "~/components/footer/footer";
@@ -15,12 +14,14 @@ export const useFormLoader = routeLoader$<InitialValues<ConfigurationForm>>(
 );
 
 export default component$(() => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const start = $((values: ConfigurationForm) => {
-    navigate(
-      `${config.urls.slides}?${new URLSearchParams(values as unknown as Record<string, string>)}`,
-    );
+    // Quick fix/trick to load new images if query params remain the same (instead of using navigate() function)
+    window.location.href = `${config.urls.slides}?${new URLSearchParams(values as unknown as Record<string, string>)}`;
+    // navigate(
+    //   `${config.urls.slides}?${new URLSearchParams(values as unknown as Record<string, string>)}`,
+    // );
   });
 
   return (
