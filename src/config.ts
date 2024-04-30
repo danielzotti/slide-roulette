@@ -18,4 +18,5 @@ export const config = {
   urls: {
     slides: "/slides",
   },
+  github: "https://github.com/danielzotti/slide-roulette",
 };
