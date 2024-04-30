@@ -7,7 +7,7 @@ export const config = {
   baseUrl,
   title: "Slide Roulette",
   description: "A slide roulette app to test your improvising skills!",
-  themeColor: "#d27c19",
+  themeColor: "#2daae1",
   // manifest: '/manifest.json',
   // faviconUrl: '/static/icons/favicon.png',
   // faviconAppleUrl: '/static/icons/favicon-apple.png',
