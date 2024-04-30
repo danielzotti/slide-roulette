@@ -1,5 +1,11 @@
 import { $, component$, useStore } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
+import {
+  MatChevronLeftRound,
+  MatChevronRightRound,
+  MatFullscreenExitOutlined,
+  MatFullscreenOutlined,
+} from "@qwikest/icons/material";
 import { Button } from "~/components/ui/button/button";
 import { config } from "~/config";
 import { getRandomTopic } from "~/db/topics";
@@ -21,6 +27,7 @@ export default component$(() => {
     title: getRandomTopic(
       parseInt(location.url.searchParams.get("level") ?? "1"),
     ),
+    isFullscreen: true,
   });
 
   const prevSlide = $(() => {
@@ -34,10 +41,13 @@ export default component$(() => {
       state.currentSlide++;
     }
   });
+  const toggleImageSize = $(() => {
+    state.isFullscreen = !state.isFullscreen;
+  });
 
   return (
     <div class={styles.presentation}>
-      {state.currentSlide > 0 && <h1 class={styles.title}>{state.title}</h1>}
+      {state.currentSlide > 0 && <h2 class={styles.title}>{state.title}</h2>}
 
       <div class={styles.content}>
         {/*<pre>{JSON.stringify(state, null, 2)}</pre>*/}
@@ -57,29 +67,61 @@ export default component$(() => {
           </div>
         )}
         {Array.from({ length: state.slides }, (_, i) => i + 1).map((i) => (
-          <img
-            key={i}
-            src={config.apis.randomImage(state.orientation) + `&${i}`}
-            width={state.orientation === "landscape" ? 1280 : 720}
-            height={state.orientation === "landscape" ? 720 : 1280}
-            alt="Random generated"
-            style={{ display: state.currentSlide === i ? "block" : "none" }}
-          />
+          <>
+            <img
+              key={`image-${i}`}
+              src={config.apis.randomImage(state.orientation) + `&${i}`}
+              width={state.orientation === "landscape" ? 1280 : 720}
+              height={state.orientation === "landscape" ? 720 : 1280}
+              alt="Random generated"
+              class={styles.image}
+              style={{
+                display:
+                  !state.isFullscreen && state.currentSlide === i
+                    ? "block"
+                    : "none",
+              }}
+            />
+            <div
+              key={`bg-image-${i}`}
+              style={{
+                backgroundImage: `url(${config.apis.randomImage(state.orientation)}&${i})`,
+                display:
+                  state.isFullscreen && state.currentSlide === i
+                    ? "block"
+                    : "none",
+              }}
+              class={styles.backgroundImage}
+            />
+          </>
         ))}
       </div>
 
       <div class={styles.controls}>
         {state.currentSlide > 0 && (
           <>
-            <Button disabled={state.currentSlide <= 1} onClick$={prevSlide}>
-              Prev
+            <Button
+              classOverride={styles.resizeImage}
+              onClick$={toggleImageSize}
+              variant="clean"
+            >
+              {!state.isFullscreen && <MatFullscreenOutlined />}
+              {state.isFullscreen && <MatFullscreenExitOutlined />}
+            </Button>
+            <Button
+              disabled={state.currentSlide <= 1}
+              onClick$={prevSlide}
+              variant="clean"
+            >
+              <MatChevronLeftRound />
             </Button>
             <span>{state.currentSlide}</span>
             <Button
               disabled={state.currentSlide >= state.slides}
+              variant="clean"
               onClick$={nextSlide}
             >
-              Next
+              <MatChevronRightRound />
             </Button>
           </>
         )}

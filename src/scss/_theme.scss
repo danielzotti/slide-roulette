@@ -26,6 +26,9 @@
   --code-bg-color: var(--black);
   --code-color: var(--white-dark);
   --code-border-color: transparent;
+
+  --presentation-element-bg-color: var(--black);
+  --presentation-element-text-color: var(--white);
 }
 
 @mixin light {

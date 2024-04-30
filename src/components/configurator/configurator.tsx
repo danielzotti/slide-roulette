@@ -107,7 +107,7 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
             )}
           </Field>
 
-          <Button type="submit" variant="primary">
+          <Button type="submit" variant="primary" classOverride={styles.start}>
             Start!
           </Button>
         </div>

@@ -1,4 +1,5 @@
 .presentation {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -10,20 +11,28 @@
   padding: var(--margin-default);
 }
 
-
 .preview {
   margin: 0;
 }
+
 .titlePreview {
   font-family: var(--font-family-title);
   text-transform: uppercase;
   margin-block: var(--margin-default);
+  font-style: italic;
 }
 
 .title {
-  margin: 0;
-  font-family: var(--font-family-title);
+  //position: absolute;
+  //top: var(--margin-small);
+  z-index: 1;
   flex: 0 0 auto;
+  margin: 0 var(--margin-small);
+  font-family: var(--font-family-title);
+  background: var(--text-bg-color);
+  padding: var(--margin-small) var(--margin-default);
+  text-align: center;
+  border-radius: var(--border-radius);
 }
 
 .content {
@@ -31,25 +40,39 @@
   overflow: hidden;
   align-content: center;
   text-align: center;
+}
 
-  img {
-    max-height: 100%;
-    max-width: 100%;
-    width: auto;
-    height: auto;
-  }
+.image {
+  object-fit: contain;
+  object-position: center;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
 }
 
 .controls {
-  display: flex;
   flex: 0 0 auto;
+  z-index: 1;
+  margin: 0 var(--margin-small);
+  display: flex;
   flex-direction: row;
   gap: var(--margin-default);
   align-items: center;
   justify-items: center;
+  background: var(--text-bg-color);
+  padding: var(--margin-default);
+  border-radius: var(--border-radius);
+  font-size: clamp(1.5em, 1.6vw, 2em);
 }
 
 .start {
   margin-top: var(--margin-medium);
   font-size: clamp(1.6em, 3.2vw, 3em);
+  text-transform: uppercase;
 }
