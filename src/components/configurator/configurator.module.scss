@@ -1,9 +1,20 @@
+.form {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  @media(min-width: 500px) {
+    max-width: 500px;
+  }
+  @media(min-width: 1250px) {
+    max-width: 800px;
+  }
+}
+
 .configurator {
-  padding: var(--margin-default);
-  text-align: center;
+  padding: var(--margin-medium);
   border-radius: var(--border-radius);
-  border: 2px solid var(--border-color);
   margin: var(--margin-medium);
+  border: 2px solid var(--accent-color);
 
   button {
     margin-top: var(--margin-medium);
@@ -15,19 +26,32 @@
   margin-bottom: var(--margin-default);
   text-align: center;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--margin-small);
+  justify-items: center;
   text-transform: uppercase;
+  flex-direction: column;
+  gap: var(--margin-small);
+
   label {
     font-weight: bold;
   }
 
-  label, input, select {
+  label, select {
     font-size: clamp(1em, 1.6vw, 2em);
     line-height: 1.5;
+    flex-grow: 1;
+    text-align: left;
+    width: 100%;
+    display: block;
   }
 
+  @media(min-width: 500px) {
+    flex-direction: row;
+    gap: var(--margin-default);
+    label {
+      text-align: right;
+    }
+  }
 }
 
 .start {

@@ -24,7 +24,7 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
 
   return (
     <>
-      <Form onSubmit$={handleSubmit}>
+      <Form onSubmit$={handleSubmit} class={styles.form}>
         <div class={styles.configurator}>
           <Field name="level" type="number">
             {(field, props) => (
@@ -100,8 +100,8 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
                       | "portrait";
                   }}
                 >
-                  <option value="landscape">Landscape (Desktop)</option>
-                  <option value="portrait">Portrait (Smartphone)</option>
+                  <option value="landscape">Desktop</option>
+                  <option value="portrait">Smartphone</option>
                 </select>
               </div>
             )}
