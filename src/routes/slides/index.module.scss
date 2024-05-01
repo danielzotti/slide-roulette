@@ -4,8 +4,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  max-height: calc(100dvh - var(--navbar-height));
-  height: calc(100dvh - var(--navbar-height));
+  max-height: calc(100svh - var(--navbar-height));
+  height: calc(100svh - var(--navbar-height));
   overflow: hidden;
   gap: var(--margin-default);
   padding: var(--margin-default);
