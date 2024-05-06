@@ -23,16 +23,19 @@
 }
 
 .title {
-  //position: absolute;
-  //top: var(--margin-small);
   z-index: 1;
   flex: 0 0 auto;
   margin: 0 var(--margin-small);
   font-family: var(--font-family-title);
-  background: var(--text-bg-color);
+  background: var(--presentation-element-bg-color);
+  color: (--presentation-element-text-color);
   padding: var(--margin-small) var(--margin-default);
   text-align: center;
   border-radius: var(--border-radius);
+
+  &:first-letter {
+    text-transform: uppercase;
+  }
 }
 
 .content {
@@ -65,7 +68,8 @@
   gap: var(--margin-default);
   align-items: center;
   justify-items: center;
-  background: var(--text-bg-color);
+  background: var(--presentation-element-bg-color);
+  color: (--presentation-element-text-color);
   padding: var(--margin-default);
   border-radius: var(--border-radius);
   font-size: clamp(1.5em, 1.6vw, 2em);

@@ -27,7 +27,7 @@
   --code-color: var(--white-dark);
   --code-border-color: transparent;
 
-  --presentation-element-bg-color: var(--black);
+  --presentation-element-bg-color: var(--black-transparent);
   --presentation-element-text-color: var(--white);
 }
 
@@ -59,4 +59,7 @@
   --code-bg-color: var(--white);
   --code-color: var(--gray-dark);
   --code-border-color: var(--gray-dark);
+
+  --presentation-element-bg-color: var(--white-transparent);
+  --presentation-element-text-color: var(--black);
 }

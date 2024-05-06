@@ -1,5 +1,4 @@
 import { $, component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
 import { routeLoader$ } from "@builder.io/qwik-city";
 import type { InitialValues } from "@modular-forms/qwik";
 import Configurator from "~/components/configurator/configurator";
@@ -27,7 +26,6 @@ export default component$(() => {
   return (
     <div>
       <div class={styles.page}>
-        {/*<h1>{config.title}</h1>*/}
         <p>{config.description}</p>
 
         <Configurator onSubmit={start} />
@@ -48,13 +46,3 @@ export default component$(() => {
     </div>
   );
 });
-
-export const head: DocumentHead = {
-  title: config.title,
-  meta: [
-    {
-      name: config.title,
-      content: config.description,
-    },
-  ],
-};

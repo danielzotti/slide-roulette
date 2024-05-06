@@ -1,7 +1,8 @@
 import { component$, Slot, useStyles$ } from "@builder.io/qwik";
-import { routeLoader$ } from "@builder.io/qwik-city";
+import { type DocumentHead, routeLoader$ } from "@builder.io/qwik-city";
 import type { RequestHandler } from "@builder.io/qwik-city";
 import Header from "~/components/header/header";
+import { config } from "~/config";
 
 import styles from "./layout.module.scss?inline";
 
@@ -33,3 +34,13 @@ export default component$(() => {
     </>
   );
 });
+
+export const head: DocumentHead = {
+  title: config.title,
+  meta: [
+    {
+      name: config.title,
+      content: config.description,
+    },
+  ],
+};

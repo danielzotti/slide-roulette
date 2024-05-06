@@ -50,8 +50,6 @@ export default component$(() => {
       {state.currentSlide > 0 && <h2 class={styles.title}>{state.title}</h2>}
 
       <div class={styles.content}>
-        {/*<pre>{JSON.stringify(state, null, 2)}</pre>*/}
-
         {state.currentSlide === 0 && (
           <div>
             <p class={styles.preview}>
@@ -97,35 +95,33 @@ export default component$(() => {
         ))}
       </div>
 
-      <div class={styles.controls}>
-        {state.currentSlide > 0 && (
-          <>
-            <Button
-              classOverride={styles.resizeImage}
-              onClick$={toggleImageSize}
-              variant="clean"
-            >
-              {!state.isFullscreen && <MatFullscreenOutlined />}
-              {state.isFullscreen && <MatFullscreenExitOutlined />}
-            </Button>
-            <Button
-              disabled={state.currentSlide <= 1}
-              onClick$={prevSlide}
-              variant="clean"
-            >
-              <MatChevronLeftRound />
-            </Button>
-            <span>{state.currentSlide}</span>
-            <Button
-              disabled={state.currentSlide >= state.slides}
-              variant="clean"
-              onClick$={nextSlide}
-            >
-              <MatChevronRightRound />
-            </Button>
-          </>
-        )}
-      </div>
+      {state.currentSlide > 0 && (
+        <div class={styles.controls}>
+          <Button
+            classOverride={styles.resizeImage}
+            onClick$={toggleImageSize}
+            variant="clean"
+          >
+            {!state.isFullscreen && <MatFullscreenOutlined />}
+            {state.isFullscreen && <MatFullscreenExitOutlined />}
+          </Button>
+          <Button
+            disabled={state.currentSlide <= 1}
+            onClick$={prevSlide}
+            variant="clean"
+          >
+            <MatChevronLeftRound />
+          </Button>
+          <span>{state.currentSlide}</span>
+          <Button
+            disabled={state.currentSlide >= state.slides}
+            variant="clean"
+            onClick$={nextSlide}
+          >
+            <MatChevronRightRound />
+          </Button>
+        </div>
+      )}
     </div>
   );
 });
