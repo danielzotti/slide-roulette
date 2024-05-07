@@ -1,16 +1,12 @@
-import {
-  type QRL,
-  $,
-  component$,
-  useSignal,
-  useVisibleTask$,
-} from "@builder.io/qwik";
+import { type QRL, $, component$, useVisibleTask$ } from "@builder.io/qwik";
 import type { SubmitHandler } from "@modular-forms/qwik";
+import { setValue } from "@modular-forms/qwik";
+import { getValues } from "@modular-forms/qwik";
 import { useForm, zodForm$ } from "@modular-forms/qwik";
 import { Button } from "~/components/ui/button/button";
 import type { ConfigurationForm } from "~/models/configuration.models";
+import { configurationDefaultValue } from "~/models/configuration.models";
 import { configurationSchema } from "~/models/configuration.models";
-import { useFormLoader } from "~/routes";
 import styles from "./configurator.module.scss";
 
 interface ConfiguratorProps {
@@ -18,12 +14,12 @@ interface ConfiguratorProps {
 }
 
 export default component$(({ onSubmit }: ConfiguratorProps) => {
-  const [, { Form, Field }] = useForm<ConfigurationForm>({
-    loader: useFormLoader(),
+  const [configurationForm, { Form, Field }] = useForm<ConfigurationForm>({
+    loader: {
+      value: configurationDefaultValue,
+    },
     validate: zodForm$(configurationSchema),
   });
-
-  const isPortrait = useSignal<boolean>(true);
 
   const handleSubmit = $<SubmitHandler<ConfigurationForm>>(async (values) => {
     onSubmit(values);
@@ -31,7 +27,15 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(() => {
-    isPortrait.value = window.matchMedia("(orientation: portrait)").matches;
+    const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+    setValue(
+      configurationForm,
+      "orientation",
+      isPortrait ? "portrait" : "landscape",
+    );
+    setTimeout(() => {
+      console.log(getValues(configurationForm));
+    }, 100);
   });
 
   return (
@@ -42,8 +46,9 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
             <div class={styles.field}>
               <label for={field.name}>{field.name}</label>
               <select
-                id={field.name}
                 {...props}
+                id={field.name}
+                value={field.value}
                 onInput$={(e) => {
                   field.value = (e.target as HTMLInputElement).value;
                 }}
@@ -62,18 +67,22 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
             <div class={styles.field}>
               <label for={field.name}>{field.name}</label>
               <select
-                id={field.name}
                 {...props}
+                id={field.name}
+                value={field.value}
                 onInput$={(e) => {
                   field.value = (e.target as HTMLInputElement).value as
                     | "landscape"
                     | "portrait";
                 }}
               >
-                <option value="portrait" selected={isPortrait.value}>
+                <option value="portrait" selected={field.value === "portrait"}>
                   Smartphone
                 </option>
-                <option value="landscape" selected={!isPortrait.value}>
+                <option
+                  value="landscape"
+                  selected={field.value === "landscape"}
+                >
                   Desktop
                 </option>
               </select>
@@ -86,8 +95,9 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
             <div class={styles.field}>
               <label for={field.name}>{field.name}</label>
               <select
-                id={field.name}
                 {...props}
+                id={field.name}
+                value={field.value}
                 onInput$={(e) => {
                   field.value = +(e.target as HTMLInputElement).value;
                 }}
@@ -108,8 +118,9 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
             <div class={styles.field}>
               <label for={field.name}>{field.name}</label>
               <select
-                id={field.name}
                 {...props}
+                id={field.name}
+                value={field.value}
                 onInput$={(e) => {
                   field.value = +(e.target as HTMLInputElement).value;
                 }}
