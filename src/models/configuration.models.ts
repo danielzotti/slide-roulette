@@ -3,7 +3,7 @@ import { z } from "@builder.io/qwik-city";
 export const configurationDefaultValue: ConfigurationForm = {
   language: "it",
   level: 1,
-  slides: 5,
+  slidesCount: 5,
   orientation: "landscape",
 };
 
@@ -13,7 +13,7 @@ export const configurationSchema = z.object({
     .min(1, "Please enter a number greater or equal than one.")
     .max(3, "The max level is 3"),
   language: z.string(),
-  slides: z
+  slidesCount: z
     .number()
     .min(1, "Please enter a number between 1 and 100.")
     .max(100, "Please enter a number between 1 and 100."),

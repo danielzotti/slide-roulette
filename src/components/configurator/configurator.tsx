@@ -1,19 +1,25 @@
-import { type QRL, $, component$, useVisibleTask$ } from "@builder.io/qwik";
+import {
+  $,
+  component$,
+  type QRL,
+  useSignal,
+  useVisibleTask$,
+} from "@builder.io/qwik";
 import type { SubmitHandler } from "@modular-forms/qwik";
-import { setValue } from "@modular-forms/qwik";
-import { getValues } from "@modular-forms/qwik";
-import { useForm, zodForm$ } from "@modular-forms/qwik";
+import { setValue, useForm, zodForm$ } from "@modular-forms/qwik";
 import { Button } from "~/components/ui/button/button";
 import type { ConfigurationForm } from "~/models/configuration.models";
-import { configurationDefaultValue } from "~/models/configuration.models";
-import { configurationSchema } from "~/models/configuration.models";
+import {
+  configurationDefaultValue,
+  configurationSchema,
+} from "~/models/configuration.models";
 import styles from "./configurator.module.scss";
 
 interface ConfiguratorProps {
   onSubmit: QRL<(values: ConfigurationForm) => void>;
 }
 
-export default component$(({ onSubmit }: ConfiguratorProps) => {
+export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
   const [configurationForm, { Form, Field }] = useForm<ConfigurationForm>({
     loader: {
       value: configurationDefaultValue,
@@ -21,7 +27,10 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
     validate: zodForm$(configurationSchema),
   });
 
-  const handleSubmit = $<SubmitHandler<ConfigurationForm>>(async (values) => {
+  const isLoading = useSignal(false);
+
+  const handleSubmit = $<SubmitHandler<ConfigurationForm>>((values) => {
+    isLoading.value = true;
     onSubmit(values);
   });
 
@@ -33,9 +42,6 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
       "orientation",
       isPortrait ? "portrait" : "landscape",
     );
-    setTimeout(() => {
-      console.log(getValues(configurationForm));
-    }, 100);
   });
 
   return (
@@ -90,7 +96,7 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
           )}
         </Field>
 
-        <Field name="slides" type="number">
+        <Field name="slidesCount" type="number">
           {(field, props) => (
             <div class={styles.field}>
               <label for={field.name}>{field.name}</label>
@@ -133,8 +139,14 @@ export default component$(({ onSubmit }: ConfiguratorProps) => {
           )}
         </Field>
 
-        <Button type="submit" variant="primary" classOverride={styles.start}>
-          Start!
+        <Button
+          type="submit"
+          variant="primary"
+          classOverride={styles.start}
+          disabled={isLoading.value}
+        >
+          {!isLoading.value && <span>Start!</span>}
+          {isLoading.value && <span>Starting...</span>}
         </Button>
       </div>
     </Form>

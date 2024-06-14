@@ -1,3 +1,5 @@
+@use "../../scss/base";
+
 .presentation {
   position: relative;
   display: flex;
@@ -9,6 +11,13 @@
   overflow: hidden;
   gap: var(--margin-default);
   padding: var(--margin-default);
+}
+
+.error {
+  @extend .h1;
+  padding: var(--margin-big);
+  color: var(--error-color);
+  text-align: center;
 }
 
 .preview {

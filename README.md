@@ -5,7 +5,9 @@ A slide roulette app: one random topic and 3 (or more) random slides (with just 
 - [Qwik](https://qwik.dev/)
 - [Vercel](https://vercel.com/)
 - [ChatGPT](https://chat.openai.com/) for the topics generation
-- [Unsplash](https://unsplash.com/) for the images
+- [Unsplash](https://unsplash.com/) for the random images
+- [Lorem Picsum](https://picsum.photos/) for the random images (if Unsplash is down)
+- [Unsample](https://unsample.net/) for the local random images (if Unsplash/Lorem Picsum service is down)
 - [Bing Image Generation](https://www.bing.com/images) for the logo
 
 ## Notes
@@ -16,5 +18,8 @@ A slide roulette app: one random topic and 3 (or more) random slides (with just 
 ## TODO
 - [x] Automatically check device orientation
 - [x] Check Italian topics (especially for level 2 and 3)
+- [ ] Fix random problems with image loading (different images between fullscreen and standard mode)
+- [ ] Fallback mode if Unsplash service is down (local images)
+  - [ ] Migrate to SSG to Vercel to store images?
 - [ ] Add English topics
 - [ ] Contribution guidelines

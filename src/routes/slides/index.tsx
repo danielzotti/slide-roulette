@@ -1,4 +1,11 @@
-import { $, component$, useStore } from "@builder.io/qwik";
+import {
+  $,
+  component$,
+  useComputed$,
+  useSignal,
+  useStore,
+  useTask$,
+} from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import {
   MatChevronLeftRound,
@@ -7,17 +14,21 @@ import {
   MatFullscreenOutlined,
 } from "@qwikest/icons/material";
 import { Button } from "~/components/ui/button/button";
-import { config } from "~/config";
+import { FragmentWithKey } from "~/components/ui/fragment-with-key/FragmentWithKey";
 import { getRandomTopic } from "~/db/topics";
 import type { State } from "~/models/state.models";
+import { getUnsplashImages } from "~/utils/images";
+
 import styles from "./index.module.scss";
 
 export default component$(() => {
   const location = useLocation();
+
   const state = useStore<State>({
     level: parseInt(location.url.searchParams.get("level") ?? "1"),
     language: location.url.searchParams.get("language") ?? "it",
-    slides: parseInt(location.url.searchParams.get("slides") ?? "5"),
+    slidesCount: parseInt(location.url.searchParams.get("slidesCount") ?? "5"),
+    slides: [],
     orientation:
       (location.url.searchParams.get("orientation") as unknown as
         | "landscape"
@@ -30,6 +41,12 @@ export default component$(() => {
     isFullscreen: true,
   });
 
+  const loadedImagesCount = useSignal<number>(0);
+  const hasError = useSignal(false);
+  const hasLoadedAllImages = useComputed$(
+    () => loadedImagesCount.value >= state.slidesCount,
+  );
+
   const prevSlide = $(() => {
     if (state.currentSlide > 1) {
       state.currentSlide--;
@@ -37,12 +54,43 @@ export default component$(() => {
   });
 
   const nextSlide = $(() => {
-    if (state.currentSlide < state.slides) {
+    if (state.currentSlide < state.slidesCount) {
       state.currentSlide++;
     }
   });
   const toggleImageSize = $(() => {
     state.isFullscreen = !state.isFullscreen;
+  });
+
+  useTask$(async () => {
+    try {
+      state.slides = await getUnsplashImages({
+        orientation: state.orientation,
+        count: state.slidesCount,
+      });
+      if (state.slides.length === 0) {
+        hasError.value = true;
+      }
+    } catch (error) {
+      console.error("Error fetching random fox image:", error);
+    }
+  });
+
+  if (hasError.value) {
+    return (
+      <div class={styles.error}>
+        There might be a problem with the image{" "}
+        <a href="https://status.unsplash.com/" target="_blank">
+          Unsplash
+        </a>{" "}
+        service. Try again later.
+      </div>
+    );
+  }
+
+  const onLoadedImage = $(({ id }: { id: string }) => {
+    console.log("Image loaded", id);
+    loadedImagesCount.value++;
   });
 
   return (
@@ -53,45 +101,55 @@ export default component$(() => {
         {state.currentSlide === 0 && (
           <div>
             <p class={styles.preview}>
-              You have {state.slides} slides to talk about{" "}
+              You have {state.slidesCount} slides to talk about{" "}
             </p>
             <h1 class={styles.titlePreview}>{state.title}</h1>
             <p class={styles.preview}>
               Just click the button below and start improvising!
             </p>
-            <Button classOverride={styles.start} onClick$={nextSlide}>
+            <Button
+              classOverride={styles.start}
+              onClick$={nextSlide}
+              disabled={!hasLoadedAllImages.value}
+            >
               Start
             </Button>
+            <p>
+              <small>
+                {!hasLoadedAllImages.value && "Loading images..."} &nbsp;
+              </small>
+            </p>
           </div>
         )}
-        {Array.from({ length: state.slides }, (_, i) => i + 1).map((i) => (
-          <>
+        {state.slides.map(({ id, url }, i) => (
+          <FragmentWithKey key={`fragment-${id}`}>
             <img
-              key={`image-${i}`}
-              src={config.apis.randomImage(state.orientation) + `&${i}`}
+              key={`image-${id}`}
+              src={url}
               width={state.orientation === "landscape" ? 1280 : 720}
               height={state.orientation === "landscape" ? 720 : 1280}
               alt="Random generated"
               class={styles.image}
+              onLoad$={() => onLoadedImage({ id })}
               style={{
                 display:
-                  !state.isFullscreen && state.currentSlide === i
+                  !state.isFullscreen && state.currentSlide === i + 1
                     ? "block"
                     : "none",
               }}
             />
             <div
-              key={`bg-image-${i}`}
+              key={`bg-image-${id}`}
               style={{
-                backgroundImage: `url(${config.apis.randomImage(state.orientation)}&${i})`,
+                backgroundImage: `url(${url})`,
                 display:
-                  state.isFullscreen && state.currentSlide === i
+                  state.isFullscreen && state.currentSlide === i + 1
                     ? "block"
                     : "none",
               }}
               class={styles.backgroundImage}
             />
-          </>
+          </FragmentWithKey>
         ))}
       </div>
 
@@ -114,7 +172,7 @@ export default component$(() => {
           </Button>
           <span>{state.currentSlide}</span>
           <Button
-            disabled={state.currentSlide >= state.slides}
+            disabled={state.currentSlide >= state.slidesCount}
             variant="clean"
             onClick$={nextSlide}
           >

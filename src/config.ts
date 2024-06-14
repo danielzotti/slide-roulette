@@ -12,11 +12,16 @@ export const config = {
   // faviconUrl: '/static/icons/favicon.png',
   // faviconAppleUrl: '/static/icons/favicon-apple.png',
   apis: {
-    randomImage: (orientation: State["orientation"]) =>
-      `https://source.unsplash.com/${orientation === "landscape" ? "1280x720" : "720x1280"}?random`,
+    unsplash: "https://api.unsplash.com/photos/random",
   },
   urls: {
     slides: "/slides",
+  },
+  folders: {
+    slides: {
+      landscape: `/images/slides/landscape`,
+      portrait: `/images/slides/portrait`,
+    },
   },
   github: "https://github.com/danielzotti/slide-roulette",
 };
