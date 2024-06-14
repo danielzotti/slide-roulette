@@ -1,6 +1,4 @@
 // const baseUrl = "https://danielzotti.github.io/slide-roulette";
-import type { State } from "~/models/state.models";
-
 const baseUrl = "https://slide-roulette.danielzotti.it";
 
 export const config = {
