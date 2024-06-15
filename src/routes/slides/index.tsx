@@ -51,7 +51,6 @@ export default component$(() => {
     () => {
       const slide = state.slides[state.currentSlide - 1];
       if (
-        !slide ||
         slide.source !== "unsplash" ||
         (!slide.photographerName && !slide.photographerNickname)
       ) {
@@ -106,7 +105,7 @@ export default component$(() => {
     );
   }
 
-  const onLoadedImage = $(({ id }: { id: string }) => {
+  const onLoadedImage = $(() => {
     loadedImagesCount.value++;
   });
 
@@ -147,7 +146,7 @@ export default component$(() => {
               height={state.orientation === "landscape" ? 720 : 1280}
               alt="Random generated"
               class={styles.image}
-              onLoad$={() => onLoadedImage({ id })}
+              onLoad$={() => onLoadedImage()}
               style={{
                 display:
                   !state.isFullscreen && state.currentSlide === i + 1
