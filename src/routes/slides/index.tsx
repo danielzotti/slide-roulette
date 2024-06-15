@@ -80,6 +80,33 @@ export default component$(() => {
     state.isFullscreen = !state.isFullscreen;
   });
 
+  const restart = $(() => {
+    window.location.reload();
+  });
+
+  const onLoadedImage = $(() => {
+    loadedImagesCount.value++;
+  });
+
+  const handleKeyDown = $((event: KeyboardEvent) => {
+    switch (event.key) {
+      case "ArrowRight":
+      case " ":
+        hasLoadedAllImages.value && void nextSlide();
+        break;
+      case "ArrowLeft":
+        void prevSlide();
+        break;
+      case "Escape":
+        void navigate("/");
+        break;
+      case "Enter":
+        state.currentSlide === state.slidesCount && void restart();
+        state.currentSlide === 0 && void nextSlide();
+        break;
+    }
+  });
+
   useTask$(async () => {
     try {
       state.slides = await getUnsplashImages({
@@ -95,26 +122,6 @@ export default component$(() => {
     }
   });
 
-  const onLoadedImage = $(() => {
-    loadedImagesCount.value++;
-  });
-
-  const handleKeyDown = $((event: KeyboardEvent) => {
-    switch (event.key) {
-      case "ArrowRight":
-      case "Enter":
-      case " ":
-        void nextSlide();
-        break;
-      case "ArrowLeft":
-        void prevSlide();
-        break;
-      case "Escape":
-        void navigate("/");
-        break;
-    }
-  });
-
   if (hasError.value) {
     return (
       <div class={styles.error}>
@@ -126,6 +133,7 @@ export default component$(() => {
       </div>
     );
   }
+
   return (
     <div document:onKeyDown$={handleKeyDown} class={styles.presentation}>
       {state.currentSlide > 0 && <h2 class={styles.title}>{state.title}</h2>}
@@ -185,7 +193,13 @@ export default component$(() => {
           </FragmentWithKey>
         ))}
       </div>
-
+      {state.currentSlide === state.slidesCount && (
+        <div class={styles.restart}>
+          <Button onClick$={restart} variant="primary">
+            Try again...?
+          </Button>
+        </div>
+      )}
       {state.currentSlide > 0 && (
         <>
           {photographer.value && (
