@@ -36,7 +36,7 @@ export default defineConfig(({ command, mode }): UserConfig => {
             // These should only be production binary deps (including deps of deps), CLI deps, and their module graph
             // If a dep-of-dep needs to be external, add it here
             // For example, if something uses `bcrypt` but you don't have it as a dep, you can write
-            external: [...Object.keys(dependencies), 'fs']
+            external: [...Object.keys(dependencies)]
           }
         : undefined,
     server: {

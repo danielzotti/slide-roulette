@@ -5,6 +5,8 @@ import type { State } from "~/models/state.models";
 import type { UnsplashImage } from "~/models/unsplash.models";
 import { getRandomNumberArrayInRange } from "~/utils/math";
 
+/*
+// THIS DOESN'T WORK IN VERCEL
 import { promises as fs } from "fs";
 
 export const getRandomLocalImages = server$(
@@ -28,7 +30,7 @@ export const getRandomLocalImages = server$(
         }) as SlideImage,
     );
   },
-);
+);*/
 
 export const getUnsplashImages = server$(
   async ({
@@ -65,7 +67,7 @@ export const getUnsplashImages = server$(
   },
 );
 
-export const getLocalImagesUsingPublicUrl = server$(
+export const getRandomLocalImages = server$(
   ({
     orientation,
     count,
