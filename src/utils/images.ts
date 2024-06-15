@@ -42,10 +42,11 @@ export const getUnsplashImages = server$(
   }): Promise<Array<SlideImage>> => {
     try {
       const response = await fetch(
-        `${config.apis.unsplash}?&orientation=${orientation}&count=${count}&client_id=${process.env.UNSPLASH_API_KEY}`,
+        `${config.apis.unsplash}?&orientation=${orientation}&count=${count}&client_id=${process.env.UNSPLASH_API_KEY}XXX`,
       );
       if (!response.ok) {
-        throw new Error("Failed to fetch images from Unsplash");
+        console.log(response.status, process.env.UNSPLASH_API_KEY);
+        throw new Error(await response.json());
       }
       const images = await response.json();
       const w = orientation === "landscape" ? 1280 : 720;
