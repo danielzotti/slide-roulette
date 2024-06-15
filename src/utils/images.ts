@@ -63,6 +63,7 @@ export const getUnsplashImages = server$(
           }) satisfies SlideImage,
       );
     } catch (e) {
+      console.error("Error fetching images from Unsplash:", e);
       return getRandomLocalImages({ orientation, count });
     }
   },
