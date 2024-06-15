@@ -77,11 +77,22 @@
   gap: var(--margin-default);
   align-items: center;
   justify-items: center;
+  font-size: clamp(1.5em, 1.6vw, 2em);
   background: var(--presentation-element-bg-color);
   color: (--presentation-element-text-color);
   padding: var(--margin-default);
   border-radius: var(--border-radius);
-  font-size: clamp(1.5em, 1.6vw, 2em);
+}
+
+.photographer {
+  z-index: 1;
+  text-align: center;
+  font-size: 10px;
+  background: var(--presentation-element-bg-color);
+  color: (--presentation-element-text-color);
+  padding: var(--margin-small) var(--margin-default);
+  border-radius: var(--border-radius);
+  line-height: 1.5;
 }
 
 .start {

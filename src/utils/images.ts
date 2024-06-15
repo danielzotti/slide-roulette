@@ -51,16 +51,17 @@ export const getUnsplashImages = server$(
       const w = orientation === "landscape" ? 1280 : 720;
       const h = orientation === "landscape" ? 720 : 1280;
 
-      const urls = images.map(
+      return images.map(
         (image: UnsplashImage) =>
           ({
             id: image.id,
             url: `${image.urls.raw}?fit=crop&w=${w}&h=${h}&min-w=${w}&min-h=${h}&f=jpg&q=90`,
             orientation,
             source: "unsplash",
+            photographerName: image.user.username,
+            photographerNickname: image.user.username,
           }) satisfies SlideImage,
       );
-      return urls;
     } catch (e) {
       return getRandomLocalImages({ orientation, count });
     }
@@ -82,6 +83,8 @@ export const getRandomLocalImages = server$(
           url: `${config.folders.slides[orientation]}/${orientation}-${n}.jpg`,
           orientation,
           source: "local",
+          // photographerName: "Daniel Zotti",
+          // photographerNickname: "danielzotti",
         }) satisfies SlideImage,
     );
   },

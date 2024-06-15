@@ -29,11 +29,11 @@ export default component$(() => {
 
         <div class={styles.credits}>
           Thanks to{" "}
-          <a href="https://chat.openai.com" target="_blank">
+          <a href={config.websites.chatGpt} target="_blank">
             ChatGPT
           </a>{" "}
           for generating the topics and to{" "}
-          <a href="https://unsplash.com" target="_blank">
+          <a href={`${config.websites.unsplash.homepage}`} target="_blank">
             Unsplash
           </a>{" "}
           to provide the images.

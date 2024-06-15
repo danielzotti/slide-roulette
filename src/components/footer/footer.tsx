@@ -8,11 +8,11 @@ export default component$(() => {
     <footer class={styles.footer}>
       <div>
         Made with ❤️ by{" "}
-        <a target="_blank" href="https://www.danielzotti.it">
+        <a target="_blank" href={config.websites.danielzotti}>
           Daniel
         </a>{" "}
         |{" "}
-        <a target="_blank" href={config.github}>
+        <a target="_blank" href={config.websites.github}>
           <GoMarkGithub16 />
         </a>
       </div>

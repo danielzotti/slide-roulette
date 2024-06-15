@@ -3,4 +3,6 @@ export interface SlideImage {
   source: "local" | "unsplash";
   url: string;
   orientation: "landscape" | "portrait";
+  photographerName?: string;
+  photographerNickname?: string;
 }

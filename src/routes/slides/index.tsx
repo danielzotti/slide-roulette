@@ -15,6 +15,7 @@ import {
 } from "@qwikest/icons/material";
 import { Button } from "~/components/ui/button/button";
 import { FragmentWithKey } from "~/components/ui/fragment-with-key/FragmentWithKey";
+import { config } from "~/config";
 import { getRandomTopic } from "~/db/topics";
 import type { State } from "~/models/state.models";
 import { getUnsplashImages } from "~/utils/images";
@@ -46,6 +47,22 @@ export default component$(() => {
   const hasLoadedAllImages = useComputed$(
     () => loadedImagesCount.value >= state.slidesCount,
   );
+  const photographer = useComputed$<{ name: string; nickname: string } | null>(
+    () => {
+      const slide = state.slides[state.currentSlide - 1];
+      if (
+        !slide ||
+        slide.source !== "unsplash" ||
+        (!slide.photographerName && !slide.photographerNickname)
+      ) {
+        return null;
+      }
+      return {
+        name: slide.photographerName!,
+        nickname: slide.photographerNickname!,
+      };
+    },
+  );
 
   const prevSlide = $(() => {
     if (state.currentSlide > 1) {
@@ -72,24 +89,24 @@ export default component$(() => {
         hasError.value = true;
       }
     } catch (error) {
-      console.error("Error fetching random fox image:", error);
+      console.error("Error fetching images:", error);
+      hasError.value = true;
     }
   });
 
   if (hasError.value) {
     return (
       <div class={styles.error}>
-        There might be a problem with the image{" "}
-        <a href="https://status.unsplash.com/" target="_blank">
+        There might be a problem with{" "}
+        <a href={config.websites.unsplash.status} target="_blank">
           Unsplash
         </a>{" "}
-        service. Try again later.
+        (the service used to retrieve images). Please, try again later.
       </div>
     );
   }
 
   const onLoadedImage = $(({ id }: { id: string }) => {
-    console.log("Image loaded", id);
     loadedImagesCount.value++;
   });
 
@@ -154,31 +171,43 @@ export default component$(() => {
       </div>
 
       {state.currentSlide > 0 && (
-        <div class={styles.controls}>
-          <Button
-            classOverride={styles.resizeImage}
-            onClick$={toggleImageSize}
-            variant="clean"
-          >
-            {!state.isFullscreen && <MatFullscreenOutlined />}
-            {state.isFullscreen && <MatFullscreenExitOutlined />}
-          </Button>
-          <Button
-            disabled={state.currentSlide <= 1}
-            onClick$={prevSlide}
-            variant="clean"
-          >
-            <MatChevronLeftRound />
-          </Button>
-          <span>{state.currentSlide}</span>
-          <Button
-            disabled={state.currentSlide >= state.slidesCount}
-            variant="clean"
-            onClick$={nextSlide}
-          >
-            <MatChevronRightRound />
-          </Button>
-        </div>
+        <>
+          {photographer.value && (
+            <div class={styles.photographer}>
+              Photo by{" "}
+              <a
+                href={config.websites.unsplash.photographer(
+                  photographer.value.nickname,
+                )}
+                target="_blank"
+              >
+                {photographer.value.name}
+              </a>{" "}
+              {/*on <a href={config.websites.unsplash.homepage}>Unsplash</a>*/}
+            </div>
+          )}
+          <div class={styles.controls}>
+            <Button onClick$={toggleImageSize} variant="clean">
+              {!state.isFullscreen && <MatFullscreenOutlined />}
+              {state.isFullscreen && <MatFullscreenExitOutlined />}
+            </Button>
+            <Button
+              disabled={state.currentSlide <= 1}
+              onClick$={prevSlide}
+              variant="clean"
+            >
+              <MatChevronLeftRound />
+            </Button>
+            <span>{state.currentSlide}</span>
+            <Button
+              disabled={state.currentSlide >= state.slidesCount}
+              variant="clean"
+              onClick$={nextSlide}
+            >
+              <MatChevronRightRound />
+            </Button>
+          </div>
+        </>
       )}
     </div>
   );

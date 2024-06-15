@@ -1,5 +1,4 @@
-// const baseUrl = "https://danielzotti.github.io/slide-roulette";
-const baseUrl = "https://slide-roulette.danielzotti.it";
+const baseUrl = "https://slide-roulette.danielzotti.it"; // "https://danielzotti.github.io/slide-roulette";
 
 export const config = {
   baseUrl,
@@ -21,5 +20,16 @@ export const config = {
       portrait: `/images/slides/portrait`,
     },
   },
-  github: "https://github.com/danielzotti/slide-roulette",
+  websites: {
+    chatGpt: "https://chat.openai.com",
+    danielzotti: "https://www.danielzotti.it",
+    github: "https://github.com/danielzotti/slide-roulette",
+    unsplash: {
+      homepage:
+        "https://unsplash.com?utm_source=slide-roulette&utm_medium=referral",
+      photographer: (artist: string) =>
+        `https://unsplash.com/@${artist}?utm_source=slide-roulette&utm_medium=referral`,
+      status: "https://status.unsplash.com",
+    },
+  },
 };
