@@ -1,4 +1,4 @@
-import type { JSXChildren, PropFunction } from "@builder.io/qwik";
+import type { JSXChildren, PropFunction, Signal } from "@builder.io/qwik";
 import styles from "./button.module.scss";
 
 interface ButtonProps {
@@ -8,6 +8,7 @@ interface ButtonProps {
   onClick$?: PropFunction<() => void> | PropFunction<() => void>[];
   disabled?: boolean;
   type?: "submit" | "reset" | "button";
+  ref?: Signal<HTMLButtonElement | undefined>;
 }
 
 export const Button = ({
@@ -17,9 +18,11 @@ export const Button = ({
   onClick$,
   type = "button",
   disabled = false,
+  ref,
 }: ButtonProps) => {
   return (
     <button
+      ref={ref}
       class={`${styles.button} ${styles[variant]} ${classOverride}`}
       type={type}
       onClick$={[onClick$]}

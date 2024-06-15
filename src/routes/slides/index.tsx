@@ -6,7 +6,7 @@ import {
   useStore,
   useTask$,
 } from "@builder.io/qwik";
-import { useLocation } from "@builder.io/qwik-city";
+import { useLocation, useNavigate } from "@builder.io/qwik-city";
 import {
   MatChevronLeftRound,
   MatChevronRightRound,
@@ -24,6 +24,7 @@ import styles from "./index.module.scss";
 
 export default component$(() => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const state = useStore<State>({
     level: parseInt(location.url.searchParams.get("level") ?? "1"),
@@ -49,7 +50,7 @@ export default component$(() => {
   );
   const photographer = useComputed$<{ name: string; nickname: string } | null>(
     () => {
-      const slide = state.slides[state.currentSlide - 1];
+      const slide = state.slides.at(state.currentSlide - 1);
       if (
         !slide ||
         slide.source !== "unsplash" ||
@@ -94,6 +95,26 @@ export default component$(() => {
     }
   });
 
+  const onLoadedImage = $(() => {
+    loadedImagesCount.value++;
+  });
+
+  const handleKeyDown = $((event: KeyboardEvent) => {
+    switch (event.key) {
+      case "ArrowRight":
+      case "Enter":
+      case " ":
+        void nextSlide();
+        break;
+      case "ArrowLeft":
+        void prevSlide();
+        break;
+      case "Escape":
+        void navigate("/");
+        break;
+    }
+  });
+
   if (hasError.value) {
     return (
       <div class={styles.error}>
@@ -105,13 +126,8 @@ export default component$(() => {
       </div>
     );
   }
-
-  const onLoadedImage = $(() => {
-    loadedImagesCount.value++;
-  });
-
   return (
-    <div class={styles.presentation}>
+    <div document:onKeyDown$={handleKeyDown} class={styles.presentation}>
       {state.currentSlide > 0 && <h2 class={styles.title}>{state.title}</h2>}
 
       <div class={styles.content}>

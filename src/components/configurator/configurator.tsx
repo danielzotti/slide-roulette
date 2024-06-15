@@ -28,10 +28,19 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
   });
 
   const isLoading = useSignal(false);
+  const submitButtonRef = useSignal<HTMLButtonElement>();
 
   const handleSubmit = $<SubmitHandler<ConfigurationForm>>((values) => {
     isLoading.value = true;
     onSubmit(values);
+  });
+
+  const handleKeyDown = $((event: KeyboardEvent) => {
+    switch (event.key) {
+      case "Enter":
+        (submitButtonRef.value as HTMLButtonElement).click();
+        break;
+    }
   });
 
   // eslint-disable-next-line qwik/no-use-visible-task
@@ -45,7 +54,11 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
   });
 
   return (
-    <Form onSubmit$={handleSubmit} class={styles.form}>
+    <Form
+      onSubmit$={handleSubmit}
+      class={styles.form}
+      document:onKeyDown$={handleKeyDown}
+    >
       <div class={styles.configurator}>
         <Field name="language" type="string">
           {(field, props) => (
@@ -144,6 +157,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
           variant="primary"
           classOverride={styles.start}
           disabled={isLoading.value}
+          ref={submitButtonRef}
         >
           {!isLoading.value && <span>Start!</span>}
           {isLoading.value && <span>Starting...</span>}
