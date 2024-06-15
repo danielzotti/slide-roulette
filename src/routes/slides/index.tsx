@@ -51,6 +51,7 @@ export default component$(() => {
     () => {
       const slide = state.slides[state.currentSlide - 1];
       if (
+        !slide ||
         slide.source !== "unsplash" ||
         (!slide.photographerName && !slide.photographerNickname)
       ) {
