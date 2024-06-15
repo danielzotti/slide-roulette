@@ -32,42 +32,40 @@ export const getRandomLocalImages = server$(
   },
 );*/
 
-export const getUnsplashImages = server$(
-  async ({
-    orientation,
-    count,
-  }: {
-    orientation: State["orientation"];
-    count: number;
-  }): Promise<Array<SlideImage>> => {
-    try {
-      const response = await fetch(
-        `${config.apis.unsplash}?&orientation=${orientation}&count=${count}&client_id=${process.env.UNSPLASH_API_KEY}`,
-      );
-      if (!response.ok) {
-        throw new Error(JSON.stringify(await response.json()));
-      }
-      const images = await response.json();
-      const w = orientation === "landscape" ? 1280 : 720;
-      const h = orientation === "landscape" ? 720 : 1280;
-
-      return images.map(
-        (image: UnsplashImage) =>
-          ({
-            id: image.id,
-            url: `${image.urls.raw}?fit=crop&w=${w}&h=${h}&min-w=${w}&min-h=${h}&f=jpg&q=90`,
-            orientation,
-            source: "unsplash",
-            photographerName: image.user.username,
-            photographerNickname: image.user.username,
-          }) satisfies SlideImage,
-      );
-    } catch (e) {
-      console.error("Error fetching images from Unsplash:", e);
-      return getRandomLocalImages({ orientation, count });
+export const getUnsplashImages = server$(async function ({
+  orientation,
+  count,
+}: {
+  orientation: State["orientation"];
+  count: number;
+}): Promise<Array<SlideImage>> {
+  try {
+    const response = await fetch(
+      `${config.apis.unsplash}?&orientation=${orientation}&count=${count}&client_id=${this.env.get("UNSPLASH_API_KEY")}`,
+    );
+    if (!response.ok) {
+      throw new Error(JSON.stringify(await response.json()));
     }
-  },
-);
+    const images = await response.json();
+    const w = orientation === "landscape" ? 1280 : 720;
+    const h = orientation === "landscape" ? 720 : 1280;
+
+    return images.map(
+      (image: UnsplashImage) =>
+        ({
+          id: image.id,
+          url: `${image.urls.raw}?fit=crop&w=${w}&h=${h}&min-w=${w}&min-h=${h}&f=jpg&q=90`,
+          orientation,
+          source: "unsplash",
+          photographerName: image.user.username,
+          photographerNickname: image.user.username,
+        }) satisfies SlideImage,
+    );
+  } catch (e) {
+    console.error("Error fetching images from Unsplash:", e);
+    return getRandomLocalImages({ orientation, count });
+  }
+});
 
 export const getRandomLocalImages = server$(
   ({
