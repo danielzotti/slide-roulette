@@ -46,9 +46,5 @@
     "vercel": "^32.3.0",
     "vite": "^5.1.4",
     "vite-tsconfig-paths": "^4.2.1"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "^4.9.5",
-    "@esbuild/linux-x64": "^0.21.5"
   }
 }
