@@ -18,8 +18,7 @@ A slide roulette app: one random topic and 3 (or more) random slides (with just 
 ## TODO
 - [x] Automatically check device orientation
 - [x] Check Italian topics (especially for level 2 and 3)
-- [ ] Fix random problems with image loading (different images between fullscreen and standard mode)
-- [ ] Fallback mode if Unsplash service is down (local images)
-  - [ ] Migrate to SSG to Vercel to store images?
+- [x] Fix random problems with image loading (different images between fullscreen and standard mode)
+- [x] Fallback mode if Unsplash service is down (local images)
 - [ ] Add English topics
 - [ ] Contribution guidelines
