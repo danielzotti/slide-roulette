@@ -41,7 +41,7 @@ export const getUnsplashImages = server$(async function ({
 }): Promise<Array<SlideImage>> {
   try {
     const response = await fetch(
-      `${config.apis.unsplash}?&orientation=${orientation}&count=${count}&client_id=${this.env.get("UNSPLASH_API_KEY")}`,
+      `${config.apis.unsplash}?&orientation=${orientation}&count=${count}&client_id=${this.env.get("UNSPLASH_API_KEY")}`, // See https://qwik.dev/docs/env-variables/
     );
     if (!response.ok) {
       throw new Error(JSON.stringify(await response.json()));

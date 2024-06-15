@@ -198,7 +198,10 @@ export default component$(() => {
             >
               <MatChevronLeftRound />
             </Button>
-            <span>{state.currentSlide}</span>
+            <div class={styles.number}>
+              {state.currentSlide}
+              <small>/{state.slidesCount}</small>
+            </div>
             <Button
               disabled={state.currentSlide >= state.slidesCount}
               variant="clean"

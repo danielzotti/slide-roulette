@@ -80,6 +80,10 @@ a {
   }
 }
 
+small {
+  font-size: 0.6em;
+}
+
 blockquote {
   word-break: break-word;
   border-left: 5px solid var(--text-color-secondary);

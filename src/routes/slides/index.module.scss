@@ -80,8 +80,14 @@
   font-size: clamp(1.5em, 1.6vw, 2em);
   background: var(--presentation-element-bg-color);
   color: (--presentation-element-text-color);
-  padding: var(--margin-default);
+  padding: var(--margin-default) 0;
   border-radius: var(--border-radius);
+}
+
+.number {
+  white-space: nowrap;
+  width: 60px;
+  text-align: right;
 }
 
 .photographer {
