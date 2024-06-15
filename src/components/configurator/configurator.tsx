@@ -54,12 +54,8 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
   });
 
   return (
-    <Form
-      onSubmit$={handleSubmit}
-      class={styles.form}
-      document:onKeyDown$={handleKeyDown}
-    >
-      <div class={styles.configurator}>
+    <Form onSubmit$={handleSubmit} class={styles.form}>
+      <div class={styles.configurator} document:onKeyDown$={handleKeyDown}>
         <Field name="language" type="string">
           {(field, props) => (
             <div class={styles.field}>
