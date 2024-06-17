@@ -19,6 +19,7 @@ import { config } from "~/config";
 import { getRandomTopic } from "~/db/topics";
 import type { State } from "~/models/state.models";
 import { getUnsplashImages } from "~/utils/images";
+import { getRandomTopicFromDb } from "~/utils/topics";
 
 import styles from "./index.module.scss";
 
@@ -37,9 +38,9 @@ export default component$(() => {
         | "portrait"
         | undefined) ?? "landscape",
     currentSlide: 0,
-    title: getRandomTopic(
-      parseInt(location.url.searchParams.get("level") ?? "1"),
-    ),
+    title: getRandomTopic({
+      level: parseInt(location.url.searchParams.get("level") ?? "1"),
+    }),
     isFullscreen: true,
   });
 
@@ -108,6 +109,7 @@ export default component$(() => {
   });
 
   useTask$(async () => {
+    getRandomTopicFromDb({ level: 1, lang: "it" });
     try {
       state.slides = await getUnsplashImages({
         orientation: state.orientation,

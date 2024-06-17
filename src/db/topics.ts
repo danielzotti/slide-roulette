@@ -776,7 +776,7 @@ export const two = [
   "tra le pagine di un libro di fantascienza",
 ];
 
-export function getRandomTopic(level = 1) {
+export function getRandomTopic({ level = 1 }: { level: number }) {
   let title = one[Math.floor(Math.random() * one.length)];
 
   if (level >= 2) {

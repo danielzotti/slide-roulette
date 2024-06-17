@@ -1,7 +1,8 @@
 import { type RequestHandler } from "@builder.io/qwik-city";
-import { getRandomTopic } from "~/db/topics";
+import { getRandomTopicFromDb } from "~/utils/topics";
 
 export const onGet: RequestHandler = async ({ json, url }) => {
   const level = parseInt(url.searchParams.get("level") ?? "1");
-  json(200, getRandomTopic(level));
+  const lang = url.searchParams.get("lang") ?? "it";
+  json(200, getRandomTopicFromDb({ level, lang }));
 };
