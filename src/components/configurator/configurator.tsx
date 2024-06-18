@@ -2,12 +2,15 @@ import {
   $,
   component$,
   type QRL,
+  useOnDocument,
+  useOnWindow,
   useSignal,
   useVisibleTask$,
 } from "@builder.io/qwik";
 import type { SubmitHandler } from "@modular-forms/qwik";
 import { setValue, useForm, zodForm$ } from "@modular-forms/qwik";
 import { Button } from "~/components/ui/button/button";
+import { config } from "~/config";
 import type { ConfigurationForm } from "~/models/configuration.models";
 import {
   configurationDefaultValue,
@@ -43,19 +46,23 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
     }
   });
 
-  // eslint-disable-next-line qwik/no-use-visible-task
-  useVisibleTask$(() => {
-    const isPortrait = window.matchMedia("(orientation: portrait)").matches;
-    setValue(
-      configurationForm,
-      "orientation",
-      isPortrait ? "portrait" : "landscape",
-    );
-  });
+  useOnWindow(
+    "load",
+    $(() => {
+      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+      setValue(
+        configurationForm,
+        "orientation",
+        isPortrait ? "portrait" : "landscape",
+      );
+    }),
+  );
+
+  useOnDocument("keydown", handleKeyDown);
 
   return (
     <Form onSubmit$={handleSubmit} class={styles.form}>
-      <div class={styles.configurator} document:onKeyDown$={handleKeyDown}>
+      <div class={styles.configurator}>
         <Field name="language" type="string">
           {(field, props) => (
             <div class={styles.field}>
@@ -68,10 +75,16 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
                   field.value = (e.target as HTMLInputElement).value;
                 }}
               >
-                <option value="it">Italian</option>
-                <option value="en" disabled>
-                  English
-                </option>
+                {config.languages.list.map((lang) => (
+                  <option
+                    key={lang.code}
+                    value={lang.code}
+                    selected={lang.code === config.languages.defaultCode}
+                    disabled={lang.disabled}
+                  >
+                    {lang.name}
+                  </option>
+                ))}
               </select>
             </div>
           )}

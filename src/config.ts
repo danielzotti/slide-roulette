@@ -20,6 +20,13 @@ export const config = {
       portrait: `/images/slides/portrait`,
     },
   },
+  languages: {
+    list: [
+      { code: "en", name: "English", disabled: true },
+      { code: "it", name: "Italiano" },
+    ],
+    defaultCode: "it",
+  },
   websites: {
     chatGpt: "https://chat.openai.com",
     danielzotti: "https://www.danielzotti.it",

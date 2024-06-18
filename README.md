@@ -1,7 +1,68 @@
 # Slide Roulette
-A slide roulette app: one random topic and 3 (or more) random slides (with just an image) to test your improvising skills!
+
+A slide roulette app: one random topic and 3 (or more) random slides (with just an image) to test your improvising
+skills!
+
+## Contribution guidelines
+
+### Add a new language
+
+#### 1. Create a new TypeScript file in `src/topics` folder, called as the language code (e.g. `en.ts` for English)
+  - The structure should be as follows:
+
+```typescript
+// src/topics/en.ts
+export default {
+    languageCode: "en",
+    languageName: "English",
+    conjunction: "and",
+    one: ["shadows", "trees"],
+    two: ["with a strange shape of clowns", "created to scare people"]
+}
+```
+
+  - Set the proper conjunction for the language (e.g. `and` for English, `e` for Italian, etc.)
+  - Add random plural nouns in the `one` array (e.g shadows, trees, etc.)
+  - Add random sentences related (or not) to the plural nouns in the `two` array
+  - Please remember that different levels will compose those 2 arrays:
+    - Level 1: Randomly select one single element from `one` array
+    - Level 2: Randomly select 2 elements from `one` array and compose them with the conjunction
+    - Level 3: Starts from Level 2 but adds a random sentence from the `two` array
+#### 2. Import the file `src/topics/en.ts` in the `src/utils/topics.ts` file and add a switch case for that specific file
+```typescript
+// src/utils/topics.ts
+import en from "../topics/en"; // <- IMPORT FILE
+
+switch (lang) {
+    // ...
+    case "en":          // <- ADD A SWITCH CASE
+        topics = en;
+        break;
+    // ...
+}
+
+```
+
+#### 3. Add the language code in the `src/config.ts` file inside the `languages.list` array in order to show it in the language selector dropdown menu.
+
+```typescript
+// src/config.ts
+const config = {
+    //...
+    languages: {
+        list: [
+            // ADD A NEW LANGUAGE HERE
+            {code: "en", name: "English"},
+        ],
+    },
+    // ...
+}
+
+```
+
 
 ## Thanks to
+
 - [Qwik](https://qwik.dev/)
 - [Vercel](https://vercel.com/)
 - [ChatGPT](https://chat.openai.com/) for the topics generation
@@ -11,14 +72,18 @@ A slide roulette app: one random topic and 3 (or more) random slides (with just 
 - [Bing Image Generation](https://www.bing.com/images) for the logo
 
 ## Notes
-- Error: ` [PLUGIN_ERROR]: Invalid module "@qwik-city-plan" is not a valid package name imported from /Users/daniel/Projects/github/slide-roulette/node_modules/@builder.io/qwik-city/index.qwik.mjs`
-  - See https://github.com/QwikDev/qwik/issues/6024#issuecomment-2029467547
-  - TLDR: move `dependencies` to `devDependencies`
+
+-
+Error: ` [PLUGIN_ERROR]: Invalid module "@qwik-city-plan" is not a valid package name imported from /Users/daniel/Projects/github/slide-roulette/node_modules/@builder.io/qwik-city/index.qwik.mjs`
+    - See https://github.com/QwikDev/qwik/issues/6024#issuecomment-2029467547
+    - TLDR: move `dependencies` to `devDependencies`
 
 ## TODO
+
 - [x] Automatically check device orientation
 - [x] Check Italian topics (especially for level 2 and 3)
 - [x] Fix random problems with image loading (different images between fullscreen and standard mode)
 - [x] Fallback mode if Unsplash service is down (local images)
-- [ ] Add English topics
 - [ ] Contribution guidelines
+- [ ] Add English topics
+

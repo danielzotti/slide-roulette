@@ -5,6 +5,7 @@ import {
   useSignal,
   useStore,
   useTask$,
+  useVisibleTask$,
 } from "@builder.io/qwik";
 import { useLocation, useNavigate } from "@builder.io/qwik-city";
 import {
@@ -16,9 +17,9 @@ import {
 import { Button } from "~/components/ui/button/button";
 import { FragmentWithKey } from "~/components/ui/fragment-with-key/FragmentWithKey";
 import { config } from "~/config";
-import { getRandomTopic } from "~/db/topics";
 import type { State } from "~/models/state.models";
 import { getUnsplashImages } from "~/utils/images";
+import { getRandomTopic } from "~/utils/topics";
 
 import styles from "./index.module.scss";
 
@@ -37,9 +38,10 @@ export default component$(() => {
         | "portrait"
         | undefined) ?? "landscape",
     currentSlide: 0,
-    title: getRandomTopic(
-      parseInt(location.url.searchParams.get("level") ?? "1"),
-    ),
+    title: getRandomTopic({
+      lang: location.url.searchParams.get("language") ?? "it",
+      level: parseInt(location.url.searchParams.get("level") ?? "1"),
+    }),
     isFullscreen: true,
   });
 
@@ -97,6 +99,15 @@ export default component$(() => {
       case "ArrowLeft":
         void prevSlide();
         break;
+      case "ArrowUp":
+        void toggleImageSize();
+        break;
+      case "Home":
+        state.currentSlide = 1;
+        break;
+      case "End":
+        state.currentSlide = state.slidesCount;
+        break;
       case "Escape":
         void navigate("/");
         break;
@@ -122,6 +133,16 @@ export default component$(() => {
     }
   });
 
+  // NB: useOnDocument causes a sort of loop, so we need to use useVisibleTask instead
+  // eslint-disable-next-line qwik/no-use-visible-task
+  useVisibleTask$(({ cleanup }) => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    cleanup(() => {
+      document.removeEventListener("keydown", handleKeyDown);
+    });
+  });
+
   if (hasError.value) {
     return (
       <div class={styles.error}>
@@ -135,7 +156,7 @@ export default component$(() => {
   }
 
   return (
-    <div document:onKeyDown$={handleKeyDown} class={styles.presentation}>
+    <div class={styles.presentation}>
       {state.currentSlide > 0 && <h2 class={styles.title}>{state.title}</h2>}
 
       <div class={styles.content}>

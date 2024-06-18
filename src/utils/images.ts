@@ -5,33 +5,6 @@ import type { State } from "~/models/state.models";
 import type { UnsplashImage } from "~/models/unsplash.models";
 import { getRandomNumberArrayInRange } from "~/utils/math";
 
-/*
-// THIS DOESN'T WORK IN VERCEL
-import { promises as fs } from "fs";
-
-export const getRandomLocalImages = server$(
-  async ({
-    orientation,
-    count,
-  }: {
-    orientation: SlideImage["orientation"];
-    count: number;
-  }) => {
-    const fileNames = await fs.readdir(
-      process.cwd() + `/public${config.folders.slides[orientation]}`,
-    );
-    return getRandomNumberArrayInRange(0, fileNames.length - 1, count).map(
-      (n) =>
-        ({
-          id: fileNames[n]?.split("-")[1].split(".")[0] ?? n,
-          source: "local",
-          orientation,
-          url: `${config.folders.slides[orientation]}/${fileNames[n]}`,
-        }) as SlideImage,
-    );
-  },
-);*/
-
 export const getUnsplashImages = server$(async function ({
   orientation,
   count,
