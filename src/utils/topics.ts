@@ -1,4 +1,5 @@
 // LANGUAGES
+import { config } from "~/config";
 import it from "../topics/it";
 import en from "../topics/en";
 
@@ -22,11 +23,11 @@ export function getRandomTopic({
       break;
   }
 
-  const { one, two } = topics;
+  const { one, two, conjunction } = topics;
   let title = one[Math.floor(Math.random() * one.length)];
 
   if (level >= 2) {
-    title += ` e ${one[Math.floor(Math.random() * one.length)]}`;
+    title += ` ${conjunction} ${one[Math.floor(Math.random() * one.length)]}`;
   }
   if (level >= 3) {
     title += ` ${two[Math.floor(Math.random() * two.length)]}`;
