@@ -1,6 +1,6 @@
 import { component$, Slot, useStyles$ } from "@builder.io/qwik";
 import { type DocumentHead } from "@builder.io/qwik-city";
-import Header from "~/components/header/header";
+import { Header } from "~/components/header/header";
 import { config } from "~/config";
 
 import styles from "./layout.module.scss?inline";

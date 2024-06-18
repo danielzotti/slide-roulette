@@ -3,7 +3,7 @@ import { Link } from "@builder.io/qwik-city";
 import styles from "./header.module.scss";
 import LogoImage from "../../../public/images/slide-roulette-logo.png?jsx";
 
-export default component$(() => {
+export const Header = component$(() => {
   return (
     <header class={styles.header}>
       <nav>

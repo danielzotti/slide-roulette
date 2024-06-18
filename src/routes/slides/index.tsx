@@ -2,6 +2,7 @@ import {
   $,
   component$,
   useComputed$,
+  useOnDocument,
   useSignal,
   useStore,
   useTask$,
@@ -39,9 +40,6 @@ export default component$(() => {
         | "portrait"
         | undefined) ?? "landscape",
     currentSlide: 0,
-    // title: getRandomTopic({
-    //   level: parseInt(location.url.searchParams.get("level") ?? "1"),
-    // }),
     title: "",
     isFullscreen: true,
   });
@@ -79,8 +77,16 @@ export default component$(() => {
       state.currentSlide++;
     }
   });
+
   const toggleImageSize = $(() => {
     state.isFullscreen = !state.isFullscreen;
+  });
+
+  const enableFullScreen = $(() => {
+    state.isFullscreen = true;
+  });
+  const disableFullScreen = $(() => {
+    state.isFullscreen = false;
   });
 
   const restart = $(() => {
@@ -100,12 +106,27 @@ export default component$(() => {
       case "ArrowLeft":
         void prevSlide();
         break;
+      case "Home":
+        state.currentSlide = 1;
+        break;
+      case "End":
+        state.currentSlide = state.slidesCount;
+        break;
+      case "ArrowUp":
+        void enableFullScreen();
+        break;
+      case "ArrowDown":
+        void disableFullScreen();
+        break;
       case "Escape":
         void navigate("/");
         break;
       case "Enter":
         state.currentSlide === state.slidesCount && void restart();
         state.currentSlide === 0 && void nextSlide();
+        break;
+      case "i":
+        // TODO: toggle info modal (shortcuts)
         break;
     }
   });
@@ -135,6 +156,9 @@ export default component$(() => {
       hasError.value = true;
     }
   });
+
+  // TODO: useOnDocument causes a re-render, so addEventListener is used instead (for the moment)
+  // useOnDocument("keydown", handleKeyDown);
 
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(() => {

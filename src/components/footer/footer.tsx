@@ -3,7 +3,7 @@ import { GoMarkGithub16 } from "@qwikest/icons/octicons";
 import { config } from "~/config";
 import styles from "./footer.module.scss";
 
-export default component$(() => {
+export const Footer = component$(() => {
   return (
     <footer class={styles.footer}>
       <div>

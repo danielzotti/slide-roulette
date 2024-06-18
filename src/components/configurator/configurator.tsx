@@ -2,8 +2,9 @@ import {
   $,
   component$,
   type QRL,
+  useOnDocument,
+  useOnWindow,
   useSignal,
-  useVisibleTask$,
 } from "@builder.io/qwik";
 import type { SubmitHandler } from "@modular-forms/qwik";
 import { setValue, useForm, zodForm$ } from "@modular-forms/qwik";
@@ -36,6 +37,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
   });
 
   const handleKeyDown = $((event: KeyboardEvent) => {
+    console.log(event.key);
     switch (event.key) {
       case "Enter":
         (submitButtonRef.value as HTMLButtonElement).click();
@@ -43,21 +45,19 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
     }
   });
 
-  // eslint-disable-next-line qwik/no-use-visible-task
-  useVisibleTask$(() => {
-    const isPortrait = window.matchMedia("(orientation: portrait)").matches;
-    setValue(
-      configurationForm,
-      "orientation",
-      isPortrait ? "portrait" : "landscape",
-    );
+  useOnWindow(
+    "load",
+    $(() => {
+      const isPortrait = window.matchMedia("(orientation: portrait)").matches;
+      setValue(
+        configurationForm,
+        "orientation",
+        isPortrait ? "portrait" : "landscape",
+      );
+    }),
+  );
 
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  });
+  useOnDocument("keydown", handleKeyDown);
 
   return (
     <Form onSubmit$={handleSubmit} class={styles.form}>

@@ -1,7 +1,7 @@
 import { $, component$, useSignal } from "@builder.io/qwik";
 import { useNavigate } from "@builder.io/qwik-city";
 import { Configurator } from "~/components/configurator/configurator";
-import Footer from "~/components/footer/footer";
+import { Footer } from "~/components/footer/footer";
 import { config } from "~/config";
 import type { ConfigurationForm } from "~/models/configuration.models";
 import styles from "./index.module.scss";
