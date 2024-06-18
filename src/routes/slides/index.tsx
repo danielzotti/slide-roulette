@@ -5,6 +5,7 @@ import {
   useSignal,
   useStore,
   useTask$,
+  useVisibleTask$,
 } from "@builder.io/qwik";
 import { useLocation, useNavigate } from "@builder.io/qwik-city";
 import {
@@ -38,9 +39,10 @@ export default component$(() => {
         | "portrait"
         | undefined) ?? "landscape",
     currentSlide: 0,
-    title: getRandomTopic({
-      level: parseInt(location.url.searchParams.get("level") ?? "1"),
-    }),
+    // title: getRandomTopic({
+    //   level: parseInt(location.url.searchParams.get("level") ?? "1"),
+    // }),
+    title: "",
     isFullscreen: true,
   });
 
@@ -109,7 +111,17 @@ export default component$(() => {
   });
 
   useTask$(async () => {
-    getRandomTopicFromDb({ level: 1, lang: "it" });
+    try {
+      state.title = await getRandomTopicFromDb({
+        level: state.level,
+        lang: state.language,
+      });
+    } catch (error) {
+      state.title = getRandomTopic({
+        level: state.level,
+      });
+      console.error("Error fetching topic", error);
+    }
     try {
       state.slides = await getUnsplashImages({
         orientation: state.orientation,
@@ -122,6 +134,15 @@ export default component$(() => {
       console.error("Error fetching images:", error);
       hasError.value = true;
     }
+  });
+
+  // eslint-disable-next-line qwik/no-use-visible-task
+  useVisibleTask$(() => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   });
 
   if (hasError.value) {
@@ -137,7 +158,7 @@ export default component$(() => {
   }
 
   return (
-    <div document:onKeyDown$={handleKeyDown} class={styles.presentation}>
+    <div class={styles.presentation}>
       {state.currentSlide > 0 && <h2 class={styles.title}>{state.title}</h2>}
 
       <div class={styles.content}>

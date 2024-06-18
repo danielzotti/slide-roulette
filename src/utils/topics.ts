@@ -3,7 +3,7 @@ import { server$ } from "@builder.io/qwik-city";
 import { promises as fs } from "fs";
 import type { Topics } from "~/models/topics.models";
 
-export function getRandomTopic({
+function getRandomTopic({
   level = 1,
   topics,
 }: {
@@ -26,8 +26,6 @@ export const getRandomTopicFromDb = server$(
   async ({ level = 1, lang = "it" }: { level: number; lang: string }) => {
     const file = await fs.readFile(process.cwd() + `/db/${lang}.json`, "utf-8");
     const topics: Topics = JSON.parse(file);
-    const topic = getRandomTopic({ level, topics });
-    console.log({ randomTopic: topic });
-    return topic;
+    return getRandomTopic({ level, topics });
   },
 );

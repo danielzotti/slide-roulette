@@ -51,11 +51,17 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
       "orientation",
       isPortrait ? "portrait" : "landscape",
     );
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   });
 
   return (
     <Form onSubmit$={handleSubmit} class={styles.form}>
-      <div class={styles.configurator} document:onKeyDown$={handleKeyDown}>
+      <div class={styles.configurator}>
         <Field name="language" type="string">
           {(field, props) => (
             <div class={styles.field}>
