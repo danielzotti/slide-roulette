@@ -1,5 +1,4 @@
 // LANGUAGES
-import { config } from "~/config";
 import it from "../topics/it";
 import en from "../topics/en";
 
