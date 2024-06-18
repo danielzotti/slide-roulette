@@ -1,8 +1,9 @@
 import {
   $,
   component$,
+  Resource,
   useComputed$,
-  useOnDocument,
+  useResource$,
   useSignal,
   useStore,
   useTask$,
@@ -18,10 +19,10 @@ import {
 import { Button } from "~/components/ui/button/button";
 import { FragmentWithKey } from "~/components/ui/fragment-with-key/FragmentWithKey";
 import { config } from "~/config";
-import { getRandomTopic } from "~/db/topics";
 import type { State } from "~/models/state.models";
+import type { RandomTopicApiModel } from "~/models/topic.models";
+import { fetchApi } from "~/utils/fetch";
 import { getUnsplashImages } from "~/utils/images";
-import { getRandomTopicFromDb } from "~/utils/topics";
 
 import styles from "./index.module.scss";
 
@@ -42,6 +43,14 @@ export default component$(() => {
     currentSlide: 0,
     title: "",
     isFullscreen: true,
+  });
+
+  const randomTopicResource = useResource$<string>(async () => {
+    const res = await fetchApi<RandomTopicApiModel>(
+      `${config.apis.randomTopic}?lang=${state.language}&level=${state.level}`,
+    );
+    state.title = res.title;
+    return res.title;
   });
 
   const loadedImagesCount = useSignal<number>(0);
@@ -132,17 +141,15 @@ export default component$(() => {
   });
 
   useTask$(async () => {
-    try {
+    /*try {
       state.title = await getRandomTopicFromDb({
         level: state.level,
         lang: state.language,
       });
     } catch (error) {
-      state.title = getRandomTopic({
-        level: state.level,
-      });
+      hasError.value = true;
       console.error("Error fetching topic", error);
-    }
+    }*/
     try {
       state.slides = await getUnsplashImages({
         orientation: state.orientation,
@@ -176,119 +183,132 @@ export default component$(() => {
         <a href={config.websites.unsplash.status} target="_blank">
           Unsplash
         </a>{" "}
-        (the service used to retrieve images). Please, try again later.
+        (the service used to retrieve images).
+        <br />
+        Please, try again later.
       </div>
     );
   }
 
   return (
-    <div class={styles.presentation}>
-      {state.currentSlide > 0 && <h2 class={styles.title}>{state.title}</h2>}
+    <Resource
+      value={randomTopicResource}
+      onPending={() => <div class={styles.loading}>Loading topic...</div>} // TODO: Add loading spinner and improve UI
+      onRejected={(error) => <>Error: {error.message}</>}
+      onResolved={() => {
+        return (
+          <div class={styles.presentation}>
+            {state.currentSlide > 0 && (
+              <h2 class={styles.title}>{state.title}</h2>
+            )}
 
-      <div class={styles.content}>
-        {state.currentSlide === 0 && (
-          <div>
-            <p class={styles.preview}>
-              You have {state.slidesCount} slides to talk about{" "}
-            </p>
-            <h1 class={styles.titlePreview}>{state.title}</h1>
-            <p class={styles.preview}>
-              Just click the button below and start improvising!
-            </p>
-            <Button
-              classOverride={styles.start}
-              onClick$={nextSlide}
-              disabled={!hasLoadedAllImages.value}
-            >
-              Start
-            </Button>
-            <p>
-              <small>
-                {!hasLoadedAllImages.value && "Loading images..."} &nbsp;
-              </small>
-            </p>
-          </div>
-        )}
-        {state.slides.map(({ id, url }, i) => (
-          <FragmentWithKey key={`fragment-${id}`}>
-            <img
-              key={`image-${id}`}
-              src={url}
-              width={state.orientation === "landscape" ? 1280 : 720}
-              height={state.orientation === "landscape" ? 720 : 1280}
-              alt="Random generated"
-              class={styles.image}
-              onLoad$={() => onLoadedImage()}
-              style={{
-                display:
-                  !state.isFullscreen && state.currentSlide === i + 1
-                    ? "block"
-                    : "none",
-              }}
-            />
-            <div
-              key={`bg-image-${id}`}
-              style={{
-                backgroundImage: `url(${url})`,
-                display:
-                  state.isFullscreen && state.currentSlide === i + 1
-                    ? "block"
-                    : "none",
-              }}
-              class={styles.backgroundImage}
-            />
-          </FragmentWithKey>
-        ))}
-      </div>
-      {state.currentSlide === state.slidesCount && (
-        <div class={styles.restart}>
-          <Button onClick$={restart} variant="primary">
-            Try again...?
-          </Button>
-        </div>
-      )}
-      {state.currentSlide > 0 && (
-        <>
-          {photographer.value && (
-            <div class={styles.photographer}>
-              Photo by{" "}
-              <a
-                href={config.websites.unsplash.photographer(
-                  photographer.value.nickname,
+            <div class={styles.content}>
+              {state.currentSlide === 0 && (
+                <div>
+                  <p class={styles.preview}>
+                    You have {state.slidesCount} slides to talk about{" "}
+                  </p>
+                  <h1 class={styles.titlePreview}>{state.title}</h1>
+                  <p class={styles.preview}>
+                    Just click the button below and start improvising!
+                  </p>
+                  <Button
+                    classOverride={styles.start}
+                    onClick$={nextSlide}
+                    disabled={!hasLoadedAllImages.value}
+                  >
+                    Start
+                  </Button>
+                  <p>
+                    <small>
+                      {!hasLoadedAllImages.value && "Loading images..."} &nbsp;
+                    </small>
+                  </p>
+                </div>
+              )}
+              {state.slides.map(({ id, url }, i) => (
+                <FragmentWithKey key={`fragment-${id}`}>
+                  <img
+                    key={`image-${id}`}
+                    src={url}
+                    width={state.orientation === "landscape" ? 1280 : 720}
+                    height={state.orientation === "landscape" ? 720 : 1280}
+                    alt="Random generated"
+                    class={styles.image}
+                    onLoad$={() => onLoadedImage()}
+                    style={{
+                      display:
+                        !state.isFullscreen && state.currentSlide === i + 1
+                          ? "block"
+                          : "none",
+                    }}
+                  />
+                  <div
+                    key={`bg-image-${id}`}
+                    style={{
+                      backgroundImage: `url(${url})`,
+                      display:
+                        state.isFullscreen && state.currentSlide === i + 1
+                          ? "block"
+                          : "none",
+                    }}
+                    class={styles.backgroundImage}
+                  />
+                </FragmentWithKey>
+              ))}
+            </div>
+            {state.currentSlide === state.slidesCount && (
+              <div class={styles.restart}>
+                <Button onClick$={restart} variant="primary">
+                  Try again...?
+                </Button>
+              </div>
+            )}
+            {state.currentSlide > 0 && (
+              <>
+                {photographer.value && (
+                  <div class={styles.photographer}>
+                    Photo by{" "}
+                    <a
+                      href={config.websites.unsplash.photographer(
+                        photographer.value.nickname,
+                      )}
+                      target="_blank"
+                    >
+                      {photographer.value.name}
+                    </a>{" "}
+                    {/*on <a href={config.websites.unsplash.homepage}>Unsplash</a>*/}
+                  </div>
                 )}
-                target="_blank"
-              >
-                {photographer.value.name}
-              </a>{" "}
-              {/*on <a href={config.websites.unsplash.homepage}>Unsplash</a>*/}
-            </div>
-          )}
-          <div class={styles.controls}>
-            <Button onClick$={toggleImageSize} variant="clean">
-              {!state.isFullscreen && <MatFullscreenOutlined />}
-              {state.isFullscreen && <MatFullscreenExitOutlined />}
-            </Button>
-            <Button
-              disabled={state.currentSlide <= 1}
-              onClick$={prevSlide}
-              variant="clean"
-            >
-              <MatChevronLeftRound />
-            </Button>
-            <div class={styles.number}>
-              {state.currentSlide}
-              <small>/{state.slidesCount}</small>
-            </div>
-            <Button
-              disabled={state.currentSlide >= state.slidesCount}
-              variant="clean"
-              onClick$={nextSlide}
-            >
-              <MatChevronRightRound />
-            </Button>
+                <div class={styles.controls}>
+                  <Button onClick$={toggleImageSize} variant="clean">
+                    {!state.isFullscreen && <MatFullscreenOutlined />}
+                    {state.isFullscreen && <MatFullscreenExitOutlined />}
+                  </Button>
+                  <Button
+                    disabled={state.currentSlide <= 1}
+                    onClick$={prevSlide}
+                    variant="clean"
+                  >
+                    <MatChevronLeftRound />
+                  </Button>
+                  <div class={styles.number}>
+                    {state.currentSlide}
+                    <small>/{state.slidesCount}</small>
+                  </div>
+                  <Button
+                    disabled={state.currentSlide >= state.slidesCount}
+                    variant="clean"
+                    onClick$={nextSlide}
+                  >
+                    <MatChevronRightRound />
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
-        </>
-      )}
-    </div>
+        );
+      }}
+    />
   );
 });

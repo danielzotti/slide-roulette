@@ -1,4 +1,6 @@
-const baseUrl = "https://slide-roulette.danielzotti.it"; // "https://danielzotti.github.io/slide-roulette";
+const baseUrl =
+  import.meta.env.PUBLIC_API_BASE_URL ??
+  "https://slide-roulette.danielzotti.it"; // "https://danielzotti.github.io/slide-roulette";
 
 export const config = {
   baseUrl,
@@ -10,6 +12,11 @@ export const config = {
   // faviconAppleUrl: '/static/icons/favicon-apple.png',
   apis: {
     unsplash: "https://api.unsplash.com/photos/random",
+    languages: "/api/languages",
+    randomTopic: "/api/random-topic",
+  },
+  language: {
+    defaultCode: "it",
   },
   urls: {
     slides: "/slides",
@@ -19,6 +26,9 @@ export const config = {
       landscape: `/images/slides/landscape`,
       portrait: `/images/slides/portrait`,
     },
+  },
+  paths: {
+    db: "/db",
   },
   websites: {
     chatGpt: "https://chat.openai.com",

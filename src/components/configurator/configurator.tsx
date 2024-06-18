@@ -2,18 +2,23 @@ import {
   $,
   component$,
   type QRL,
+  Resource,
   useOnDocument,
   useOnWindow,
+  useResource$,
   useSignal,
 } from "@builder.io/qwik";
 import type { SubmitHandler } from "@modular-forms/qwik";
 import { setValue, useForm, zodForm$ } from "@modular-forms/qwik";
 import { Button } from "~/components/ui/button/button";
+import { config } from "~/config";
 import type { ConfigurationForm } from "~/models/configuration.models";
 import {
   configurationDefaultValue,
   configurationSchema,
 } from "~/models/configuration.models";
+import type { Language, LanguagesApiModel } from "~/models/language.models";
+import { fetchApi } from "~/utils/fetch";
 import styles from "./configurator.module.scss";
 
 interface ConfiguratorProps {
@@ -31,13 +36,17 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
   const isLoading = useSignal(false);
   const submitButtonRef = useSignal<HTMLButtonElement>();
 
+  const languages = useResource$<Language[]>(async () => {
+    const res = await fetchApi<LanguagesApiModel>(config.apis.languages);
+    return res.languages;
+  });
+
   const handleSubmit = $<SubmitHandler<ConfigurationForm>>((values) => {
     isLoading.value = true;
     onSubmit(values);
   });
 
   const handleKeyDown = $((event: KeyboardEvent) => {
-    console.log(event.key);
     switch (event.key) {
       case "Enter":
         (submitButtonRef.value as HTMLButtonElement).click();
@@ -60,111 +69,130 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
   useOnDocument("keydown", handleKeyDown);
 
   return (
-    <Form onSubmit$={handleSubmit} class={styles.form}>
-      <div class={styles.configurator}>
-        <Field name="language" type="string">
-          {(field, props) => (
-            <div class={styles.field}>
-              <label for={field.name}>{field.name}</label>
-              <select
-                {...props}
-                id={field.name}
-                value={field.value}
-                onInput$={(e) => {
-                  field.value = (e.target as HTMLInputElement).value;
-                }}
-              >
-                <option value="it">Italian</option>
-                <option value="en" disabled>
-                  English
-                </option>
-              </select>
-            </div>
-          )}
-        </Field>
+    <Resource
+      value={languages}
+      onPending={() => <div class={styles.loading}>Loading languages...</div>} // TODO: Add loading spinner and improve UI
+      onRejected={(error) => <>Error: {error.message}</>}
+      onResolved={(languageList) => {
+        return (
+          <Form onSubmit$={handleSubmit} class={styles.form}>
+            <div class={styles.configurator}>
+              <Field name="language" type="string">
+                {(field, props) => (
+                  <div class={styles.field}>
+                    <label for={field.name}>{field.name}</label>
+                    <select
+                      {...props}
+                      id={field.name}
+                      value={field.value}
+                      onInput$={(e) => {
+                        field.value = (e.target as HTMLInputElement).value;
+                      }}
+                    >
+                      {languageList.map((language) => (
+                        <option
+                          key={language.code}
+                          value={language.code}
+                          selected={
+                            config.language.defaultCode === language.code
+                          }
+                        >
+                          {language.name}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
+              </Field>
 
-        <Field name="orientation" type="string">
-          {(field, props) => (
-            <div class={styles.field}>
-              <label for={field.name}>{field.name}</label>
-              <select
-                {...props}
-                id={field.name}
-                value={field.value}
-                onInput$={(e) => {
-                  field.value = (e.target as HTMLInputElement).value as
-                    | "landscape"
-                    | "portrait";
-                }}
-              >
-                <option value="portrait" selected={field.value === "portrait"}>
-                  Smartphone
-                </option>
-                <option
-                  value="landscape"
-                  selected={field.value === "landscape"}
-                >
-                  Desktop
-                </option>
-              </select>
-            </div>
-          )}
-        </Field>
+              <Field name="orientation" type="string">
+                {(field, props) => (
+                  <div class={styles.field}>
+                    <label for={field.name}>{field.name}</label>
+                    <select
+                      {...props}
+                      id={field.name}
+                      value={field.value}
+                      onInput$={(e) => {
+                        field.value = (e.target as HTMLInputElement).value as
+                          | "landscape"
+                          | "portrait";
+                      }}
+                    >
+                      <option
+                        value="portrait"
+                        selected={field.value === "portrait"}
+                      >
+                        Smartphone
+                      </option>
+                      <option
+                        value="landscape"
+                        selected={field.value === "landscape"}
+                      >
+                        Desktop
+                      </option>
+                    </select>
+                  </div>
+                )}
+              </Field>
 
-        <Field name="slidesCount" type="number">
-          {(field, props) => (
-            <div class={styles.field}>
-              <label for={field.name}>{field.name}</label>
-              <select
-                {...props}
-                id={field.name}
-                value={field.value}
-                onInput$={(e) => {
-                  field.value = +(e.target as HTMLInputElement).value;
-                }}
-              >
-                <option>3</option>
-                <option selected>5</option>
-                <option>7</option>
-                <option>10</option>
-                <option>15</option>
-                <option>20</option>
-              </select>
-            </div>
-          )}
-        </Field>
+              <Field name="slidesCount" type="number">
+                {(field, props) => (
+                  <div class={styles.field}>
+                    <label for={field.name}>{field.name}</label>
+                    <select
+                      {...props}
+                      id={field.name}
+                      value={field.value}
+                      onInput$={(e) => {
+                        field.value = +(e.target as HTMLInputElement).value;
+                      }}
+                    >
+                      <option>3</option>
+                      <option selected>5</option>
+                      <option>7</option>
+                      <option>10</option>
+                      <option>15</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+                )}
+              </Field>
 
-        <Field name="level" type="number">
-          {(field, props) => (
-            <div class={styles.field}>
-              <label for={field.name}>{field.name}</label>
-              <select
-                {...props}
-                id={field.name}
-                value={field.value}
-                onInput$={(e) => {
-                  field.value = +(e.target as HTMLInputElement).value;
-                }}
-              >
-                <option value="1">Easy</option>
-                <option value="2">Medium</option>
-                <option value="3">Hard</option>
-              </select>
-            </div>
-          )}
-        </Field>
+              <Field name="level" type="number">
+                {(field, props) => (
+                  <div class={styles.field}>
+                    <label for={field.name}>{field.name}</label>
+                    <select
+                      {...props}
+                      id={field.name}
+                      value={field.value}
+                      onInput$={(e) => {
+                        field.value = +(e.target as HTMLInputElement).value;
+                      }}
+                    >
+                      <option value="1">Easy</option>
+                      <option value="2">Medium</option>
+                      <option value="3">Hard</option>
+                    </select>
+                  </div>
+                )}
+              </Field>
 
-        <Button
-          type="submit"
-          variant="primary"
-          classOverride={styles.start}
-          disabled={isLoading.value}
-          ref={submitButtonRef}
-        >
-          {!isLoading.value && <span>Start!</span>}
-          {isLoading.value && <span>Starting...</span>}
-        </Button>
-      </div>
-    </Form>
+              <Button
+                type="submit"
+                variant="primary"
+                classOverride={styles.start}
+                disabled={isLoading.value}
+                ref={submitButtonRef}
+              >
+                {!isLoading.value && <span>Start!</span>}
+                {isLoading.value && <span>Starting...</span>}
+              </Button>
+            </div>
+          </Form>
+        );
+      }}
+    />
   );
 });
