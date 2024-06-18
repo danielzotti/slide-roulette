@@ -5,7 +5,6 @@ import {
   useOnDocument,
   useOnWindow,
   useSignal,
-  useVisibleTask$,
 } from "@builder.io/qwik";
 import type { SubmitHandler } from "@modular-forms/qwik";
 import { setValue, useForm, zodForm$ } from "@modular-forms/qwik";
