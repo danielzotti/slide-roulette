@@ -7,6 +7,9 @@ skills!
 
 ...just open a PR! 🙃 I'll be happy to review it and merge it if it's good!
 
+First time contributing to an open source project? See [First Contributions repo](https://firstcontributions.github.io/)
+and [How to make your first Open Source contribution](https://www.youtube.com/watch?v=Xg6C_ij99TI).
+
 See [Slide Roulette Project](https://github.com/users/danielzotti/projects/2) for more details about next steps (WIP).
 
 ### How to add a new language
@@ -81,6 +84,7 @@ const config = {
 ## Notes
 
 Error: ` [PLUGIN_ERROR]: Invalid module "@qwik-city-plan" is not a valid package name imported from /Users/daniel/Projects/github/slide-roulette/node_modules/@builder.io/qwik-city/index.qwik.mjs`
+
 - See https://github.com/QwikDev/qwik/issues/6024#issuecomment-2029467547
 - TLDR: move `dependencies` to `devDependencies`
 
