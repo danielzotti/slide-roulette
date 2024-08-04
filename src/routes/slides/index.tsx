@@ -92,10 +92,6 @@ export default component$(() => {
     window.location.reload();
   });
 
-  const goToHome = $(() => {
-    void navigate("/");
-  });
-
   const onLoadedImage = $(() => {
     loadedImagesCount.value++;
   });
