@@ -167,7 +167,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
           disabled={isLoading.value}
           ref={submitButtonRef}
         >
-          {!isLoading.value && <span>Start!</span>}
+          {!isLoading.value && <span>Let's go!</span>}
           {isLoading.value && <span>Starting...</span>}
         </Button>
       </div>

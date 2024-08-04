@@ -88,6 +88,10 @@
   white-space: nowrap;
   width: 60px;
   text-align: right;
+
+  &:global(.last) {
+    text-align: center;
+  }
 }
 
 .photographer {
@@ -104,14 +108,44 @@
 .restart {
   z-index: 1;
   font-size: clamp(1.6em, 2.8vw, 2em);
+  display: block;
 
   button {
     text-transform: uppercase;
   }
 }
 
+.youDidIt {
+  img {
+    max-width: 100%;
+  }
+
+  p {
+    font-style: italic;
+  }
+}
+.challengeAcceptedButton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--margin-default);
+}
+
+.challengeAcceptedImage {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  display: block;
+  :global(img) {
+    display: block;
+  }
+}
+
 .start {
-  margin-top: var(--margin-medium);
   font-size: clamp(1.6em, 3.2vw, 3em);
   text-transform: uppercase;
+  width: 100%;
+  padding: var(--margin-default);
+}
+
+.newGame {
+  margin-top: var(--margin-medium);
 }

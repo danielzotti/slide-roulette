@@ -80,6 +80,7 @@ const config = {
 - [Unsample](https://unsample.net/) for the local random images (if Unsplash/Lorem Picsum service is down)
 - [Bing Image Generation](https://www.bing.com/images) for the logo
 - [Play Speechless by Carmelo Ventimiglia](https://carmeloventimiglia.dev/play-speechless/) for the idea
+- [Canvas Confetti](https://github.com/catdad/canvas-confetti) for the confetti effect
 
 ## Notes
 

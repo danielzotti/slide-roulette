@@ -7,7 +7,7 @@ import {
   useTask$,
   useVisibleTask$,
 } from "@builder.io/qwik";
-import { useLocation, useNavigate } from "@builder.io/qwik-city";
+import { Link, useLocation, useNavigate } from "@builder.io/qwik-city";
 import {
   MatChevronLeftRound,
   MatChevronRightRound,
@@ -18,10 +18,13 @@ import { Button } from "~/components/ui/button/button";
 import { FragmentWithKey } from "~/components/ui/fragment-with-key/FragmentWithKey";
 import { config } from "~/config";
 import type { State } from "~/models/state.models";
+import { fireworks } from "~/utils/confetti";
 import { getUnsplashImages } from "~/utils/images";
 import { getRandomTopic } from "~/utils/topics";
 
 import styles from "./index.module.scss";
+import youDidItSrc from "../../../public/images/you-did-it.jpg";
+import challengeAcceptedSrc from "../../../public/images/challenge-accepted.gif";
 
 export default component$(() => {
   const location = useLocation();
@@ -50,6 +53,9 @@ export default component$(() => {
   const hasLoadedAllImages = useComputed$(
     () => loadedImagesCount.value >= state.slidesCount,
   );
+  const isFinalPage = useComputed$(
+    () => state.currentSlide === state.slidesCount + 1,
+  );
   const photographer = useComputed$<{ name: string; nickname: string } | null>(
     () => {
       const slide = state.slides.at(state.currentSlide - 1);
@@ -74,7 +80,7 @@ export default component$(() => {
   });
 
   const nextSlide = $(() => {
-    if (state.currentSlide < state.slidesCount) {
+    if (state.currentSlide <= state.slidesCount) {
       state.currentSlide++;
     }
   });
@@ -84,6 +90,10 @@ export default component$(() => {
 
   const restart = $(() => {
     window.location.reload();
+  });
+
+  const goToHome = $(() => {
+    void navigate("/");
   });
 
   const onLoadedImage = $(() => {
@@ -133,6 +143,13 @@ export default component$(() => {
     }
   });
 
+  useTask$(async ({ track }) => {
+    track(() => isFinalPage.value);
+    if (isFinalPage.value) {
+      fireworks({ durationInSeconds: 6 });
+    }
+  });
+
   // NB: useOnDocument causes a sort of loop, so we need to use useVisibleTask instead
   // eslint-disable-next-line qwik/no-use-visible-task
   useVisibleTask$(({ cleanup }) => {
@@ -166,15 +183,22 @@ export default component$(() => {
               You have {state.slidesCount} slides to talk about{" "}
             </p>
             <h1 class={styles.titlePreview}>{state.title}</h1>
-            <p class={styles.preview}>
-              Just click the button below and start improvising!
-            </p>
             <Button
               classOverride={styles.start}
               onClick$={nextSlide}
               disabled={!hasLoadedAllImages.value}
             >
-              Start
+              <div class={styles.challengeAcceptedButton}>
+                <div class={styles.challengeAcceptedImage}>
+                  <img
+                    src={challengeAcceptedSrc}
+                    alt={"Challenge Accepted! meme"}
+                    width={498}
+                    height={399}
+                  />
+                </div>
+                Start
+              </div>
             </Button>
             <p>
               <small>
@@ -213,14 +237,32 @@ export default component$(() => {
             />
           </FragmentWithKey>
         ))}
+        {state.currentSlide === state.slidesCount + 1 && (
+          <>
+            <div class={styles.restart}>
+              <div class={styles.youDidIt}>
+                <img
+                  src={youDidItSrc}
+                  alt={
+                    "You Did It. The Crazy Son of a Bitch, You Did It! (quote from Jurassic Park)"
+                  }
+                  width={800}
+                  height={450}
+                />
+                <p>You Did It. The Crazy Son of a Bitch, You Did It!</p>
+              </div>
+
+              <Button onClick$={restart} variant="primary">
+                Try again
+              </Button>
+            </div>
+            <div class={styles.newGame}>
+              or <Link href={"/"}>start</Link> with a new configuration
+            </div>
+          </>
+        )}
       </div>
-      {state.currentSlide === state.slidesCount && (
-        <div class={styles.restart}>
-          <Button onClick$={restart} variant="primary">
-            Try again...?
-          </Button>
-        </div>
-      )}
+
       {state.currentSlide > 0 && (
         <>
           {photographer.value && (
@@ -249,12 +291,19 @@ export default component$(() => {
             >
               <MatChevronLeftRound />
             </Button>
-            <div class={styles.number}>
-              {state.currentSlide}
-              <small>/{state.slidesCount}</small>
+            <div
+              class={`${styles.number} ${state.currentSlide === state.slidesCount + 1 ? "last" : ""}`}
+            >
+              {state.currentSlide === state.slidesCount + 1 && "💪"}
+              {state.currentSlide <= state.slidesCount && (
+                <>
+                  <span>{state.currentSlide}</span>
+                  <small>/{state.slidesCount}</small>
+                </>
+              )}
             </div>
             <Button
-              disabled={state.currentSlide >= state.slidesCount}
+              disabled={state.currentSlide > state.slidesCount}
               variant="clean"
               onClick$={nextSlide}
             >
