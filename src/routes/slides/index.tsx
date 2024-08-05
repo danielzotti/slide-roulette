@@ -143,7 +143,7 @@ export default component$(() => {
   useVisibleTask$(async ({ track }) => {
     track(() => isFinalPage.value);
     if (isFinalPage.value) {
-      fireworks({ durationInSeconds: 6 });
+      void fireworks({ durationInSeconds: 6 });
     }
   });
 
