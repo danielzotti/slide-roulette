@@ -291,7 +291,7 @@ export default component$(() => {
             <div
               class={`${styles.number} ${state.currentSlide === state.slidesCount + 1 ? "last" : ""}`}
             >
-              {state.currentSlide === state.slidesCount + 1 && "💪"}
+              {state.currentSlide > state.slidesCount && <span>💪</span>}
               {state.currentSlide <= state.slidesCount && (
                 <>
                   <span>{state.currentSlide}</span>
