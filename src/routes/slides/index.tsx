@@ -170,22 +170,20 @@ export default component$(() => {
   }
 
   return (
-    <div class={styles.presentation}>
-      {state.currentSlide > 0 && <h2 class={styles.title}>{state.title}</h2>}
-
-      <div class={styles.content}>
-        {state.currentSlide === 0 && (
-          <div>
-            <p class={styles.preview}>
-              You have {state.slidesCount} slides to talk about{" "}
-            </p>
-            <h1 class={styles.titlePreview}>{state.title}</h1>
-            <Button
-              classOverride={styles.start}
-              onClick$={nextSlide}
-              disabled={!hasLoadedAllImages.value}
-            >
-              <div class={styles.challengeAcceptedButton}>
+    <>
+      {state.currentSlide <= state.slidesCount && (
+        <div class={state.currentSlide > 0 && styles.presentation}>
+          {state.currentSlide === 0 && (
+            <div class={styles.intro}>
+              <p class={styles.preview}>
+                You have {state.slidesCount} slides to talk about{" "}
+              </p>
+              <h1 class={styles.titlePreview}>{state.title}</h1>
+              <Button
+                classOverride={styles.challengeAcceptedButton}
+                onClick$={nextSlide}
+                disabled={!hasLoadedAllImages.value}
+              >
                 <div class={styles.challengeAcceptedImage}>
                   <img
                     src={challengeAcceptedSrc}
@@ -195,120 +193,126 @@ export default component$(() => {
                   />
                 </div>
                 Start
-              </div>
-            </Button>
-            <p>
-              <small>
-                {!hasLoadedAllImages.value && "Loading images..."} &nbsp;
-              </small>
-            </p>
-          </div>
-        )}
-        {state.slides.map(({ id, url }, i) => (
-          <FragmentWithKey key={`fragment-${id}`}>
-            <img
-              key={`image-${id}`}
-              src={url}
-              width={state.orientation === "landscape" ? 1280 : 720}
-              height={state.orientation === "landscape" ? 720 : 1280}
-              alt="Random generated"
-              class={styles.image}
-              onLoad$={() => onLoadedImage()}
-              style={{
-                display:
-                  !state.isFullscreen && state.currentSlide === i + 1
-                    ? "block"
-                    : "none",
-              }}
-            />
-            <div
-              key={`bg-image-${id}`}
-              style={{
-                backgroundImage: `url(${url})`,
-                display:
-                  state.isFullscreen && state.currentSlide === i + 1
-                    ? "block"
-                    : "none",
-              }}
-              class={styles.backgroundImage}
-            />
-          </FragmentWithKey>
-        ))}
-        {state.currentSlide === state.slidesCount + 1 && (
-          <>
-            <div class={styles.restart}>
-              <div class={styles.youDidIt}>
-                <img
-                  src={youDidItSrc}
-                  alt={
-                    "You Did It. The Crazy Son of a Bitch, You Did It! (quote from Jurassic Park)"
-                  }
-                  width={800}
-                  height={450}
-                />
-                <p>You Did It. The Crazy Son of a Bitch, You Did It!</p>
-              </div>
-
-              <Button onClick$={restart} variant="primary">
-                Try again
               </Button>
-            </div>
-            <div class={styles.newGame}>
-              or <Link href={"/"}>start</Link> with a new configuration
-            </div>
-          </>
-        )}
-      </div>
-
-      {state.currentSlide > 0 && (
-        <>
-          {photographer.value && (
-            <div class={styles.photographer}>
-              Photo by{" "}
-              <a
-                href={config.websites.unsplash.photographer(
-                  photographer.value.nickname,
-                )}
-                target="_blank"
-              >
-                {photographer.value.name}
-              </a>{" "}
-              {/*on <a href={config.websites.unsplash.homepage}>Unsplash</a>*/}
+              <p>
+                <small>
+                  {!hasLoadedAllImages.value && "Loading images..."} &nbsp;
+                </small>
+              </p>
             </div>
           )}
-          <div class={styles.controls}>
-            <Button onClick$={toggleImageSize} variant="clean">
-              {!state.isFullscreen && <MatFullscreenOutlined />}
-              {state.isFullscreen && <MatFullscreenExitOutlined />}
-            </Button>
-            <Button
-              disabled={state.currentSlide <= 1}
-              onClick$={prevSlide}
-              variant="clean"
-            >
-              <MatChevronLeftRound />
-            </Button>
-            <div
-              class={`${styles.number} ${state.currentSlide === state.slidesCount + 1 ? "last" : ""}`}
-            >
-              {state.currentSlide > state.slidesCount && <span>💪</span>}
-              {state.currentSlide <= state.slidesCount && (
-                <>
-                  <span>{state.currentSlide}</span>
-                  <small>/{state.slidesCount}</small>
-                </>
+          {state.currentSlide > 0 && (
+            <h2 class={styles.title}>{state.title}</h2>
+          )}
+
+          <div class={styles.content}>
+            {state.slides.map(({ id, url }, i) => (
+              <FragmentWithKey key={`fragment-${id}`}>
+                <img
+                  key={`image-${id}`}
+                  src={url}
+                  width={state.orientation === "landscape" ? 1280 : 720}
+                  height={state.orientation === "landscape" ? 720 : 1280}
+                  alt="Random generated"
+                  class={styles.image}
+                  onLoad$={() => onLoadedImage()}
+                  style={{
+                    display:
+                      !state.isFullscreen && state.currentSlide === i + 1
+                        ? "block"
+                        : "none",
+                  }}
+                />
+                <div
+                  key={`bg-image-${id}`}
+                  style={{
+                    backgroundImage: `url(${url})`,
+                    display:
+                      state.isFullscreen && state.currentSlide === i + 1
+                        ? "block"
+                        : "none",
+                  }}
+                  class={styles.backgroundImage}
+                />
+              </FragmentWithKey>
+            ))}
+          </div>
+
+          {state.currentSlide > 0 && (
+            <>
+              {photographer.value && (
+                <div class={styles.photographer}>
+                  Photo by{" "}
+                  <a
+                    href={config.websites.unsplash.photographer(
+                      photographer.value.nickname,
+                    )}
+                    target="_blank"
+                  >
+                    {photographer.value.name}
+                  </a>{" "}
+                  {/*on <a href={config.websites.unsplash.homepage}>Unsplash</a>*/}
+                </div>
               )}
+              {state.currentSlide <= state.slidesCount && (
+                <div class={styles.controls}>
+                  <Button onClick$={toggleImageSize} variant="clean">
+                    {!state.isFullscreen && <MatFullscreenOutlined />}
+                    {state.isFullscreen && <MatFullscreenExitOutlined />}
+                  </Button>
+                  <Button
+                    disabled={state.currentSlide <= 1}
+                    onClick$={prevSlide}
+                    variant="clean"
+                  >
+                    <MatChevronLeftRound />
+                  </Button>
+                  <div class={styles.number}>
+                    {state.currentSlide <= state.slidesCount && (
+                      <>
+                        <span>{state.currentSlide}</span>
+                        <small>/{state.slidesCount}</small>
+                      </>
+                    )}
+                  </div>
+                  <Button
+                    disabled={state.currentSlide > state.slidesCount}
+                    variant="clean"
+                    onClick$={nextSlide}
+                  >
+                    <MatChevronRightRound />
+                  </Button>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      )}
+      {state.currentSlide > state.slidesCount && (
+        <div class={styles.final}>
+          <div class={styles.restart}>
+            <div class={styles.youDidIt}>
+              <img
+                src={youDidItSrc}
+                alt={
+                  "You Did It. The Crazy Son of a Bitch, You Did It! (quote from Jurassic Park)"
+                }
+                width={800}
+                height={450}
+              />
+              <p>You Did It. The Crazy Son of a Bitch, You Did It!</p>
             </div>
-            <Button
-              disabled={state.currentSlide > state.slidesCount}
-              variant="clean"
-              onClick$={nextSlide}
-            >
-              <MatChevronRightRound />
+
+            <Button onClick$={restart} variant="primary">
+              Try again
             </Button>
           </div>
-        </>
+          <div class={styles.newGame}>
+            you can also <Link href={"/"}>start</Link> with a new configuration
+            or <Link onClick$={prevSlide}>go back</Link> to the last slide
+          </div>
+        </div>
       )}
-    </div>
+    </>
   );
 });

@@ -35,7 +35,7 @@
   z-index: 1;
   flex: 0 0 auto;
   margin: 0 var(--margin-small);
-  font-family: var(--font-family-title);
+  font-family: var(--font-family-title), sans-serif;
   background: var(--presentation-element-bg-color);
   color: (--presentation-element-text-color);
   padding: var(--margin-small) var(--margin-default);
@@ -105,29 +105,29 @@
   line-height: 1.5;
 }
 
-.restart {
-  z-index: 1;
-  font-size: clamp(1.6em, 2.8vw, 2em);
-  display: block;
-
-  button {
-    text-transform: uppercase;
-  }
+.intro,
+.final {
+  display: flex;
+  position: relative;
+  height: calc(100vh - var(--navbar-height));
+  flex-direction: column;
+  justify-content: safe center;
+  align-items: center;
+  text-align: center;
+  padding: var(--margin-default);
 }
 
-.youDidIt {
-  img {
-    max-width: 100%;
-  }
-
-  p {
-    font-style: italic;
-  }
-}
 .challengeAcceptedButton {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: var(--margin-default);
+  width: 300px;
+  max-width: 100%;
+  font-size: clamp(1.6em, 3.2vw, 3em);
+  text-transform: uppercase;
+  align-items: center;
+  padding: var(--margin-default);
 }
 
 .challengeAcceptedImage {
@@ -139,12 +139,26 @@
   }
 }
 
-.start {
-  font-size: clamp(1.6em, 3.2vw, 3em);
-  text-transform: uppercase;
-  padding: var(--margin-default);
+.youDidIt {
+  img {
+    width: 400px;
+    max-width: 100%;
+  }
+
+  p {
+    font-style: italic;
+  }
+}
+
+.restart {
+  font-size: clamp(1.6em, 2.8vw, 2em);
+  display: block;
+
+  button {
+    text-transform: uppercase;
+  }
 }
 
 .newGame {
-  margin-top: var(--margin-medium);
+  margin-top: var(--margin-default);
 }
