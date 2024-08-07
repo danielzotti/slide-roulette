@@ -1,14 +1,20 @@
 import { component$ } from "@builder.io/qwik";
 import { Link } from "@builder.io/qwik-city";
 import styles from "./header.module.scss";
-import logo from "../../../public/images/slide-roulette-logo.png";
+import logo from "../../../public/images/codemotion/codemotion-monogram-dark.png";
 
 export default component$(() => {
   return (
     <header class={styles.header}>
       <nav>
         <Link href="/" title="Home">
-          <img src={logo} alt="Slide Roulette Logo" width={40} height={40} />
+          <img
+            class="logo-dark"
+            src={logo}
+            alt="Slide Roulette Logo Dark"
+            width={50}
+            height={50}
+          />
         </Link>
       </nav>
       <div class={styles.title}>Slide Roulette</div>

@@ -82,6 +82,7 @@
   color: (--presentation-element-text-color);
   padding: var(--margin-default) 0;
   border-radius: var(--border-radius);
+  font-weight: 500;
 }
 
 .number {
@@ -97,7 +98,7 @@
 .photographer {
   z-index: 1;
   text-align: center;
-  font-size: 10px;
+  font-size: 12px;
   background: var(--presentation-element-bg-color);
   color: (--presentation-element-text-color);
   padding: var(--margin-small) var(--margin-default);
@@ -131,18 +132,34 @@
 }
 
 .challengeAcceptedImage {
-  border-radius: var(--border-radius);
-  overflow: hidden;
   display: block;
+  //border-radius: 30% 70% 49% 51% / 2% 2% 98% 98%;
+  margin-bottom: var(--margin-default);
+
   :global(img) {
+    border-radius: var(--border-radius);
+    width: 300px;
     display: block;
   }
+}
+
+.challengeAcceptedImageSvg {
+  display: block;
+  width: 200px;
+  min-height: 256px;
+  max-width: 100%;
+  //padding: var(--margin-default);
+  //margin-bottom: var(--margin-default);
+  //background-color: #fff;
+  //fill: #000;
+  fill: var(--text-color);
 }
 
 .youDidIt {
   img {
     width: 400px;
     max-width: 100%;
+    border-radius: 78% 22% 78% 22% / 39% 42% 58% 61%;
   }
 
   p {
@@ -161,4 +178,5 @@
 
 .newGame {
   margin-top: var(--margin-default);
+  padding-bottom: var(--margin-default);
 }

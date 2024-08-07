@@ -4,11 +4,11 @@
   // THEME (dark)
   --text-color: var(--white-dark);
   --text-color-secondary: var(--white);
-  --text-bg-color: var(--gray-dark);
-  --accent-color: var(--blue);
+  --text-bg-color: var(--black);
+  --accent-color: var(--orange-codemotion);
   --error-color: var(--red);
 
-  --navbar-bg-color: var(--black);
+  --navbar-bg-color: var(--blue-dark-codemotion);
   --navbar-text-color: var(--white-dark);
   --navbar-text-active-color: var(--accent-color);
 
@@ -28,7 +28,7 @@
   --code-color: var(--white-dark);
   --code-border-color: transparent;
 
-  --presentation-element-bg-color: var(--black-transparent);
+  --presentation-element-bg-color: var(--blue-dark-codemotion);
   --presentation-element-text-color: var(--white);
 }
 
@@ -36,13 +36,13 @@
   color-scheme: light;
 
   // THEME (light)
-  --text-color: var(--black-light);
+  --text-color: var(--blue-dark-codemotion);
   --text-color-secondary: var(--gray-dark);
   --text-bg-color: var(--white);
-  --accent-color: var(--blue);
+  --accent-color: var(--orange-codemotion);
   --error-color: var(--red);
 
-  --navbar-bg-color: var(--black-light);
+  --navbar-bg-color: var(--blue-dark-codemotion);
   --navbar-text-color: var(--white);
   --navbar-text-active-color: var(--accent-color);
 

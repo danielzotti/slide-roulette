@@ -22,11 +22,14 @@
   --blue: #2daae1;
   --red: #d70d1f;
 
+  --orange-codemotion: #FF5C00;
+  --blue-dark-codemotion: #0E1E30;
+
   --link-color: inherit;
 
   //FONTS
-  --font-family-title: Exo, Georgia, serif;
-  --font-family-text: 'Roboto Condensed', Verdana, Helvetica, Arial, sans-serif;
+  --font-family-title: 'IBM Plex Sans', Exo, Georgia, serif;
+  --font-family-text: 'IBM Plex Sans', 'Roboto Condensed', Verdana, Helvetica, Arial, sans-serif;
 
   //MARGINS
   --margin-small: 5px;
@@ -44,6 +47,12 @@
 
 [data-theme=light] {
   @include theme.light;
+  .logo-dark {
+    display: none;
+  }
+  .logo-light {
+    display: block;
+  }
 }
 
 [data-theme=dark] {

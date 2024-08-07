@@ -81,6 +81,7 @@ const config = {
 - [Bing Image Generation](https://www.bing.com/images) for the logo
 - [Play Speechless by Carmelo Ventimiglia](https://carmeloventimiglia.dev/play-speechless/) for the idea
 - [Canvas Confetti](https://github.com/catdad/canvas-confetti) for the confetti effect
+- [Fancy Border Radius Generator](https://9elements.github.io/fancy-border-radius) for the Jeff Goldblum Image's border 
 
 ## Notes
 
