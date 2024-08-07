@@ -54,6 +54,12 @@
   text-align: center;
 }
 
+.slide {
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+  opacity: 0;
+}
+
 .image {
   object-fit: contain;
   object-position: center;
@@ -61,11 +67,13 @@
   max-width: 100%;
 }
 
+
 .backgroundImage {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
+  @extend .slide;
 }
 
 .controls {
@@ -116,6 +124,7 @@
   align-items: center;
   text-align: center;
   padding: var(--margin-default);
+  overflow: auto;
 }
 
 .challengeAcceptedButton {
@@ -132,14 +141,32 @@
 }
 
 .challengeAcceptedImage {
+  --bubble-size: var(--margin-medium);
+
   display: block;
+  position: relative;
   //border-radius: 30% 70% 49% 51% / 2% 2% 98% 98%;
-  margin-bottom: var(--margin-default);
 
   :global(img) {
-    border-radius: var(--border-radius);
+    margin-bottom: var(--margin-default);
+    padding: var(--margin-default);
+    border-radius: var(--margin-medium);
+    overflow: hidden;
+    background: #fff;
     width: 300px;
+    max-width: 100%;
     display: block;
+  }
+
+  &::before {
+    display: block;
+    position: relative;
+    width: 0;
+    content: "";
+    border: var(--bubble-size) solid transparent;
+    border-bottom-color: #fff;
+    border-top: 0;
+    left: calc(50% - var(--bubble-size));
   }
 }
 
@@ -157,9 +184,9 @@
 
 .youDidIt {
   img {
-    width: 400px;
     max-width: 100%;
     border-radius: 78% 22% 78% 22% / 39% 42% 58% 61%;
+    width: clamp(400px,40vw, 800px);
   }
 
   p {
