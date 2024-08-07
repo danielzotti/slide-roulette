@@ -1,9 +1,18 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
-  "name": "Slide Roulette",
+  "id": "Slide Roulette",
+  "name": "Slide Roulette by Codemotion",
   "short_name": "Slide Roulette",
   "start_url": ".",
   "display": "standalone",
-  "background_color": "#2daae1",
-  "description": "A slide roulette app to test your improvising skills!"
+  "background_color": "#0E1E30",
+  "theme_color": "#FF5C00",
+  "description": "A slide roulette app to test your improvising skills!",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "1000x1000",
+      "type": "image/png"
+    }
+  ]
 }
