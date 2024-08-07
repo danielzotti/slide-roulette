@@ -24,7 +24,7 @@ import { getRandomTopic } from "~/utils/topics";
 
 import styles from "./index.module.scss";
 import youDidItSrc from "../../../public/images/you-did-it.jpg";
-import challengeAcceptedSrc from "../../../public/images/challenge-accepted.png";
+// import challengeAcceptedSrc from "../../../public/images/challenge-accepted.png";
 
 export default component$(() => {
   const location = useLocation();
