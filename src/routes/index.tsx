@@ -21,23 +21,19 @@ export default component$(() => {
   });
 
   return (
-    <div>
-      <div class={styles.page}>
-        <p>{config.description}</p>
+    <div class={styles.page}>
+      <Configurator onSubmit={start} />
 
-        <Configurator onSubmit={start} />
-
-        <div class={styles.credits}>
-          Thanks to{" "}
-          <a href={config.websites.chatGpt} target="_blank">
-            ChatGPT
-          </a>{" "}
-          for generating the topics and to{" "}
-          <a href={`${config.websites.unsplash.homepage}`} target="_blank">
-            Unsplash
-          </a>{" "}
-          to provide the images.
-        </div>
+      <div class={styles.credits}>
+        Thanks to{" "}
+        <a href={config.websites.chatGpt} target="_blank">
+          ChatGPT
+        </a>{" "}
+        for generating the topics and to{" "}
+        <a href={`${config.websites.unsplash.homepage}`} target="_blank">
+          Unsplash
+        </a>{" "}
+        to provide the images.
       </div>
       <Footer />
     </div>

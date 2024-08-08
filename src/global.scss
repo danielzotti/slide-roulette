@@ -7,38 +7,3 @@
  * the styles in here will be applied to the Document, without any sort of CSS scoping.
  *
  */
-
-main {
-  view-transition-name: root;
-}
-main::view-transition-old(root) {
-  animation-duration: 0.2s;
-  animation-name: -ua-view-transition-fade-out;
-}
-main::view-transition-new(root) {
-  animation-duration: 0.2s;
-  animation-name: -ua-view-transition-fade-in;
-}
-
-@keyframes -ua-view-transition-fade-out {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes -ua-view-transition-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-}

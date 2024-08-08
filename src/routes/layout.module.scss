@@ -1,0 +1,13 @@
+@import "../scss/animations/fade";
+
+.page {
+  view-transition-name: main;
+}
+::view-transition-old(main) {
+  animation-duration: .5s;
+  animation-name: fade-out;
+}
+::view-transition-new(main) {
+  animation-duration: .5s;
+  animation-name: fade-in;
+}
