@@ -22,8 +22,9 @@ export const config = {
   },
   languages: {
     list: [
-      { code: "en", name: "English", disabled: true },
+      { code: "en", name: "English" },
       { code: "it", name: "Italiano" },
+      { code: "es", name: "Español", disabled: true },
     ],
     defaultCode: "it",
   },
