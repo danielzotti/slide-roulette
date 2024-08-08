@@ -241,10 +241,10 @@ export default component$(() => {
                   key={`bg-image-${id}`}
                   style={{
                     backgroundImage: `url(${url})`,
-                    opacity:
+                    display:
                       state.isFullscreen && state.currentSlide === i + 1
-                        ? "1"
-                        : "0",
+                        ? "block"
+                        : "none",
                   }}
                   class={styles.backgroundImage}
                 />

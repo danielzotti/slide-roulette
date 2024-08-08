@@ -67,12 +67,6 @@
   text-align: center;
 }
 
-.slide {
-  transition: opacity 1s ease-in-out;
-  pointer-events: none;
-  opacity: 0;
-}
-
 .image {
   object-fit: contain;
   object-position: center;
@@ -86,7 +80,6 @@
   inset: 0;
   background-size: cover;
   background-position: center;
-  @extend .slide;
 }
 
 .controls {
