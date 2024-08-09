@@ -806,7 +806,7 @@ export default {
     "API",
     "GitHub",
     "Encryption",
-    "Binary",
+    "Binary Code",
     "HTML",
     "CSS",
     "IoT (Internet of Things)",

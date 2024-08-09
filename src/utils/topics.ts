@@ -22,7 +22,21 @@ export function getRandomTopic({
       break;
   }
 
+  if (level >= 4) {
+    const { nerd, two, conjunction } = topics;
+    let nerdTitle = nerd[Math.floor(Math.random() * nerd.length)];
+
+    if (level >= 5) {
+      nerdTitle += ` ${conjunction} ${nerd[Math.floor(Math.random() * nerd.length)]}`;
+    }
+    if (level >= 6) {
+      nerdTitle += ` ${two[Math.floor(Math.random() * two.length)]}`;
+    }
+    return nerdTitle;
+  }
+
   const { one, two, conjunction } = topics;
+
   let title = one[Math.floor(Math.random() * one.length)];
 
   if (level >= 2) {

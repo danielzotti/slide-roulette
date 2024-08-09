@@ -152,9 +152,16 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
                   field.value = +(e.target as HTMLInputElement).value;
                 }}
               >
-                <option value="1">Easy</option>
-                <option value="2">Medium</option>
-                <option value="3">Hard</option>
+                <optgroup label="PERSON">
+                  <option value="1">Easy</option>
+                  <option value="2">Medium</option>
+                  <option value="3">Hard</option>
+                </optgroup>
+                <optgroup label="NERD">
+                  <option value="4">Junior</option>
+                  <option value="5">Senior</option>
+                  <option value="6">Stephen Hawking</option>
+                </optgroup>
               </select>
             </div>
           )}

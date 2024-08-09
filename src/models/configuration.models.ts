@@ -11,7 +11,7 @@ export const configurationSchema = z.object({
   level: z
     .number()
     .min(1, "Please enter a number greater or equal than one.")
-    .max(3, "The max level is 3"),
+    .max(6, "The max level is 4"),
   language: z.string(),
   slidesCount: z
     .number()
