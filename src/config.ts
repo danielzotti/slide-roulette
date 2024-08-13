@@ -25,7 +25,7 @@ export const config = {
       { code: "en", name: "English" },
       { code: "it", name: "Italiano" },
       { code: "es", name: "Español" }, // , disabled: true
-    ],
+    ] as { code: string; name: string; disabled?: boolean }[],
     defaultCode: "it",
   },
   websites: {
