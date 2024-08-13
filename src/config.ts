@@ -24,7 +24,7 @@ export const config = {
     list: [
       { code: "en", name: "English" },
       { code: "it", name: "Italiano" },
-      { code: "es", name: "Español", disabled: true },
+      { code: "es", name: "Español" }, // , disabled: true
     ],
     defaultCode: "it",
   },

@@ -1,6 +1,7 @@
 // LANGUAGES
 import it from "../topics/it";
 import en from "../topics/en";
+import es from "../topics/es";
 
 // ADD NEW LANGUEAGES HERE
 // import new from "../topics/new";
@@ -19,6 +20,9 @@ export function getRandomTopic({
       break;
     case "en":
       topics = en;
+      break;
+    case "es":
+      topics = es;
       break;
   }
 
