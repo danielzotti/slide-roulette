@@ -65,3 +65,9 @@
   --presentation-element-bg-color: var(--white-transparent);
   --presentation-element-text-color: var(--black);
 }
+
+body {
+  background-image: url("../../public/bg-pattern.svg");
+  background-position: center;
+  background-size: contain;
+}
