@@ -777,6 +777,14 @@ export default {
     "sulla cresta di un'onda",
     "sulla cresta di una montagna",
     "tra le pagine di un libro di fantascienza",
+    // Daniel
+    "ad hogwarts",
+    "in un universo parallelo",
+    "in biblioteca",
+    "al cinema",
+    "pubblicizzati da Apple",
+    "in bianco e nero",
+    "nel 3024",
   ],
   nerd: [
     "Codemotion",

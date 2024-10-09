@@ -777,6 +777,14 @@ export default {
     "on the crest of a wave",
     "on the crest of a mountain",
     "between the pages of a science fiction book",
+    // DANIEL
+    "at hogwarts",
+    "in a parallel universe",
+    "in the library",
+    "at the movies",
+    "advertised by Apple",
+    "in black and white",
+    "in 3024",
   ],
   nerd: [
     "Codemotion",

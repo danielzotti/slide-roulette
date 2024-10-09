@@ -40,4 +40,18 @@ export const config = {
       status: "https://status.unsplash.com",
     },
   },
+  unsplash_topics: {
+    // "3d-renders": "CDwuwXJAbEw",
+    animals: "Jpg6Kidl-Hk",
+    "architecture-interior": "M8jVbLbTRws",
+    // experimental: "qPYsDzvJOYc",
+    "fashion-beauty": "S4MKLAsBB74",
+    film: "hmenvQhUmxM",
+    "food-drink": "xjPR4hlkBGA",
+    // nature: "6sMVjTLSkeQ",
+    people: "towJZFskpGg",
+    sports: "Bn-DjrcBrwo",
+    // travel: "Fzo3zuOHN6w",
+    // "rising-stars": "N0SJ103DI1Y",
+  },
 };
