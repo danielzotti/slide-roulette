@@ -1,0 +1,19 @@
+.fullScreenButton {
+  --full-screen-button-size: 30px;
+  color: var(--black);
+  width:var(--full-screen-button-size);
+  height:var(--full-screen-button-size);
+  font-size: var(--full-screen-button-size);
+  line-height: var(--full-screen-button-size);
+  z-index: 100;
+  position: fixed;
+  border:0;
+  margin:0;
+  padding:0;
+  outline: none;
+  cursor: pointer;
+  background: rgba(255,255,255,0.6);
+  border-radius: 5px;
+  bottom:5px;
+  right:5px;
+}

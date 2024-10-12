@@ -5,6 +5,7 @@
   --text-color: var(--white-dark);
   --text-color-secondary: var(--white);
   --text-bg-color: var(--black);
+  --bg-color: var(--blue-dark-codemotion);
   --accent-color: var(--orange-codemotion);
   --error-color: var(--red);
 
@@ -18,8 +19,8 @@
   --btn-border-radius: var(--border-radius);
   --btn-primary-text-color: var(--white);
   --btn-primary-bg-color: var(--accent-color);
-  --btn-secondary-text-color: var(--accent-color);
-  --btn-secondary-bg-color: var(--gray-dark);
+  --btn-secondary-text-color: var(--black);
+  --btn-secondary-bg-color: var(--green-light-codemotion);
   --btn-outline-text-color: var(--accent-color);
   --btn-outline-border-color: var(--accent-color);
   --btn-clean-text-color: var(--accent-color);
@@ -28,8 +29,15 @@
   --code-color: var(--white-dark);
   --code-border-color: transparent;
 
-  --presentation-element-bg-color: var(--blue-dark-codemotion);
-  --presentation-element-text-color: var(--white);
+  --presentation-element-bg-color: var(--black);
+  --presentation-element-text-color: var(--white-dark);
+
+  --title--main-text-color: var(--white-dark);
+  --title--main-bg-color: var(--black);
+  --title--main-border-color: var(--black);
+
+  --title--simple-text-color: var(--white-dark);
+  --title--simple-bg-color: var(--black);
 }
 
 @mixin light {
@@ -39,6 +47,7 @@
   --text-color: var(--blue-dark-codemotion);
   --text-color-secondary: var(--gray-dark);
   --text-bg-color: var(--white);
+  --bg-color: var(--blue-light-codemotion);
   --accent-color: var(--orange-codemotion);
   --error-color: var(--red);
 
@@ -52,8 +61,8 @@
   --btn-border-radius: var(--border-radius);
   --btn-primary-text-color: var(--white);
   --btn-primary-bg-color: var(--accent-color);
-  --btn-secondary-text-color: var(--accent-color);
-  --btn-secondary-bg-color: var(--white);
+  --btn-secondary-text-color: var(--black);
+  --btn-secondary-bg-color: var(--green-light-codemotion);
   --btn-outline-text-color: var(--accent-color);
   --btn-outline-border-color: var(--accent-color);
   --btn-clean-text-color: var(--accent-color);
@@ -62,6 +71,13 @@
   --code-color: var(--gray-dark);
   --code-border-color: var(--gray-dark);
 
-  --presentation-element-bg-color: var(--white-transparent);
-  --presentation-element-text-color: var(--black);
+  --presentation-element-bg-color: var(--black);
+  --presentation-element-text-color: var(--white);
+
+  --title--main-text-color: var(--black);
+  --title--main-bg-color: var(--white);
+  --title--main-border-color: var(--black);
+
+  --title--simple-text-color: var(--white);
+  --title--simple-bg-color: var(--black);
 }

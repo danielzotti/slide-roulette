@@ -1,10 +1,13 @@
 .button {
   border: none;
-  border-radius: var(--btn-border-radius);
+  border-radius: 0; // var(--btn-border-radius);
   padding: var(--margin-small) var(--margin-medium);
   cursor: var(--cursor-pointer);
   line-height: 1;
   font-weight: 600;
+  &:active {
+    outline: none;
+  }
 
   &.primary {
     background-color: var(--btn-primary-bg-color);
@@ -14,13 +17,13 @@
   &.secondary {
     background-color: var(--btn-secondary-bg-color);
     color: var(--btn-secondary-text-color);
-    border: 1px solid var(--btn-secondary-text-color);
+    border: var(--border-width) solid var(--btn-secondary-text-color);
   }
 
   &.outline {
     background-color: transparent;
     color: var(--btn-outline-text-color);
-    border: 1px solid var(--btn-outline-border-color);
+    border: var(--border-width) solid var(--btn-outline-border-color);
   }
 
   &.clean {
