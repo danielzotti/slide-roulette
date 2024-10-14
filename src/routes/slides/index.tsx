@@ -241,8 +241,16 @@ export default component$(() => {
                 <img
                   key={`image-${id}`}
                   src={url}
-                  width={state.orientation === "landscape" ? 1280 : 720}
-                  height={state.orientation === "landscape" ? 720 : 1280}
+                  width={
+                    state.orientation === "landscape"
+                      ? config.unsplash.imageWidth
+                      : config.unsplash.imageHeight
+                  }
+                  height={
+                    state.orientation === "landscape"
+                      ? config.unsplash.imageHeight
+                      : config.unsplash.imageWidth
+                  }
                   alt="Random generated"
                   class={styles.image}
                   onLoad$={() => onLoadedImage()}
