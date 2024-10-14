@@ -7,7 +7,7 @@ import {
   useTask$,
   useVisibleTask$,
 } from "@builder.io/qwik";
-import { Link, useLocation, useNavigate } from "@builder.io/qwik-city";
+import { useLocation, useNavigate } from "@builder.io/qwik-city";
 import {
   MatChevronLeftRound,
   MatChevronRightRound,
@@ -22,10 +22,10 @@ import type { State } from "~/models/state.models";
 import { fireworks } from "~/utils/confetti";
 import { getUnsplashImages } from "~/utils/images";
 import { getRandomTopic } from "~/utils/topics";
+import chuckSrc from "../../../public/images/ui/chuck.png";
+import youDidItSrc from "../../../public/images/ui/goldblum.png";
 
 import styles from "./index.module.scss";
-import youDidItSrc from "../../../public/images/ui/goldblum.png";
-import chuckSrc from "../../../public/images/ui/chuck.png";
 
 export default component$(() => {
   const location = useLocation();
