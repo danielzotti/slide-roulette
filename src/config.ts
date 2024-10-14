@@ -41,8 +41,8 @@ export const config = {
     },
   },
   unsplash: {
-    imageWidth: 1280, // 1920,
-    imageHeight: 720, // 1080,
+    imageWidth: 1920, // 1280, // 1920,
+    imageHeight: 1080, // 720, // 1080,
     topics: {
       // "3d-renders": "CDwuwXJAbEw",
       animals: "Jpg6Kidl-Hk",

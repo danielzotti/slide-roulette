@@ -1,6 +1,6 @@
 .button {
   border: none;
-  border-radius: 0; // var(--btn-border-radius);
+  border-radius: var(--btn-border-radius);
   padding: var(--margin-small) var(--margin-medium);
   cursor: var(--cursor-pointer);
   line-height: 1;

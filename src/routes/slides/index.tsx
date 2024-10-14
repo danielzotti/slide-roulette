@@ -229,7 +229,7 @@ export default component$(() => {
           >
             {state.slides.map(({ id, url }, i) => (
               <FragmentWithKey key={`fragment-${id}`}>
-                <div
+                {/*<div
                   class={styles.imageWrapper}
                   style={{
                     display:
@@ -237,7 +237,31 @@ export default component$(() => {
                         ? "block"
                         : "none",
                   }}
-                ></div>
+                >
+                  <img
+                    key={`image-${id}`}
+                    src={url}
+                    width={
+                      state.orientation === "landscape"
+                        ? config.unsplash.imageWidth
+                        : config.unsplash.imageHeight
+                    }
+                    height={
+                      state.orientation === "landscape"
+                        ? config.unsplash.imageHeight
+                        : config.unsplash.imageWidth
+                    }
+                    alt="Random generated"
+                    className={styles.image}
+                    onLoad$={() => onLoadedImage()}
+                    style={{
+                      display:
+                        !state.isFullscreen && state.currentSlide === i + 1
+                          ? "block"
+                          : "none",
+                    }}
+                  />
+                </div>*/}
                 <img
                   key={`image-${id}`}
                   src={url}

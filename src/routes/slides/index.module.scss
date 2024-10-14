@@ -67,14 +67,14 @@
   flex: 1 1 auto;
   align-content: center;
   text-align: center;
+  overflow: hidden;
 }
 
 .imageWrapper {
-  position: absolute;
+  position: relative;
   z-index: 0;
   height: auto;
   width: 100%;
-  aspect-ratio: 16 / 9;
   object-fit: contain;
   object-position: center;
 
@@ -104,11 +104,10 @@
   object-position: center;
   max-height: 100%;
   max-width: 100%;
-  display: block;
-  position: relative;
-  border: var(--border-width) solid var(--title--main-border-color);
+  //display: block;
+  //position: relative;
+  //border: var(--border-width) solid var(--title--main-border-color);
 }
-
 
 .backgroundImage {
   position: absolute;
