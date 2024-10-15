@@ -51,8 +51,9 @@
   --border-width: clamp(3px, 0.35vw, 6px);
 
   //TRANSITIONS
-  --transition-duration: .2s;
+  --transition-duration: .25s;
   --navbar-transition-duration: .5s;
+  --rotation-deafult: -5deg;
 }
 
 [data-theme=light] {

@@ -1,5 +1,6 @@
 @use "../../../scss/variables";
 .button {
+  transition: transform var(--transition-duration) ease-in-out;
   border: none;
   border-radius: var(--btn-border-radius);
   padding: var(--margin-small) var(--margin-medium);
@@ -46,7 +47,7 @@
     border-radius: 50%;
     aspect-ratio: 1;
     padding: var(--margin-small);
-    rotate: -3deg;
+    rotate: -5deg;
     text-wrap: balance;
     overflow: hidden;
 

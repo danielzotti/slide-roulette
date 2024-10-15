@@ -1,4 +1,17 @@
+@use "../../scss/variables";
+@use "../../scss/common";
+
 .footer {
-  padding: 10px;
-  text-align: center;
+
+}
+
+.credits {
+  @extend .title--simple;
+  display: block;
+  padding: var(--margin-small) var(--margin-default);
+}
+
+.author {
+  @extend .title--simple;
+  padding: var(--margin-small) var(--margin-default);
 }

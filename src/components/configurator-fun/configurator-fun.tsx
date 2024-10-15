@@ -9,9 +9,12 @@ import {
 import {
   MatCropLandscapeOutlined,
   MatCropPortraitOutlined,
+  MatArrowRightFilled,
+  MatArrowRightAltOutlined,
 } from "@qwikest/icons/material";
 import type { SubmitHandler } from "@modular-forms/qwik";
 import { setValue, useForm, zodForm$ } from "@modular-forms/qwik";
+
 import levelHumanEasy from "../../../public/images/ui/level-human-easy.png";
 import levelHumanMedium from "../../../public/images/ui/level-human-medium.png";
 import levelHumanHard from "../../../public/images/ui/level-human-hard.png";
@@ -77,25 +80,51 @@ export const ConfiguratorFun = component$(({ onSubmit }: ConfiguratorProps) => {
         <div class={styles.languageContainer}>
           <Field name="language" type="string">
             {(field) => (
-              <div class={styles.language}>
+              <>
+                <div class={styles.languageLandscape}>
+                  {config.languages.list.map((lang) => (
+                    <button
+                      key={lang.code}
+                      type="button"
+                      disabled={field.value === lang.code}
+                      class={`${styles.flag} flag-${[lang.code as string]}`}
+                      onClick$={() => {
+                        field.value = lang.code;
+                      }}
+                    >
+                      <img
+                        src={`/public/images/ui/lang-${lang.code}.png`}
+                        alt={lang.name}
+                        width={100}
+                        height={100}
+                      />
+                    </button>
+                  ))}
+                </div>
+              </>
+            )}
+          </Field>
+        </div>
+        <div class={styles.mainContainer}>
+          <Field name="language" type="string">
+            {(field) => (
+              <div class={styles.languagePortrait}>
                 {config.languages.list.map((lang) => (
                   <button
                     key={lang.code}
                     type="button"
                     disabled={field.value === lang.code}
-                    class={field.value === lang.code ? "active" : ""}
+                    class={styles.language}
                     onClick$={() => {
                       field.value = lang.code;
                     }}
                   >
-                    {lang.name}
+                    {lang.code}
                   </button>
                 ))}
               </div>
             )}
           </Field>
-        </div>
-        <div class={styles.mainContainer}>
           <div class={styles.topContainer}>
             <Field name="orientation" type="string">
               {(field) => (
@@ -158,7 +187,7 @@ export const ConfiguratorFun = component$(({ onSubmit }: ConfiguratorProps) => {
             <Field name="level" type="number">
               {(field) => (
                 <>
-                  <p>Choose your difficulty level!</p>
+                  <p>Choose your difficulty level wisely!</p>
                   {[1, 2, 3].includes(field.value as number) && (
                     <div class={styles.level}>
                       <button
@@ -290,7 +319,23 @@ export const ConfiguratorFun = component$(({ onSubmit }: ConfiguratorProps) => {
         <Button
           type="submit"
           variant="primary"
-          classOverride={styles.startButton}
+          classOverride={styles.startButtonPortrait}
+          disabled={isLoading.value}
+          ref={submitButtonRef}
+        >
+          {!isLoading.value && (
+            <div>
+              <span>Setup's done!</span>
+              <MatArrowRightAltOutlined />
+            </div>
+          )}
+          {isLoading.value && <span>Starting...</span>}
+        </Button>
+
+        <Button
+          type="submit"
+          variant="primary"
+          classOverride={styles.startButtonLandscape}
           disabled={isLoading.value}
           ref={submitButtonRef}
           rounded

@@ -12,13 +12,19 @@ html, body {
   font-weight: 100;
   min-width: var(--html-min-width);
   min-height: 100svh;
-  //background-color: var(--text-bg-color);
   background-color: var(--bg-color);
   color: var(--text-color);
   cursor: var(--cursor-default);
-  //background-image: url("../../public/bg-pattern.svg");
-  //background-position: center;
-  //background-size: contain;
+  background-image: url("../../public/images/ui/bg-landscape.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  @media (orientation: portrait) {
+    background-image: url("../../public/images/ui/bg-portrait.png");
+    background-size: contain; // cover
+    background-position: center;
+  }
 }
 
 h1, h2, h3, h4, h5, h6,

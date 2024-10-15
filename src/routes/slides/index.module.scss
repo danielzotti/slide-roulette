@@ -47,7 +47,10 @@
 }
 
 .titlePreview {
-  padding-inline: var(--margin-default);
+  padding-inline: var(--margin-variable-small);
+  @media(min-width: variables.$container-md-min) {
+    padding-inline: var(--margin-variable-big);
+  }
 }
 
 .title {
