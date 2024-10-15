@@ -15,13 +15,13 @@ html, body {
   background-color: var(--bg-color);
   color: var(--text-color);
   cursor: var(--cursor-default);
-  background-image: url("../../public/images/ui/bg-landscape.png");
+  background-image: url("../../images/ui/bg-landscape.png");
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 
   @media (orientation: portrait) {
-    background-image: url("../../public/images/ui/bg-portrait.png");
+    background-image: url("../../images/ui/bg-portrait.png");
     background-size: contain; // cover
     background-position: center;
   }
