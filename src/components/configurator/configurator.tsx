@@ -92,7 +92,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
                       }}
                     >
                       <img
-                        src={`/public/images/ui/lang-${lang.code}.png`}
+                        src={`/images/ui/lang-${lang.code}.png`}
                         alt={lang.name}
                         width={100}
                         height={100}
