@@ -1,6 +1,6 @@
 import { $, component$, useSignal } from "@builder.io/qwik";
 import { useNavigate } from "@builder.io/qwik-city";
-import { ConfiguratorFun } from "~/components/configurator-fun/configurator-fun";
+import { Configurator } from "~/components/configurator/configurator";
 import Footer from "~/components/footer/footer";
 import Header from "~/components/header/header";
 import { config } from "~/config";
@@ -26,8 +26,7 @@ export default component$(() => {
       <Header />
 
       <div class={styles.page}>
-        <ConfiguratorFun onSubmit={start} />
-
+        <Configurator onSubmit={start} />
         <Footer />
       </div>
     </>
