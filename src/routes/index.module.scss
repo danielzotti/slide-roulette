@@ -8,6 +8,7 @@
   height: 100dvh;
   justify-content: safe center;
   padding: var(--margin-default);
-  overflow: auto;
   padding-top: var(--navbar-height);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
