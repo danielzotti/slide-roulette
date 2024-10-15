@@ -1,21 +1,28 @@
 @use "../../scss/common";
+@use "../../scss/variables";
+
 
 .fullScreenButton {
   @extend .clear-button;
 
   --full-screen-button-size: 30px;
   color: var(--black);
-  width:var(--full-screen-button-size);
-  height:var(--full-screen-button-size);
+  width: var(--full-screen-button-size);
+  height: var(--full-screen-button-size);
   font-size: var(--full-screen-button-size);
   line-height: var(--full-screen-button-size);
   z-index: 100;
   position: fixed;
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   outline: none;
-  background: rgba(255,255,255,0.6);
+  background: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
-  bottom:5px;
-  right:5px;
+  right: 5px;
+    top: 5px;
+
+  @media(min-width: 470px) {
+    bottom: 5px;
+    top: unset;
+  }
 }
