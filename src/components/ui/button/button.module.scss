@@ -1,3 +1,4 @@
+@use "../../../scss/variables";
 .button {
   border: none;
   border-radius: var(--btn-border-radius);
@@ -10,13 +11,14 @@
   }
 
   &.primary {
-    background-color: var(--btn-primary-bg-color);
-    color: var(--btn-primary-text-color);
+    background-color: var(--btn-secondary-bg-color);
+    color: var(--btn-secondary-text-color);
+    border: var(--border-width) solid var(--btn-secondary-text-color);
   }
 
   &.secondary {
-    background-color: var(--btn-secondary-bg-color);
-    color: var(--btn-secondary-text-color);
+    background-color: var(--btn-primary-bg-color);
+    color: var(--btn-primary-text-color);
     border: var(--border-width) solid var(--btn-secondary-text-color);
   }
 
@@ -33,5 +35,36 @@
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+  &.rounded {
+    --btn-rounded-min-width: 150px;
+    --btn-rounded-max-width: 250px;
+
+    --btn-rounded-small-min-width: calc(var(--btn-rounded-min-width) / 2);
+    --btn-rounded-small-max-width: calc(var(--btn-rounded-max-width) / 2);
+
+    border-radius: 50%;
+    aspect-ratio: 1;
+    padding: var(--margin-small);
+    rotate: -3deg;
+    text-wrap: balance;
+    overflow: hidden;
+
+    width:var(--btn-rounded-min-width);
+    font-size: calc(var(--btn-rounded-min-width) * 0.13);
+    @media(min-width: variables.$container-lg-min) {
+      width:var(--btn-rounded-max-width);
+      font-size: calc(var(--btn-rounded-max-width) * 0.13);
+    }
+
+    &.small {
+      border-width: calc(var(--border-width)*0.75);
+      width:var(--btn-rounded-small-min-width);
+      font-size: calc(var(--btn-rounded-small-min-width) * 0.13);
+      @media(min-width: variables.$container-lg-min) {
+        width:var(--btn-rounded-small-max-width);
+        font-size: calc(var(--btn-rounded-small-max-width) * 0.13);
+      }
+    }
   }
 }

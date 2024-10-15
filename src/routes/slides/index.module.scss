@@ -1,5 +1,6 @@
 @use "../../scss/base";
 @use "../../scss/common";
+@use "../../scss/variables";
 
 .intro,
 .final {
@@ -154,46 +155,42 @@
   line-height: 1.5;
 }
 
-.tryAgainButton, .newGameButton, .challengeAcceptedButton {
-  font-size: clamp(1.2em, 2.8vw, 2.2em);
-  width: clamp(150px, 25vw, 300px);
-  padding: var(--margin-default);
-  rotate: -3deg;
-  //text-transform: uppercase;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background-color: var(--green-light-codemotion);
-  border: var(--border-width) solid var(--black);
-  text-wrap: balance;
+.restartButtonsWrapper {
+  position: relative;
+  top:-60px;
+  right: -50px;
+  @media(max-width: 550px) {
+    width: 230px;
+  }
+
+  @media(min-width: variables.$container-lg-min) {
+    top: -190px;
+    right: -215px;
+    width: auto;
+  }
 }
 
 .newGameButton {
-  font-size: clamp(0.6em, 1.4vw, 1.1em);
-  width: clamp(75px, 13vw, 150px);
-
-  position: absolute;
-  bottom: -50px;
-  @media(min-width: 768px) {
-    bottom: -150px;
-    right: -150px
-  }
+  position: relative;
+  right: -35px;
+  z-index: 1;
+  top: 40px;
 }
 
 .tryAgainButton {
-  position: absolute;
-  bottom: -50px;
-  @media(min-width: 768px) {
-    bottom: -100px;
-    right: -100px
-  }
+
 }
 
 .challengeAcceptedButton {
-  position: absolute;
-  bottom: -50px;
-  @media(min-width: 768px) {
-    bottom: -100px;
-    right: -100px
+  position: relative;
+  top:-60px;
+  right: -50px;
+
+  @media(min-width: variables.$container-lg-min) {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    top: auto;
   }
 }
 
@@ -204,7 +201,7 @@
   :global(img) {
     margin-bottom: var(--margin-default);
     padding: var(--margin-default);
-    width: clamp(250px, 50vw, 650px);
+    width: clamp(300px, 50vw, 650px);
     max-width: 100%;
     display: block;
   }
@@ -215,10 +212,6 @@
   width: 200px;
   min-height: 256px;
   max-width: 100%;
-  //padding: var(--margin-default);
-  //margin-bottom: var(--margin-default);
-  //background-color: #fff;
-  //fill: #000;
   fill: var(--text-color);
 }
 

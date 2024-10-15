@@ -204,7 +204,8 @@ export default component$(() => {
                   classOverride={styles.challengeAcceptedButton}
                   onClick$={nextSlide}
                   disabled={!hasLoadedAllImages.value}
-                  variant="secondary"
+                  variant="primary"
+                  rounded
                 >
                   Now let's kick this butt!
                 </Button>
@@ -366,20 +367,23 @@ export default component$(() => {
                 width={800}
                 height={450}
               />
-              <div>
-                <Button
-                  onClick$={restart}
-                  variant="secondary"
-                  classOverride={styles.tryAgainButton}
-                >
-                  Try again!
-                </Button>
+              <div class={styles.restartButtonsWrapper}>
                 <Button
                   onClick$={newGame}
-                  variant="primary"
+                  variant="secondary"
+                  size="small"
+                  rounded
                   classOverride={styles.newGameButton}
                 >
                   New game
+                </Button>
+                <Button
+                  onClick$={restart}
+                  variant="primary"
+                  classOverride={styles.tryAgainButton}
+                  rounded
+                >
+                  Try again!
                 </Button>
               </div>
             </div>

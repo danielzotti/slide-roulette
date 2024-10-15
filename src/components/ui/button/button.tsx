@@ -9,6 +9,8 @@ interface ButtonProps {
   disabled?: boolean;
   type?: "submit" | "reset" | "button";
   ref?: Signal<HTMLButtonElement | undefined>;
+  rounded?: boolean;
+  size?: "small" | "default";
 }
 
 export const Button = ({
@@ -18,12 +20,14 @@ export const Button = ({
   onClick$,
   type = "button",
   disabled = false,
+  rounded = false,
+  size = "default",
   ref,
 }: ButtonProps) => {
   return (
     <button
       ref={ref}
-      class={`${styles.button} ${styles[variant]} ${classOverride}`}
+      class={`${styles.button} ${styles[variant]} ${rounded ? styles.rounded : ""} ${size === "small" ? styles.small : ""} ${classOverride}`}
       type={type}
       onClick$={[onClick$]}
       disabled={disabled}
