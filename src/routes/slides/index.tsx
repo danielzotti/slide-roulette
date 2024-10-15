@@ -207,15 +207,16 @@ export default component$(() => {
                   variant="primary"
                   rounded
                 >
-                  Now let's kick this butt!
+                  {hasLoadedAllImages.value && (
+                    <span>Now let's kick this butt!</span>
+                  )}
+                  {!hasLoadedAllImages.value && (
+                    <p>
+                      <small>{"Loading images..."} &nbsp;</small>
+                    </p>
+                  )}
                 </Button>
               </div>
-
-              <p>
-                <small>
-                  {!hasLoadedAllImages.value && "Loading images..."} &nbsp;
-                </small>
-              </p>
             </div>
           )}
           {state.currentSlide > 0 && (

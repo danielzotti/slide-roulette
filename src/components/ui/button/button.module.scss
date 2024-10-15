@@ -38,10 +38,10 @@
   }
   &.rounded {
     --btn-rounded-min-width: 150px;
-    --btn-rounded-max-width: 250px;
+    --btn-rounded-max-width: 200px;
 
-    --btn-rounded-small-min-width: calc(var(--btn-rounded-min-width) / 2);
-    --btn-rounded-small-max-width: calc(var(--btn-rounded-max-width) / 2);
+    --btn-rounded-small-min-width: calc(var(--btn-rounded-min-width) / 1.5);
+    --btn-rounded-small-max-width: calc(var(--btn-rounded-max-width) / 1.5);
 
     border-radius: 50%;
     aspect-ratio: 1;

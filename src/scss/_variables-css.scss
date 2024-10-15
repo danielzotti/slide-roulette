@@ -29,6 +29,7 @@
   --yellow-light-codemotion: #F9DC5C;
 
   --link-color: inherit;
+  --opacity-default: 0.4;
 
   //FONTS
   --font-family-title: 'IBM Plex Sans', Exo, Georgia, serif;
@@ -36,10 +37,10 @@
   --font-family-text: Roboto, Verdana, Helvetica, Arial, sans-serif;
 
   //MARGINS
-  //--margin-small: clamp(5px, 1vw, 15px);
-  //--margin-default: clamp(15px, 3vw, 45px);
-  //--margin-medium: clamp(30px, 6vw, 90px);
-  //--margin-big: clamp(60px, 12vw, 180px);
+  --margin-variable-small: clamp(5px, 1vw, 15px);
+  --margin-variable-default: clamp(15px, 3vw, 45px);
+  --margin-variable-medium: clamp(30px, 6vw, 90px);
+  --margin-variable-big: clamp(60px, 12vw, 180px);
   --margin-small: 5px;
   --margin-default: 15px;
   --margin-medium: 30px;
@@ -47,7 +48,7 @@
 
   //BORDERS
   --border-radius: 0px;
-  --border-width: clamp(3px, 0.3vw, 6px);
+  --border-width: clamp(3px, 0.35vw, 6px);
 
   //TRANSITIONS
   --transition-duration: .2s;

@@ -38,6 +38,9 @@
 
   --title--simple-text-color: var(--white-dark);
   --title--simple-bg-color: var(--black);
+
+  --btn-level-bg: var(--white);
+  --btn-level-text: var(--black);
 }
 
 @mixin light {
@@ -80,4 +83,7 @@
 
   --title--simple-text-color: var(--white);
   --title--simple-bg-color: var(--black);
+
+  --btn-level-bg: var(--white);
+  --btn-level-text: var(--black);
 }

@@ -7,13 +7,17 @@
   display: flex;
   position: relative;
   height: calc(100dvh - var(--navbar-height));
-  //height: 100dvh;
   flex-direction: column;
   justify-content: safe center;
   align-items: center;
   text-align: center;
   padding: var(--margin-default);
   overflow: auto;
+}
+
+.final {
+  padding-top: var(--navbar-height);
+  height: 100dvh;
 }
 
 .presentation {
@@ -82,24 +86,27 @@
   &:before, &:after {
     display: block;
     content: '';
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     position: absolute;
     border: var(--border-width) solid var(--title--main-border-color);
   }
+
   &:before {
     background-color: var(--title--main-bg-color);
     top: 0;
     left: 0;
-    z-index:-1;
+    z-index: -1;
   }
+
   &:after {
     background-color: var(--orange-codemotion);
-    top: calc(2.5*var(--border-width));
-    left: calc(2*var(--border-width));
-    z-index:-2;
+    top: calc(2.5 * var(--border-width));
+    left: calc(2 * var(--border-width));
+    z-index: -2;
   }
 }
+
 .image {
   object-fit: contain;
   object-position: center;
@@ -157,10 +164,10 @@
 
 .restartButtonsWrapper {
   position: relative;
-  top:-60px;
+  top: -60px;
   right: -50px;
   @media(max-width: 550px) {
-    width: 230px;
+    width: 250px;
   }
 
   @media(min-width: variables.$container-lg-min) {
@@ -183,8 +190,13 @@
 
 .challengeAcceptedButton {
   position: relative;
-  top:-60px;
+  top: -60px;
   right: -50px;
+
+  p {
+    line-height: 0.8;
+    margin: 0;
+  }
 
   @media(min-width: variables.$container-lg-min) {
     position: absolute;
@@ -199,7 +211,6 @@
   position: relative;
 
   :global(img) {
-    margin-bottom: var(--margin-default);
     padding: var(--margin-default);
     width: clamp(300px, 50vw, 650px);
     max-width: 100%;
@@ -226,7 +237,8 @@
   }
 
   p {
-    font-style: italic;
+    margin: 2px;
+    font-weight: 600;
   }
 }
 
