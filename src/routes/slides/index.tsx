@@ -24,6 +24,8 @@ import { getUnsplashImages } from "~/utils/images";
 import { getRandomTopic } from "~/utils/topics";
 import chuckSrc from "../../../public/images/ui/chuck.png";
 import youDidItSrc from "../../../public/images/ui/goldblum.png";
+import spongebobSrc from "../../../public/images/ui/spongebob.png";
+import disasterGirlSrc from "../../../public/images/ui/disaster-girl.png";
 
 import styles from "./index.module.scss";
 
@@ -89,10 +91,6 @@ export default component$(() => {
     state.isFullscreen = !state.isFullscreen;
   });
 
-  const restart = $(() => {
-    window.location.reload();
-  });
-
   const newGame = $(() => {
     void navigate("/");
   });
@@ -129,7 +127,7 @@ export default component$(() => {
     }
   });
 
-  useTask$(async () => {
+  const init = $(async () => {
     try {
       state.slides = await getUnsplashImages({
         orientation: state.orientation,
@@ -142,6 +140,18 @@ export default component$(() => {
       console.error("Error fetching images:", error);
       hasError.value = true;
     }
+  });
+
+  const restart = $(() => {
+    // window.location.reload();
+    state.slides = [];
+    state.currentSlide = 0;
+    loadedImagesCount.value = 0;
+    void init();
+  });
+
+  useTask$(async () => {
+    await init();
   });
 
   // eslint-disable-next-line qwik/no-use-visible-task
@@ -194,11 +204,17 @@ export default component$(() => {
                 <h1 class="title--main">{state.title}</h1>
               </div>
               <div class={styles.challengeAcceptedImage}>
-                <img
+                {/*<img
                   src={chuckSrc}
                   alt={"Chuck Norris with his hat"}
                   width={919}
                   height={665}
+                />*/}
+                <img
+                  src={disasterGirlSrc}
+                  alt={"Disaster girl meme"}
+                  width={675}
+                  height={511}
                 />
                 <Button
                   classOverride={styles.challengeAcceptedButton}
@@ -208,12 +224,11 @@ export default component$(() => {
                   rounded
                 >
                   {hasLoadedAllImages.value && (
-                    <span>Now let's kick this butt!</span>
+                    // <span>Now let's kick this butt!</span>
+                    <span>Let's set this stage on fire!</span>
                   )}
                   {!hasLoadedAllImages.value && (
-                    <p>
-                      <small>{"Loading images..."} &nbsp;</small>
-                    </p>
+                    <small>{"Loading images..."} &nbsp;</small>
                   )}
                 </Button>
               </div>
@@ -323,17 +338,15 @@ export default component$(() => {
         <div class={styles.final}>
           <div class={styles.restart}>
             <div class={styles.youDidIt}>
-              <p class="title--simple">You did it.</p>
+              <p class="title--simple">Well done!</p>
               <br />
-              <p class="title--simple">The crazy son of a b*tch, you did it!</p>
+              <p class="title--simple">You made it!</p>
               <br />
               <img
-                src={youDidItSrc}
-                alt={
-                  "You Did It. The Crazy Son of a Bitch, You Did It! (quote from Jurassic Park)"
-                }
-                width={800}
-                height={450}
+                src={spongebobSrc}
+                alt={"Spongebob rainbow meme"}
+                width={704}
+                height={561}
               />
               <div class={styles.restartButtonsWrapper}>
                 <Button
@@ -350,16 +363,14 @@ export default component$(() => {
                   variant="primary"
                   classOverride={styles.tryAgainButton}
                   rounded
+                  disabled={!hasLoadedAllImages.value}
                 >
                   Try again!
+                  {!hasLoadedAllImages.value && <small>Loading...</small>}
                 </Button>
               </div>
             </div>
           </div>
-          {/*<div class={styles.newGame}>*/}
-          {/*  you can also <Link href={"/"}>start</Link> with a new configuration*/}
-          {/*  or go <Link onClick$={prevSlide}>back</Link> to the last slide*/}
-          {/*</div>*/}
         </div>
       )}
     </>

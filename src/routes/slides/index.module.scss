@@ -26,8 +26,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  //max-height: calc(100svh - var(--navbar-height));
-  //height: calc(100svh - var(--navbar-height));
+  //max-height: calc(100dvh - var(--navbar-height));
+  //height: calc(100dvh - var(--navbar-height));
   max-height: 100dvh;
   height: 100dvh;
   overflow: hidden;
@@ -193,7 +193,7 @@
 
 .challengeAcceptedButton {
   position: relative;
-  top: -60px;
+  top: -95px;
   right: -50px;
 
   p {
@@ -203,7 +203,7 @@
 
   @media(min-width: variables.$container-lg-min) {
     position: absolute;
-    bottom: 0;
+    bottom: 40px;
     right: 0;
     top: auto;
   }
@@ -213,11 +213,14 @@
   display: block;
   position: relative;
 
+
   :global(img) {
     padding: var(--margin-default);
     width: clamp(300px, 50vw, 650px);
     max-width: 100%;
     display: block;
+    scale: -1 1;
+    //rotate:-8deg;
   }
 }
 
@@ -237,6 +240,7 @@
     max-width: 100%;
     //border-radius: 78% 22% 78% 22% / 39% 42% 58% 61%;
     width: clamp(400px, 40vw, 800px);
+    margin-top: var(--margin-default);
   }
 
   p {

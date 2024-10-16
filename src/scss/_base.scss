@@ -11,18 +11,18 @@ html, body {
   font-family: var(--font-family-text);
   font-weight: 100;
   min-width: var(--html-min-width);
-  min-height: 100svh;
+  min-height: 100dvh;
   background-color: var(--bg-color);
   color: var(--text-color);
   cursor: var(--cursor-default);
-  background-image: url("../../images/ui/bg-landscape.png");
+  background-image: url("../../images/ui/bg-landscape.svg");
   background-position: center;
-  background-size: contain;
+  background-size: cover; //contain
   background-repeat: no-repeat;
 
   @media (orientation: portrait) {
-    background-image: url("../../images/ui/bg-portrait.png");
-    background-size: contain; // cover
+    background-image: url("../../images/ui/bg-portrait.svg");
+    background-size: cover; // contain
     background-position: center;
   }
 }

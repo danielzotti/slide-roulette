@@ -21,6 +21,7 @@
 .topContainer {
   display: flex;
   flex-direction: column;
+  gap: var(--margin-small);
 
   @media(min-width: variables.$container-md-min) {
     flex-direction: row;
@@ -68,7 +69,7 @@
   @extend .clear-button;
   opacity: var(--opacity-default);
   transition: rotate var(--transition-duration) ease-in-out;
-  transition-property: rotate, scale;
+  transition-property: rotate, scale, opacity;
 
   &:disabled {
     opacity: 1;
@@ -105,13 +106,15 @@
   font-weight: 500;
   text-transform: uppercase;
   transition: rotate var(--transition-duration) ease-in-out;
-  transition-property: rotate, scale;
+  transition-property: rotate, scale, opacity;
+  opacity: var(--opacity-default);
 
   &:disabled {
     @extend .codemotion-wrapper;
     cursor: default;
     rotate: var(--rotation-deafult);
     scale: 1.2;
+    opacity: 1;
   }
 
   p {
@@ -142,7 +145,7 @@
   font-size: 40px;
   color: var(--orientation-text-color);
   transition: rotate var(--transition-duration) ease-in-out;
-  transition-property: rotate, scale;
+  transition-property: rotate, scale, opacity;
   opacity: var(--opacity-default);
 
   &:disabled {
@@ -153,7 +156,7 @@
 
   span {
     font-size: 10px;
-    margin-top:5px;
+    margin-top: 5px;
   }
 }
 
@@ -215,7 +218,7 @@
     color: var(--btn-level-text);
     opacity: var(--opacity-default);
     transition: rotate var(--transition-duration) ease-in-out;
-    transition-property: rotate, scale;
+    transition-property: rotate, scale, opacity;
 
     @media(min-width: variables.$container-md-min) {
       max-width: 100%;
@@ -257,6 +260,12 @@
   @extend .title--simple;
   font-weight: 500;
   text-transform: uppercase;
+  margin-bottom: var(--margin-default);
+
+  @media(max-width: variables.$container-sm-max) {
+    width: 100%;
+    margin-bottom: var(--margin-small);
+  }
 }
 
 .slides {
@@ -277,16 +286,21 @@
   @extend .codemotion-wrapper-alternative;
   padding: var(--margin-variable-small) var(--margin-variable-default);
   display: block;
-  aspect-ratio: 2/1.5;
   font-weight: 500;
   transition: rotate var(--transition-duration) ease-in-out;
-  transition-property: rotate, scale;
+  transition-property: rotate, scale, opacity;
+  opacity: var(--opacity-default);
+
+  min-width: 25px;
+  aspect-ratio: 2 / 1.5;
+  height: auto;
 
   &:disabled {
     @extend .codemotion-wrapper;
     cursor: default;
     rotate: var(--rotation-deafult);
     scale: 1.15;
+    opacity: 1;
   }
 
   p {
@@ -299,8 +313,8 @@
   grid-area: button;
   font-size: clamp(1.6em, 3.2vw, 3em);
   text-transform: uppercase;
+  justify-self: stretch;
 
-  justify-self: flex-end;
 
   @media(min-width: variables.$container-md-min) {
     margin-top: 0;
@@ -309,7 +323,7 @@
     left: -50px;
   }
   @media(min-width: variables.$container-xl-min) {
-    top: -200px;
+    top: -220px;
   }
 }
 
@@ -317,7 +331,7 @@
   @extend .startButton;
   display: none;
   margin-block: var(--margin-default);
-  margin-left: auto;
+  margin-inline: 0;
   padding: var(--margin-variable-small) var(--margin-variable-default);
   @media(max-width: variables.$container-sm-max) {
     display: block;
@@ -342,19 +356,4 @@
   @media(min-width: variables.$container-md-min) {
     display: block;
   }
-}
-
-
-// TODO: remove below code
-.recap {
-  display: block;
-  border: 1px solid black;
-  margin: 20px;
-  padding: 10px;
-}
-
-.field {
-  margin: 10px;
-  display: flex;
-  gap: 20px
 }

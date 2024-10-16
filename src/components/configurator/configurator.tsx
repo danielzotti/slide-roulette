@@ -75,51 +75,30 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
         <div class={styles.languageContainer}>
           <Field name="language" type="string">
             {(field) => (
-              <>
-                <div class={styles.languageLandscape}>
-                  {config.languages.list.map((lang) => (
-                    <button
-                      key={lang.code}
-                      type="button"
-                      disabled={field.value === lang.code}
-                      class={`${styles.flag} flag-${[lang.code as string]}`}
-                      onClick$={() => {
-                        field.value = lang.code;
-                      }}
-                    >
-                      <img
-                        src={`/images/ui/lang-${lang.code}.png`}
-                        alt={lang.name}
-                        width={100}
-                        height={100}
-                      />
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </Field>
-        </div>
-        <div class={styles.mainContainer}>
-          <Field name="language" type="string">
-            {(field) => (
-              <div class={styles.languagePortrait}>
+              <div class={styles.languageLandscape}>
                 {config.languages.list.map((lang) => (
                   <button
                     key={lang.code}
                     type="button"
                     disabled={field.value === lang.code}
-                    class={styles.language}
+                    class={`${styles.flag} flag-${[lang.code as string]}`}
                     onClick$={() => {
                       field.value = lang.code;
                     }}
                   >
-                    {lang.code}
+                    <img
+                      src={`/images/ui/lang-${lang.code}.png`}
+                      alt={lang.name}
+                      width={100}
+                      height={100}
+                    />
                   </button>
                 ))}
               </div>
             )}
           </Field>
+        </div>
+        <div class={styles.mainContainer}>
           <div class={styles.topContainer}>
             <Field name="orientation" type="string">
               {(field) => (
@@ -158,6 +137,25 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
                     />
                     <span>portrait</span>
                   </button>
+                </div>
+              )}
+            </Field>
+            <Field name="language" type="string">
+              {(field) => (
+                <div class={styles.languagePortrait}>
+                  {config.languages.list.map((lang) => (
+                    <button
+                      key={lang.code}
+                      type="button"
+                      disabled={field.value === lang.code}
+                      class={styles.language}
+                      onClick$={() => {
+                        field.value = lang.code;
+                      }}
+                    >
+                      2 a 1 e 4 a 3{lang.code}
+                    </button>
+                  ))}
                 </div>
               )}
             </Field>
@@ -334,7 +332,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
               <MatArrowRightAltOutlined />
             </div>
           )}
-          {isLoading.value && <span>Are you ready??</span>}
+          {isLoading.value && <span>Starting...</span>}
         </Button>
 
         <Button

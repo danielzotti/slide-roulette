@@ -1,7 +1,7 @@
 @use "../../../scss/variables";
 .button {
   transition: scale var(--transition-duration) ease-in-out;
-  transition-property: rotate, scale;
+  transition-property: rotate, scale, opacity;
 
   border: none;
   border-radius: var(--btn-border-radius);
@@ -42,7 +42,7 @@
 
   &.rounded {
     --btn-rounded-min-width: 150px;
-    --btn-rounded-max-width: 200px;
+    --btn-rounded-max-width: 150px;
 
     --btn-rounded-small-min-width: calc(var(--btn-rounded-min-width) / 1.5);
     --btn-rounded-small-max-width: calc(var(--btn-rounded-max-width) / 1.5);
