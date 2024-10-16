@@ -6,11 +6,7 @@ import {
   useOnWindow,
   useSignal,
 } from "@builder.io/qwik";
-import {
-  MatCropLandscapeOutlined,
-  MatCropPortraitOutlined,
-  MatArrowRightAltOutlined,
-} from "@qwikest/icons/material";
+import { MatArrowRightAltOutlined } from "@qwikest/icons/material";
 import type { SubmitHandler } from "@modular-forms/qwik";
 import { setValue, useForm, zodForm$ } from "@modular-forms/qwik";
 
