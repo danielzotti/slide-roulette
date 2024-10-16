@@ -182,24 +182,44 @@
 
 .newGameButton {
   position: relative;
-  right: -35px;
+  right: -30px;
   z-index: 1;
   top: 40px;
+  font-size: 18px !important;
 }
 
 .tryAgainButton {
-
+  font-size: 27px !important;
 }
 
-.challengeAcceptedButton {
+.challengeAcceptedContainer {
   position: relative;
   top: -95px;
   right: -50px;
+  height:100px;
 
-  p {
-    line-height: 0.8;
-    margin: 0;
+  :global(.fire) {
+    display: none;
   }
+  @media(min-width: variables.$container-lg-min) {
+    :global(.fire) {
+      transition: opacity var(--transition-duration) ease-in-out;
+      pointer-events: none;
+      opacity: 0;
+      display: block;
+      position: absolute;
+      bottom: 135px;
+      right: 0;
+    }
+
+    & button:hover + :global(.fire) {
+        opacity: 1;
+    }
+  }
+}
+
+.challengeAcceptedButton {
+  font-size: 24px !important;
 
   @media(min-width: variables.$container-lg-min) {
     position: absolute;

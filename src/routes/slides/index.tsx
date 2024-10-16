@@ -20,10 +20,8 @@ import { FragmentWithKey } from "~/components/ui/fragment-with-key/FragmentWithK
 import { config } from "~/config";
 import type { State } from "~/models/state.models";
 import { fireworks } from "~/utils/confetti";
-import { getUnsplashImages } from "~/utils/images";
+import { getUnsplashImagesWithSpecificTopics } from "~/utils/images";
 import { getRandomTopic } from "~/utils/topics";
-import chuckSrc from "../../../public/images/ui/chuck.png";
-import youDidItSrc from "../../../public/images/ui/goldblum.png";
 import spongebobSrc from "../../../public/images/ui/spongebob.png";
 import disasterGirlSrc from "../../../public/images/ui/disaster-girl.png";
 
@@ -129,7 +127,7 @@ export default component$(() => {
 
   const init = $(async () => {
     try {
-      state.slides = await getUnsplashImages({
+      state.slides = await getUnsplashImagesWithSpecificTopics({
         orientation: state.orientation,
         count: state.slidesCount,
       });
@@ -204,33 +202,33 @@ export default component$(() => {
                 <h1 class="title--main">{state.title}</h1>
               </div>
               <div class={styles.challengeAcceptedImage}>
-                {/*<img
-                  src={chuckSrc}
-                  alt={"Chuck Norris with his hat"}
-                  width={919}
-                  height={665}
-                />*/}
                 <img
                   src={disasterGirlSrc}
                   alt={"Disaster girl meme"}
                   width={675}
                   height={511}
                 />
-                <Button
-                  classOverride={styles.challengeAcceptedButton}
-                  onClick$={nextSlide}
-                  disabled={!hasLoadedAllImages.value}
-                  variant="primary"
-                  rounded
-                >
-                  {hasLoadedAllImages.value && (
-                    // <span>Now let's kick this butt!</span>
-                    <span>Let's set this stage on fire!</span>
-                  )}
-                  {!hasLoadedAllImages.value && (
-                    <small>{"Loading images..."} &nbsp;</small>
-                  )}
-                </Button>
+                <div class={styles.challengeAcceptedContainer}>
+                  <Button
+                    classOverride={styles.challengeAcceptedButton}
+                    onClick$={nextSlide}
+                    disabled={!hasLoadedAllImages.value}
+                    variant="primary"
+                    rounded
+                  >
+                    {hasLoadedAllImages.value && (
+                      <span>Let's set this stage on fire!</span>
+                    )}
+                    {!hasLoadedAllImages.value && (
+                      <small>{"Loading images..."} &nbsp;</small>
+                    )}
+                  </Button>
+                  <div class="fire">
+                    {[...Array(50)].map((_, i) => (
+                      <div class="fire__particle" key={i}></div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           )}
@@ -356,7 +354,9 @@ export default component$(() => {
                   rounded
                   classOverride={styles.newGameButton}
                 >
-                  New game
+                  New
+                  <br />
+                  game
                 </Button>
                 <Button
                   onClick$={restart}
@@ -365,7 +365,9 @@ export default component$(() => {
                   rounded
                   disabled={!hasLoadedAllImages.value}
                 >
-                  Try again!
+                  Try
+                  <br />
+                  again!
                   {!hasLoadedAllImages.value && <small>Loading...</small>}
                 </Button>
               </div>

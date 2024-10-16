@@ -236,7 +236,6 @@
     &:disabled {
       opacity: 1;
       cursor: default;
-      rotate: var(--rotation-deafult);
       scale: 1.1;
     }
   }
@@ -311,7 +310,7 @@
 
 .startButton {
   grid-area: button;
-  font-size: clamp(1.6em, 3.2vw, 3em);
+  font-size: 27px !important;
   text-transform: uppercase;
   justify-self: stretch;
 
@@ -319,7 +318,7 @@
   @media(min-width: variables.$container-md-min) {
     margin-top: 0;
     position: absolute;
-    top: -160px;
+    top: -185px;
     left: -50px;
   }
   @media(min-width: variables.$container-xl-min) {

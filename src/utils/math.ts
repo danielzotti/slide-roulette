@@ -11,3 +11,10 @@ export function getRandomNumberArrayInRange(
 export function getRandomNumberInRange(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+export function randomize<T>(array: T[]): T[] {
+  return array
+    .map((value) => ({ value, sortKey: Math.random() }))
+    .sort((a, b) => a.sortKey - b.sortKey)
+    .map(({ value }) => value);
+}
