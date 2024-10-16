@@ -41,6 +41,8 @@
 
   --btn-level-bg: var(--white);
   --btn-level-text: var(--black);
+
+  --orientation-text-color: var(--white-dark);
 }
 
 @mixin light {
@@ -86,4 +88,6 @@
 
   --btn-level-bg: var(--white);
   --btn-level-text: var(--black);
+
+  --orientation-text-color: var(--white);
 }

@@ -136,8 +136,13 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
                       field.value = "landscape";
                     }}
                   >
-                    {/*<p>landscape</p>*/}
-                    <MatCropLandscapeOutlined />
+                    {/*<MatCropLandscapeOutlined />*/}
+                    <img
+                      src={`/images/ui/desktop-landscape.png`}
+                      alt={"Desktop PC (landscape)"}
+                      width={50}
+                      height={50}
+                    />
                     <span>landscape</span>
                   </button>
                   <button
@@ -148,8 +153,13 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
                       field.value = "portrait";
                     }}
                   >
-                    {/*<p>portrait</p>*/}
-                    <MatCropPortraitOutlined />
+                    {/*<MatCropPortraitOutlined />*/}
+                    <img
+                      src={`/images/ui/smartphone-portrait.png`}
+                      alt={"Nokia 3310 (portrait)"}
+                      width={21}
+                      height={50}
+                    />
                     <span>portrait</span>
                   </button>
                 </div>
@@ -328,7 +338,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
               <MatArrowRightAltOutlined />
             </div>
           )}
-          {isLoading.value && <span>Starting...</span>}
+          {isLoading.value && <span>Are you ready??</span>}
         </Button>
 
         <Button
