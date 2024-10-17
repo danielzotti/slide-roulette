@@ -342,7 +342,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
           rounded
         >
           {!isLoading.value && <span>Setup's done!</span>}
-          {isLoading.value && <span>Starting...</span>}
+          {isLoading.value && <small>Starting...</small>}
         </Button>
       </div>
     </Form>

@@ -274,9 +274,9 @@
   justify-content: center;
   @media(min-width: variables.$container-md-min) {
     flex-direction: row;
+    gap: var(--margin-medium);
   }
   @media(min-width: variables.$container-xl-min) {
-    gap: var(--margin-medium);
   }
 }
 
@@ -289,10 +289,6 @@
   transition: rotate var(--transition-duration) ease-in-out;
   transition-property: rotate, scale, opacity;
   opacity: var(--opacity-default);
-
-  min-width: 25px;
-  aspect-ratio: 2 / 1.5;
-  height: auto;
 
   &:disabled {
     @extend .codemotion-wrapper;
@@ -332,7 +328,9 @@
   margin-block: var(--margin-default);
   margin-inline: 0;
   padding: var(--margin-variable-small) var(--margin-variable-default);
+
   @media(max-width: variables.$container-sm-max) {
+    width: 100%;
     display: block;
   }
 

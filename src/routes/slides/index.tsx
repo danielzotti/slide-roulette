@@ -146,6 +146,10 @@ export default component$(() => {
     state.slides = [];
     state.currentSlide = 0;
     loadedImagesCount.value = 0;
+    state.title = getRandomTopic({
+      lang: location.url.searchParams.get("language") ?? "it",
+      level: parseInt(location.url.searchParams.get("level") ?? "1"),
+    });
     void init();
   });
 
