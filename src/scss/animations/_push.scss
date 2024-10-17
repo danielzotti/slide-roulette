@@ -4,13 +4,13 @@
   }
 
   to {
-    transform: translateY(-100%);
+    transform: translateY(-100vh);
   }
 }
 
 @keyframes push-in {
   from {
-    transform: translateY(100%);
+    transform: translateY(100vh);
   }
 
   to {

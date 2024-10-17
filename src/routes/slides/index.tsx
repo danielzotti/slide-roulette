@@ -14,7 +14,8 @@ import {
   MatFullscreenExitOutlined,
   MatFullscreenOutlined,
 } from "@qwikest/icons/material";
-import Header from "~/components/header/header";
+import { Footer } from "~/components/footer/footer";
+import { Header } from "~/components/header/header";
 import { Button } from "~/components/ui/button/button";
 import { FragmentWithKey } from "~/components/ui/fragment-with-key/FragmentWithKey";
 import { config } from "~/config";
@@ -373,6 +374,7 @@ export default component$(() => {
               </div>
             </div>
           </div>
+          <Footer />
         </div>
       )}
     </>

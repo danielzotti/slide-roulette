@@ -3,7 +3,7 @@ import { Link } from "@builder.io/qwik-city";
 import styles from "./header.module.scss";
 import logo from "../../../public/images/codemotion/codemotion-monogram-dark.png";
 
-export default component$(() => {
+export const Header = component$(() => {
   return (
     <header class={styles.header}>
       <Link href="/" title="Home">

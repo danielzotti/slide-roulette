@@ -31,6 +31,9 @@ export const config = {
   websites: {
     chatGpt: "https://chat.openai.com",
     danielzotti: "https://www.danielzotti.it",
+    marinella: "https://marinella.mastrosimone.eu",
+    max: "https://github.com/MaxAttianese",
+    antonio: "https://github.com/AntonioRoccoGit",
     github: "https://github.com/danielzotti/slide-roulette",
     unsplash: {
       homepage:
