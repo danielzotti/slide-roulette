@@ -11,18 +11,19 @@
   rotate: -5deg;
   transition: rotate var(--transition-duration) ease-in-out;
   transition-property: rotate, scale;
+
   &:hover {
     rotate: 5deg;
-    scale:1.1;
+    scale: 1.1;
   }
 }
 
 .dialog {
   z-index: 999;
   border: 0;
-  padding: var(--margin-default);
   background-color: var(--text-bg-color);
   color: var(--text-color);
+  padding:0;
 
   transition-property: opacity, display, overlay;
   transition-duration: 1s;
@@ -67,17 +68,41 @@
   }
 }
 
+.dialogWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--margin-variable-default) var(--margin-variable-medium);
+  gap: var(--margin-variable-default);
+
+  @media(min-width: variables.$container-sm-min) {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.infoMeme {
+  text-align: left;
+}
+
+.infoMemeImage {
+  width: 60px;
+  @media(min-width: variables.$container-md-min) {
+    width: 120px;
+  }
+}
+
 .dialogContent {
   text-align: left;
   display: flex;
   position: relative;
   flex-direction: column;
   gap: var(--margin-variable-default);
-  padding: var(--margin-variable-default) var(--margin-variable-medium);
 
   :global(p) {
     margin: 0;
   }
+
   :global(a) {
     font-weight: 500;
   }
@@ -85,8 +110,8 @@
 
 .closeButton {
   position: absolute;
-  bottom: -80px;
-  right: -30px;
+  bottom: -90px;
+  right: 0;
   font-size: 24px !important;
 
   @media(min-width: variables.$container-md-min) {
