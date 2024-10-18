@@ -196,24 +196,44 @@
   position: relative;
   top: -95px;
   right: -50px;
-  height:100px;
+  height: 100px;
 
   :global(.fire) {
     display: none;
   }
+
   @media(min-width: variables.$container-lg-min) {
+    & button {
+      transition: background-color 1s ease-in-out,
+                  scale var(--transition-duration) ease-in-out,
+                  opacity var(--transition-duration) ease-in-out,
+                  rotate var(--transition-duration) ease-in-out;
+
+    }
+    & button:hover {
+      transition: background-color 3s ease-in-out,
+                  scale var(--transition-duration) ease-in-out,
+                  opacity var(--transition-duration) ease-in-out,
+                  rotate var(--transition-duration) ease-in-out;
+      background-color: #d62e00;
+    }
+
     :global(.fire) {
-      transition: opacity var(--transition-duration) ease-in-out;
+      transition: opacity var(--transition-duration) ease-in-out,
+      scale .5s ease-in-out,
+      bottom 1s ease-in-out;
       pointer-events: none;
       opacity: 0;
       display: block;
       position: absolute;
-      bottom: 135px;
       right: 0;
+      bottom: 40px;
+      scale: .2;
     }
-
     & button:hover + :global(.fire) {
-        opacity: 1;
+      opacity: 0.9;
+      scale: 1.5;
+      bottom: -10px;
     }
   }
 }
