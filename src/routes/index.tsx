@@ -1,7 +1,8 @@
 import { $, component$, useSignal } from "@builder.io/qwik";
 import { useNavigate } from "@builder.io/qwik-city";
 import { Configurator } from "~/components/configurator/configurator";
-import Footer from "~/components/footer/footer";
+import { Footer } from "~/components/footer/footer";
+import { Header } from "~/components/header/header";
 import { config } from "~/config";
 import type { ConfigurationForm } from "~/models/configuration.models";
 import styles from "./index.module.scss";
@@ -21,21 +22,13 @@ export default component$(() => {
   });
 
   return (
-    <div class={styles.page}>
-      <Configurator onSubmit={start} />
+    <>
+      <Header />
 
-      <div class={styles.credits}>
-        Thanks to{" "}
-        <a href={config.websites.chatGpt} target="_blank">
-          ChatGPT
-        </a>{" "}
-        for generating the topics and to{" "}
-        <a href={`${config.websites.unsplash.homepage}`} target="_blank">
-          Unsplash
-        </a>{" "}
-        to provide the images.
+      <div class={styles.page}>
+        <Configurator onSubmit={start} />
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 });

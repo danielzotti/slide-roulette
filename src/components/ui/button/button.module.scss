@@ -1,26 +1,34 @@
+@use "../../../scss/variables";
 .button {
+  transition: scale var(--transition-duration) ease-in-out;
+  transition-property: rotate, scale, opacity;
+
   border: none;
   border-radius: var(--btn-border-radius);
   padding: var(--margin-small) var(--margin-medium);
   cursor: var(--cursor-pointer);
   line-height: 1;
   font-weight: 600;
+  &:active {
+    outline: none;
+  }
 
   &.primary {
-    background-color: var(--btn-primary-bg-color);
-    color: var(--btn-primary-text-color);
+    background-color: var(--btn-secondary-bg-color);
+    color: var(--btn-secondary-text-color);
+    border: var(--border-width) solid var(--btn-secondary-text-color);
   }
 
   &.secondary {
-    background-color: var(--btn-secondary-bg-color);
-    color: var(--btn-secondary-text-color);
-    border: 1px solid var(--btn-secondary-text-color);
+    background-color: var(--btn-primary-bg-color);
+    color: var(--btn-primary-text-color);
+    border: var(--border-width) solid var(--btn-secondary-text-color);
   }
 
   &.outline {
     background-color: transparent;
     color: var(--btn-outline-text-color);
-    border: 1px solid var(--btn-outline-border-color);
+    border: var(--border-width) solid var(--btn-outline-border-color);
   }
 
   &.clean {
@@ -30,5 +38,42 @@
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+  &.rounded {
+    --btn-rounded-min-width: 150px;
+    --btn-rounded-max-width: 150px;
+
+    --btn-rounded-small-min-width: calc(var(--btn-rounded-min-width) / 1.5);
+    --btn-rounded-small-max-width: calc(var(--btn-rounded-max-width) / 1.5);
+
+    border-radius: 50%;
+    aspect-ratio: 1;
+    padding: var(--margin-small);
+    rotate: -5deg;
+    text-wrap: balance;
+    overflow: hidden;
+
+    width:var(--btn-rounded-min-width);
+    font-size: calc(var(--btn-rounded-min-width) * 0.13);
+    @media(min-width: variables.$container-lg-min) {
+      width:var(--btn-rounded-max-width);
+      font-size: calc(var(--btn-rounded-max-width) * 0.13);
+    }
+
+    &:hover {
+      rotate: 5deg;
+      scale: 1.05;
+    }
+
+    &.small {
+      border-width: calc(var(--border-width)*0.75);
+      width:var(--btn-rounded-small-min-width);
+      font-size: calc(var(--btn-rounded-small-min-width) * 0.13);
+      @media(min-width: variables.$container-lg-min) {
+        width:var(--btn-rounded-small-max-width);
+        font-size: calc(var(--btn-rounded-small-max-width) * 0.13);
+      }
+    }
   }
 }

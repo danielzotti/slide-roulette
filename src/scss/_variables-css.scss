@@ -24,25 +24,36 @@
 
   --orange-codemotion: #FF5C00;
   --blue-dark-codemotion: #0E1E30;
+  --blue-light-codemotion: #1E66FA;
+  --green-light-codemotion: #54F0B2;
+  --yellow-light-codemotion: #F9DC5C;
 
   --link-color: inherit;
+  --opacity-default: 0.4;
 
   //FONTS
   --font-family-title: 'IBM Plex Sans', Exo, Georgia, serif;
-  --font-family-text: 'IBM Plex Sans', 'Roboto Condensed', Verdana, Helvetica, Arial, sans-serif;
+  //--font-family-text: 'IBM Plex Sans', 'Roboto Condensed', Verdana, Helvetica, Arial, sans-serif;
+  --font-family-text: Roboto, Verdana, Helvetica, Arial, sans-serif;
 
   //MARGINS
+  --margin-variable-small: clamp(5px, 1vw, 15px);
+  --margin-variable-default: clamp(15px, 3vw, 45px);
+  --margin-variable-medium: clamp(30px, 6vw, 90px);
+  --margin-variable-big: clamp(60px, 12vw, 180px);
   --margin-small: 5px;
   --margin-default: 15px;
   --margin-medium: 30px;
   --margin-big: 60px;
 
   //BORDERS
-  --border-radius: 10px;
+  --border-radius: 0px;
+  --border-width: clamp(3px, 0.35vw, 6px);
 
   //TRANSITIONS
-  --transition-duration: .2s;
+  --transition-duration: .25s;
   --navbar-transition-duration: .5s;
+  --rotation-deafult: -5deg;
 }
 
 [data-theme=light] {

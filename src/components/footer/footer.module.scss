@@ -1,4 +1,144 @@
-.footer {
-  padding: 10px;
-  text-align: center;
+@use "../../scss/variables";
+@use "../../scss/common";
+@use "../../scss/animations/push";
+
+.info {
+  position: absolute;
+  bottom: var(--margin-small);
+  left: var(--margin-small);
+  cursor: pointer;
+  z-index: 10;
+  rotate: -5deg;
+  transition: rotate var(--transition-duration) ease-in-out;
+  transition-property: rotate, scale;
+
+  &:hover {
+    rotate: 5deg;
+    scale: 1.1;
+  }
 }
+
+.dialog {
+  z-index: 999;
+  border: 0;
+  background-color: var(--text-bg-color);
+  color: var(--text-color);
+  padding:0;
+
+  transition-property: opacity, display, overlay;
+  transition-duration: 1s;
+  transition-behavior: allow-discrete;
+
+  animation: push-out 1s forwards;
+  display: none;
+  opacity: 0;
+  overflow: visible;
+
+  &[open] {
+    animation: push-in 1s forwards;
+    display: block;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+
+  &::backdrop {
+    transition-property: opacity, display, overlay;
+    transition-duration: 1s;
+    transition-behavior: allow-discrete;
+
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+  }
+
+  &[open]::backdrop {
+    transition-property: opacity, display, overlay;
+    transition-duration: 1s;
+    transition-behavior: allow-discrete;
+
+    display: block;
+    opacity: 1;
+
+    @starting-style {
+      opacity: 0;
+    }
+  }
+}
+
+.dialogWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--margin-variable-default) var(--margin-variable-medium);
+  gap: var(--margin-variable-default);
+
+  @media(min-width: variables.$container-sm-min) {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.infoMeme {
+  text-align: left;
+}
+
+.infoMemeImage {
+  width: 60px;
+  @media(min-width: variables.$container-md-min) {
+    width: 120px;
+  }
+}
+
+.dialogContent {
+  text-align: left;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  gap: var(--margin-variable-default);
+
+  :global(p) {
+    margin: 0;
+  }
+
+  :global(a) {
+    font-weight: 500;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  bottom: -90px;
+  right: 0;
+  font-size: 24px !important;
+
+  @media(min-width: variables.$container-md-min) {
+    bottom: -50px;
+    right: -50px;
+  }
+}
+
+@keyframes open {
+  from {
+    opacity: 0;
+    display: none;
+  }
+  to {
+    opacity: 1;
+    display: block;
+  }
+}
+
+@keyframes close {
+  from {
+    opacity: 1;
+    display: block;
+  }
+  to {
+    opacity: 0;
+    display: none;
+  }
+}
+

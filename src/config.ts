@@ -31,6 +31,9 @@ export const config = {
   websites: {
     chatGpt: "https://chat.openai.com",
     danielzotti: "https://www.danielzotti.it",
+    marinella: "https://marinella.mastrosimone.eu",
+    max: "https://github.com/MaxAttianese",
+    antonio: "https://github.com/AntonioRoccoGit",
     github: "https://github.com/danielzotti/slide-roulette",
     unsplash: {
       homepage:
@@ -40,18 +43,22 @@ export const config = {
       status: "https://status.unsplash.com",
     },
   },
-  unsplash_topics: {
-    // "3d-renders": "CDwuwXJAbEw",
-    animals: "Jpg6Kidl-Hk",
-    "architecture-interior": "M8jVbLbTRws",
-    // experimental: "qPYsDzvJOYc",
-    "fashion-beauty": "S4MKLAsBB74",
-    film: "hmenvQhUmxM",
-    "food-drink": "xjPR4hlkBGA",
-    // nature: "6sMVjTLSkeQ",
-    people: "towJZFskpGg",
-    sports: "Bn-DjrcBrwo",
-    // travel: "Fzo3zuOHN6w",
-    // "rising-stars": "N0SJ103DI1Y",
+  unsplash: {
+    imageWidth: 1920, // 1280, // 1920,
+    imageHeight: 1080, // 720, // 1080,
+    topics: {
+      // "3d-renders": "CDwuwXJAbEw",
+      animals: "Jpg6Kidl-Hk",
+      // "architecture-interior": "M8jVbLbTRws",
+      // experimental: "qPYsDzvJOYc",
+      "fashion-beauty": "S4MKLAsBB74",
+      film: "hmenvQhUmxM",
+      "food-drink": "xjPR4hlkBGA",
+      nature: "6sMVjTLSkeQ",
+      people: "towJZFskpGg",
+      sports: "Bn-DjrcBrwo",
+      travel: "Fzo3zuOHN6w",
+      // "rising-stars": "N0SJ103DI1Y",
+    },
   },
 };
