@@ -43,10 +43,12 @@ export default component$(() => {
         | "portrait"
         | undefined) ?? "landscape",
     currentSlide: 0,
-    title: getRandomTopic({
-      lang: location.url.searchParams.get("language") ?? "it",
-      level: parseInt(location.url.searchParams.get("level") ?? "1"),
-    }),
+    title:
+      location.url.searchParams.get("customTopic")?.trim() ||
+      getRandomTopic({
+        lang: location.url.searchParams.get("language") ?? "it",
+        level: parseInt(location.url.searchParams.get("level") ?? "1"),
+      }),
     isFullscreen: false,
   });
 
@@ -198,44 +200,47 @@ export default component$(() => {
           style={{ paddingTop: state.isFullscreen ? 0 : "60px" }}
         >
           {state.currentSlide === 0 && (
-            <div class={styles.intro}>
-              <p class={styles.preview}>
-                You have <strong>{state.slidesCount} SLIDES</strong> to talk
-                about{" "}
-              </p>
-              <div class={styles.titlePreview}>
-                <h1 class="title--main">{state.title}</h1>
-              </div>
-              <div class={styles.challengeAcceptedImage}>
-                <img
-                  src={disasterGirlSrc}
-                  alt={"Disaster girl meme"}
-                  width={675}
-                  height={511}
-                />
-                <div class={styles.challengeAcceptedContainer}>
-                  <Button
-                    classOverride={styles.challengeAcceptedButton}
-                    onClick$={nextSlide}
-                    disabled={!hasLoadedAllImages.value}
-                    variant="primary"
-                    rounded
-                  >
-                    {hasLoadedAllImages.value && (
-                      <span>Let's set this stage on fire!</span>
-                    )}
-                    {!hasLoadedAllImages.value && (
-                      <small>{"Loading images..."} &nbsp;</small>
-                    )}
-                  </Button>
-                  <div class="fire">
-                    {[...Array(50)].map((_, i) => (
-                      <div class="fire__particle" key={i}></div>
-                    ))}
+            <>
+              <div class={styles.intro}>
+                <p class={styles.preview}>
+                  You have <strong>{state.slidesCount} SLIDES</strong> to talk
+                  about{" "}
+                </p>
+                <div class={styles.titlePreview}>
+                  <h1 class="title--main">{state.title}</h1>
+                </div>
+                <div class={styles.challengeAcceptedImage}>
+                  <img
+                    src={disasterGirlSrc}
+                    alt={"Disaster girl meme"}
+                    width={675}
+                    height={511}
+                  />
+                  <div class={styles.challengeAcceptedContainer}>
+                    <Button
+                      classOverride={styles.challengeAcceptedButton}
+                      onClick$={nextSlide}
+                      disabled={!hasLoadedAllImages.value}
+                      variant="primary"
+                      rounded
+                    >
+                      {hasLoadedAllImages.value && (
+                        <span>Let's set this stage on fire!</span>
+                      )}
+                      {!hasLoadedAllImages.value && (
+                        <small>{"Loading images..."} &nbsp;</small>
+                      )}
+                    </Button>
+                    <div class="fire">
+                      {[...Array(50)].map((_, i) => (
+                        <div class="fire__particle" key={i}></div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+              <Footer />
+            </>
           )}
           {state.currentSlide > 0 && (
             <h2 class={styles.title}>{state.title}</h2>

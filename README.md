@@ -3,6 +3,13 @@
 A slide roulette app: one random topic and 3 (or more) random slides (with just an image) to test your improvising
 skills!
 
+> TODO: video demo
+
+## Other contributors
+- [Marinella Mastrosimone](https://github.com/cybermarinella) (UX/UI)
+- [Massimiliano Attianese](https://github.com/MaxAttianese) (Dev)
+- [Antonio Rocco](https://github.com/AntonioRoccoGit) (Dev)
+
 ## Contribution guidelines
 
 ...just open a PR! 🙃 I'll be happy to review it and merge it if it's good!
@@ -92,10 +99,6 @@ Error: ` [PLUGIN_ERROR]: Invalid module "@qwik-city-plan" is not a valid package
 
 ## TODO
 
-- [x] Automatically check device orientation
-- [x] Check Italian topics (especially for level 2 and 3)
-- [x] Fix random problems with image loading (different images between fullscreen and standard mode)
-- [x] Fallback mode if Unsplash service is down (local images)
-- [x] Contribution guidelines
-- [ ] Add English topics
-
+- [ ] Page and slides transitions
+- [ ] More animations!
+- [ ] Offline mode
