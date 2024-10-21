@@ -302,7 +302,7 @@ export default component$(() => {
 
           {state.currentSlide > 0 && (
             <>
-              {photographer.value && (
+              {photographer.value && !state.isFullscreen && (
                 <div class={styles.photographer}>
                   Photo by{" "}
                   <a

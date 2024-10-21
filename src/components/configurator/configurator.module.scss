@@ -1,5 +1,6 @@
 @use "../../scss/variables";
 @use "../../scss/common";
+@use "../../scss/animations/shake";
 
 .configurator {
   position: relative;
@@ -350,6 +351,7 @@
 .startButtonLandscape {
   @extend .startButton;
   display: none;
+  animation: jump-shaking 1.25s ease-in infinite;
   @media(min-width: variables.$container-md-min) {
     display: block;
   }

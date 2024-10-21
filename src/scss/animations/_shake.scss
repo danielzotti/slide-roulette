@@ -27,3 +27,13 @@
     transform: rotate(0deg)
   }
 }
+
+@keyframes jump-shaking {
+  0% { transform: translateX(0) }
+  25% { transform: translateY(-9px) }
+  35% { transform: translateY(-9px) rotate(4deg) }
+  55% { transform: translateY(-9px) rotate(-4deg) }
+  65% { transform: translateY(-9px) rotate(4deg) }
+  75% { transform: translateY(-9px) rotate(-4deg) }
+  100% { transform: translateY(0) rotate(0) }
+}
