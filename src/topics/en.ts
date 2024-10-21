@@ -179,7 +179,6 @@ export default {
     "euphoria",
     "events",
     "evolution",
-    "fascination",
     "facts",
     "happiness",
     "phenomena",

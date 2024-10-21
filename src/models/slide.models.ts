@@ -5,4 +5,5 @@ export interface SlideImage {
   orientation: "landscape" | "portrait";
   photographerName?: string;
   photographerNickname?: string;
+  topic?: string;
 }

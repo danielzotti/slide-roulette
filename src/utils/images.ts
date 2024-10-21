@@ -74,7 +74,7 @@ export const getUnsplashImagesWithSpecificTopics = server$(async function ({
 
     if (count <= topicsCount) {
       const topicsSet = new Set<number>();
-      while (topicsSet.size <= count) {
+      while (topicsSet.size < count) {
         topicsSet.add(
           getRandomNumberInRange(
             0,
@@ -95,7 +95,7 @@ export const getUnsplashImagesWithSpecificTopics = server$(async function ({
         ];
       }
       const topicsSet = new Set<number>();
-      while (topicsSet.size <= mod) {
+      while (topicsSet.size < mod) {
         topicsSet.add(
           getRandomNumberInRange(
             0,
@@ -105,6 +105,10 @@ export const getUnsplashImagesWithSpecificTopics = server$(async function ({
       }
       randomTopics = [...randomTopics, ...topicsSet];
     }
+
+    const randomTopicsNames = randomTopics.map(
+      (topic) => Object.keys(config.unsplash.topics)[topic],
+    );
 
     const response = await Promise.all(
       randomTopics.map(async (topic) => {
@@ -124,7 +128,7 @@ export const getUnsplashImagesWithSpecificTopics = server$(async function ({
     const images = await Promise.all(imagesPromises);
 
     return images.map(
-      (image: UnsplashImage) =>
+      (image: UnsplashImage, i: number) =>
         ({
           id: image.id,
           url: `${image.urls.raw}&fit=crop&w=${w}&h=${h}&f=jpg&q=90`,
@@ -132,6 +136,7 @@ export const getUnsplashImagesWithSpecificTopics = server$(async function ({
           source: "unsplash",
           photographerName: image.user.username,
           photographerNickname: image.user.username,
+          topic: randomTopicsNames[i],
         }) satisfies SlideImage,
     );
   } catch (e) {

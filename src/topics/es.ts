@@ -179,7 +179,6 @@ export default {
     "euforia",
     "acontecimientos",
     "evolución",
-    "fascinación",
     "hechos",
     "felicidad",
     "fenómenos",

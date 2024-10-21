@@ -22,6 +22,7 @@ import { config } from "~/config";
 import type { State } from "~/models/state.models";
 import { fireworks } from "~/utils/confetti";
 import { getUnsplashImagesWithSpecificTopics } from "~/utils/images";
+import { humanizeTopic } from "~/utils/text";
 import { getRandomTopic } from "~/utils/topics";
 import spongebobSrc from "../../../public/images/ui/spongebob.png";
 import disasterGirlSrc from "../../../public/images/ui/disaster-girl.png";
@@ -60,22 +61,25 @@ export default component$(() => {
   const isFinalPage = useComputed$(
     () => state.currentSlide === state.slidesCount + 1,
   );
-  const photographer = useComputed$<{ name: string; nickname: string } | null>(
-    () => {
-      const slide = state.slides.at(state.currentSlide - 1);
-      if (
-        !slide ||
-        slide.source !== "unsplash" ||
-        (!slide.photographerName && !slide.photographerNickname)
-      ) {
-        return null;
-      }
-      return {
-        name: slide.photographerName!,
-        nickname: slide.photographerNickname!,
-      };
-    },
-  );
+  const photographer = useComputed$<{
+    name: string;
+    nickname: string;
+    topic?: string;
+  } | null>(() => {
+    const slide = state.slides.at(state.currentSlide - 1);
+    if (
+      !slide ||
+      slide.source !== "unsplash" ||
+      (!slide.photographerName && !slide.photographerNickname)
+    ) {
+      return null;
+    }
+    return {
+      name: slide.photographerName!,
+      nickname: slide.photographerNickname!,
+      topic: humanizeTopic(slide.topic),
+    };
+  });
 
   const prevSlide = $(() => {
     if (state.currentSlide > 1) {
@@ -219,7 +223,9 @@ export default component$(() => {
                   <div class={styles.challengeAcceptedContainer}>
                     <Button
                       classOverride={styles.challengeAcceptedButton}
-                      onClick$={nextSlide}
+                      onClick$={$(() => {
+                        state.currentSlide = 1;
+                      })}
                       disabled={!hasLoadedAllImages.value}
                       variant="primary"
                       rounded
@@ -304,7 +310,10 @@ export default component$(() => {
                     target="_blank"
                   >
                     {photographer.value.name}
-                  </a>{" "}
+                  </a>
+                  {photographer.value.topic
+                    ? ` (${photographer.value.topic})`
+                    : null}
                   {/*on <a href={config.websites.unsplash.homepage}>Unsplash</a>*/}
                 </div>
               )}
