@@ -9,7 +9,6 @@ export const FullScreenButton = component$(() => {
   const isFullscreen = useSignal<boolean>(false);
 
   const toggleFullScreen = $(() => {
-    console.log("toggleFullScreen");
     if (isFullscreen.value) {
       isFullscreen.value = false;
       document.exitFullscreen();

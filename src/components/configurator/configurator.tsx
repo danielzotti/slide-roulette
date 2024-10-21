@@ -293,7 +293,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
           </div>
           <div class={styles.slidesContainer}>
             <div class={styles.slidesTitle}>
-              <p>Slide numbers</p>
+              <p>Number of slides</p>
             </div>
             <Field name="slidesCount" type="number">
               {(field) => (
@@ -326,7 +326,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
         >
           {!isLoading.value && (
             <div>
-              <span>Setup's done!</span>
+              <span>Setup done!</span>
               <MatArrowRightAltOutlined />
             </div>
           )}
@@ -341,7 +341,7 @@ export const Configurator = component$(({ onSubmit }: ConfiguratorProps) => {
           ref={submitButtonRef}
           rounded
         >
-          {!isLoading.value && <span>Setup's done!</span>}
+          {!isLoading.value && <span>Setup done!</span>}
           {isLoading.value && <small>Starting...</small>}
         </Button>
       </div>
