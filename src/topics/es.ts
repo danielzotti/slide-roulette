@@ -276,7 +276,6 @@ export default {
     "multiplicación",
     "scooters",
     "monumentos",
-    "mezquitas",
     "exposiciones",
     "motivaciones",
     "ratones",

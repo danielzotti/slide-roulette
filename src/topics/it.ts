@@ -276,7 +276,6 @@ export default {
     "moltiplicazione",
     "monopattini",
     "monumenti",
-    "moschee",
     "mostre",
     "motivazioni",
     "mouse",

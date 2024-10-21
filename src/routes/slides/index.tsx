@@ -127,7 +127,9 @@ export default component$(() => {
         break;
       case "Enter":
         state.currentSlide === state.slidesCount && void restart();
-        state.currentSlide === 0 && void nextSlide();
+        state.currentSlide === 0 &&
+          hasLoadedAllImages.value &&
+          void nextSlide();
         break;
     }
   });

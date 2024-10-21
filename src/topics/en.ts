@@ -276,7 +276,6 @@ export default {
     "multiplication",
     "scooters",
     "monuments",
-    "mosques",
     "exhibitions",
     "motivations",
     "mice",
