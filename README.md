@@ -3,7 +3,7 @@
 A slide roulette app: one random topic and 3 (or more) random slides (with just an image) to test your improvising
 skills!
 
-> TODO: video demo
+> TODO: video demo & screenshots
 
 ## Other contributors
 - [Marinella Mastrosimone](https://github.com/cybermarinella) (UX/UI)
@@ -97,8 +97,14 @@ Error: ` [PLUGIN_ERROR]: Invalid module "@qwik-city-plan" is not a valid package
 - See https://github.com/QwikDev/qwik/issues/6024#issuecomment-2029467547
 - TLDR: move `dependencies` to `devDependencies`
 
+## Custom topic
+Just add a `&customTopic=My custom topic` at the end of the URL created after clicking "Setup done". 
+
+e.g. https://slide-roulette.danielzotti.it/slides/?language=it&level=1&slidesCount=5&orientation=landscape&customTopic=Cissone
+
 ## TODO
 
-- [ ] Page and slides transitions
-- [ ] More animations!
-- [ ] Offline mode
+- [ ] Add dark/light theme switcher button
+- [ ] Pages and slides transitions
+- [ ] Offline mode (PWA)
+- [ ] Custom topics (textarea + local storage? remote url?)
