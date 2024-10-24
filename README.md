@@ -3,7 +3,7 @@
 A slide roulette app: one random topic and 3 (or more) random slides (with just an image) to test your improvising
 skills!
 
-> TODO: video demo & screenshots
+https://github.com/user-attachments/assets/1f5ebb68-74ec-496f-8157-2bc0210c239a
 
 ## Other contributors
 - [Marinella Mastrosimone](https://github.com/cybermarinella) (UX/UI)
