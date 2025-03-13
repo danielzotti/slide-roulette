@@ -3,7 +3,7 @@
 @use "../../scss/animations/push";
 
 .info {
-  position: absolute;
+  position: fixed;
   bottom: var(--margin-small);
   left: var(--margin-small);
   cursor: pointer;
