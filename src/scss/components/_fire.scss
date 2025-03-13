@@ -1,3 +1,5 @@
+@use "sass:math";
+
 $fireColor: rgb(255,80,0);
 $fireColorT: rgba(255,80,0,0);
 $dur: 1s;
@@ -28,7 +30,7 @@ $partSize: 5em;
   // spread particles out in time and x-position to get desired effect
   @for $p from 1 through $parts {
     &:nth-of-type(#{$p}) {
-      animation-delay: $dur * random();
+      animation-delay: $dur * math.random();
       left: calc((100% - #{$partSize}) * calc(($p - 1) / $parts));
     }
   }

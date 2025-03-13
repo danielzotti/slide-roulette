@@ -1,11 +1,11 @@
-@import "variables";
+@use "variables";
 
-@import "fonts";
+@use "fonts";
 
-@import "reset";
-@import "base";
-@import "common";
+@use "reset";
+@use "base";
+@use "common";
 
-@import "layout";
+@use "layout";
 
-@import "components/fire";
+@use "components/fire";
