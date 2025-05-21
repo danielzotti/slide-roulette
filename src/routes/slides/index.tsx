@@ -107,14 +107,17 @@ export default component$(() => {
   const handleKeyDown = $((event: KeyboardEvent) => {
     switch (event.key) {
       case "ArrowRight":
+      case "PageDown":
       case " ":
         hasLoadedAllImages.value && void nextSlide();
         break;
       case "ArrowLeft":
+      case "PageUp":
         void prevSlide();
         break;
       case "ArrowUp":
-        void toggleImageSize();
+      case "b":
+        state.currentSlide >= 1 && void toggleImageSize();
         break;
       case "Home":
         state.currentSlide = 1;

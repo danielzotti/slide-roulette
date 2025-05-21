@@ -1,4 +1,4 @@
-import { $, component$, useSignal } from "@builder.io/qwik";
+import { $, component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import {
   MatFullscreenExitOutlined,
   MatFullscreenOutlined,
@@ -16,6 +16,22 @@ export const FullScreenButton = component$(() => {
       isFullscreen.value = true;
       document.documentElement.requestFullscreen();
     }
+  });
+
+  const handleKeyDown = $((event: KeyboardEvent) => {
+    if (event.key === "F5" && event.shiftKey) {
+      void toggleFullScreen();
+    }
+  });
+
+  // NB: useOnDocument causes a sort of loop, so we need to use useVisibleTask instead
+  // eslint-disable-next-line qwik/no-use-visible-task
+  useVisibleTask$(({ cleanup }) => {
+    document.addEventListener("keydown", handleKeyDown);
+
+    cleanup(() => {
+      document.removeEventListener("keydown", handleKeyDown);
+    });
   });
 
   return (
