@@ -109,14 +109,17 @@ export default component$(() => {
       case "ArrowRight":
       case "PageDown":
       case " ":
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         hasLoadedAllImages.value && void nextSlide();
         break;
       case "ArrowLeft":
       case "PageUp":
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         void prevSlide();
         break;
       case "ArrowUp":
       case "b":
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         state.currentSlide >= 1 && void toggleImageSize();
         break;
       case "Home":
@@ -126,10 +129,13 @@ export default component$(() => {
         state.currentSlide = state.slidesCount;
         break;
       case "Escape":
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         void navigate("/");
         break;
       case "Enter":
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         state.currentSlide === state.slidesCount && void restart();
+        // eslint-disable-next-line @typescript-eslint/no-unused-expressions
         state.currentSlide === 0 &&
           hasLoadedAllImages.value &&
           void nextSlide();
